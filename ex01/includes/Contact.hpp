@@ -6,7 +6,7 @@
 /*   By: jduval <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/18 14:22:47 by jduval            #+#    #+#             */
-/*   Updated: 2023/07/18 15:56:31 by jduval           ###   ########.fr       */
+/*   Updated: 2023/07/19 09:54:44 by jduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,13 @@
 
 class Contact
 {
-	public :
+	private :
 		std::string infos[5];
+	public	:
+		Contact();
+		~Contact();
+		int set_infos(std::string, int);
+		int	get_infos(int);
 };
 
 #endif
