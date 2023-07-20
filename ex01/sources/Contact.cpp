@@ -6,27 +6,50 @@
 /*   By: jduval <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/18 14:53:01 by jduval            #+#    #+#             */
-/*   Updated: 2023/07/19 10:18:21 by jduval           ###   ########.fr       */
+/*   Updated: 2023/07/20 17:55:02 by jduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Contact.hpp"
+#include "utils.hpp"
 #include <iostream>
 
-Contact::Contact(){}
+Contact::Contact()
+{
+	id = -1;
+}
 
 Contact::~Contact(){}
 
-int	Contact::set_infos(std::string new_info, int type)
+void	Contact::set_infos(std::string new_info, int type)
 {
-	(void)type;
-	infos[0] = new_info;
-	return (0);
+	infos[type] = new_info;
 }
 
-int	Contact::get_infos(int type)
+std::string	Contact::get_infos(int type)
 {
-	(void)type;
-	std::cout << infos[0] << std::endl;
-	return (0);
+	return (infos[type]);
+}
+
+void	Contact::set_id(int new_id)
+{
+	std::cout << "new id = " << new_id << std::endl;
+	id = new_id;
+	std::cout << "id = " << id << std::endl;
+}
+
+int		Contact::get_id(void)
+{
+	return (id);
+}
+
+void	Contact::debug_display(void)
+{
+	int	i = 0;
+
+	while (i < contact_parameters)
+	{
+		std::cout << infos[i] << std::endl;
+		i++;
+	}
 }

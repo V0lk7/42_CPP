@@ -1,25 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   enum.hpp                                           :+:      :+:    :+:   */
+/*   function.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jduval <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: jduval <jduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/18 15:21:37 by jduval            #+#    #+#             */
-/*   Updated: 2023/07/19 09:50:40 by jduval           ###   ########.fr       */
+/*   Created: 2023/07/20 17:34:50 by jduval            #+#    #+#             */
+/*   Updated: 2023/07/20 17:35:46 by jduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ENUM_H
-# define ENUM_H
+#ifndef FUNCTION_HPP
+# define FUNCTION_HPP
 
-typedef enum e_type
-{
-	F_NAME,
-	L_NAME,
-	N_NAME,
-	P_NUMBER,
-	D_SECRET
-}	t_type;
+# include "PhoneBook.hpp"
+
+int	add_input(PhoneBook &book);
 
 #endif
