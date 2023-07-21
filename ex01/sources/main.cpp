@@ -6,7 +6,7 @@
 /*   By: jduval <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/18 15:28:10 by jduval            #+#    #+#             */
-/*   Updated: 2023/07/20 18:04:39 by jduval           ###   ########.fr       */
+/*   Updated: 2023/07/21 10:07:09 by jduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,14 +20,8 @@ int	main(void)
 	PhoneBook	book;
 	std::string	input;
 
-	while (1)
+	while (std::getline(std::cin, input))
 	{
-		std::getline(std::cin, input);
-		if (std::cin.eof() == true)
-		{
-			std::cout << bad_input[3] << std::endl;
-			return (0);
-		}
 		if (input.empty() == true)
 			std::cout << bad_input[0] << std::endl;
 		else if (input.compare("ADD") == 0)
@@ -40,13 +34,10 @@ int	main(void)
 		else
 			std::cout << bad_input[2] << std::endl;
 	}
-	for (int i = 0; i < number_of_contacts; i++)
+	if (std::cin.eof() == true)
 	{
-		Contact		&contact = book.get_contact(i);
-		if (contact.get_id() == -1)
-			std::cout << "Contact not set" << std::endl;
-		else
-			contact.debug_display();
+		std::cout << bad_input[3] << std::endl;
+		return (0);
 	}
 	return (0);
 }
