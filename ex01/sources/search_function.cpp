@@ -6,7 +6,7 @@
 /*   By: jduval <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 10:07:25 by jduval            #+#    #+#             */
-/*   Updated: 2023/07/21 11:39:33 by jduval           ###   ########.fr       */
+/*   Updated: 2023/07/21 18:55:44 by jduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,12 +26,26 @@ Sinon, affichez les informations du contact, une par ligne.
 
 static void	display_contact(PhoneBook &book)
 {
-	
+	int	part_displayable;
+
+	part_displayable = number_of_contacts / 2;
+	if (part_displayable == 0)
+		part_displayable = 1;
+	for (int i = 0; i < part_displayable)
+	{
+		Contact	&contact = get_contact(i);
+		if (contact.get_id() == -1)
+			continue ;
+		else
+			contact.display_base_search();
+	}
 }
 
 int	search_input(PhoneBook &book)
 {
+	int	index;
 	std::string	input;
+
 	if (is_phonebook_empty(book) == true)
 	{
 		std::cout << search_request[1] << std::endl;
@@ -45,7 +59,13 @@ int	search_input(PhoneBook &book)
 			std::cout << user_pathern[4] << std::endl;
 			return (0);
 		}
-		
+		try
+			index = std::stoi(input);
+		catch (const std::out_of_range &overflow)
+		{
+			std::cout << overflow.what() << bad_input[4] << number_of_contact << std::endl;
+			continue ;
+		}
 	}
 	return (0);
 }

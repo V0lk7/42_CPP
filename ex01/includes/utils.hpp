@@ -6,7 +6,7 @@
 /*   By: jduval <jduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 15:57:01 by jduval            #+#    #+#             */
-/*   Updated: 2023/07/21 11:39:37 by jduval           ###   ########.fr       */
+/*   Updated: 2023/07/21 18:47:43 by jduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,13 @@
 
 # include <string>
 
-const std::string	bad_input[4] =
+const std::string	bad_input[5] =
 {	
 	"Try to write something.",
 	"Come on... It can't be empty, try again.",
 	"Wrong command. Try this: ADD, SEARCH or EXIT",
-	"Well done, you EOF the program... Now it's Exit time !"
+	"Well done, you EOF the program... Now it's Exit time !",
+	"You overflow... Don't try me ! Again, put an id between 0 and "
 };
 
 const std::string	add_request[6] = 
@@ -30,7 +31,7 @@ const std::string	add_request[6] =
 	"Enter the nickname :",
 	"Enter the phone number :",
 	"Enter the darkest secret :",
-	"The contact is not completely set. It will be erased.\nReturn to the main menu."
+	"The contact is not completely set. All modification will be lost.\nReturn to the main menu."
 };
 
 const std::string	search_request[3] = 

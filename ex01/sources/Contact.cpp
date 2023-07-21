@@ -6,7 +6,7 @@
 /*   By: jduval <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/18 14:53:01 by jduval            #+#    #+#             */
-/*   Updated: 2023/07/21 11:39:36 by jduval           ###   ########.fr       */
+/*   Updated: 2023/07/21 18:13:19 by jduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,16 +22,15 @@ Contact::Contact()
 
 Contact::~Contact(){}
 
-void	Contact::set_infos(std::string new_info, int type)
+void	Contact::set_infos(std::string new_info[])
 {
-	infos[type] = new_info;
+	for (int i = 0; i < contact_parameters; i++)
+		infos[i] = new_info[i];
 }
 
 void	Contact::set_id(int new_id)
 {
-	std::cout << "new id = " << new_id << std::endl;
 	id = new_id;
-	std::cout << "id = " << id << std::endl;
 }
 
 int		Contact::get_id(void) const
