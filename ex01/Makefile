@@ -6,7 +6,7 @@
 #    By: jduval <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/18 10:18:38 by jduval            #+#    #+#              #
-#    Updated: 2023/07/20 17:49:07 by jduval           ###   ########.fr        #
+#    Updated: 2023/07/24 09:59:07 by jduval           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,10 +32,11 @@ SRC_DIR		=	sources
 
 INCLUDES	=	includes
 
-SRCS		:=	main.cpp		\
-				PhoneBook.cpp	\
-				Contact.cpp		\
-				add_function.cpp
+SRCS		:=	main.cpp			\
+				PhoneBook.cpp		\
+				Contact.cpp			\
+				add_function.cpp	\
+				search_function.cpp
 
 SRCS		:=	$(SRCS:%=$(SRC_DIR)/%)
 

@@ -6,7 +6,7 @@
 /*   By: jduval <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/18 14:22:47 by jduval            #+#    #+#             */
-/*   Updated: 2023/07/21 18:03:14 by jduval           ###   ########.fr       */
+/*   Updated: 2023/07/24 09:54:15 by jduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,8 @@ class Contact
 		void 		set_infos(std::string[]);
 		void		set_id(int);
 		int			get_id() const;
-		void		display_base_search() const;
+		void		display_all_contacts() const;
+		void		display_infos() const;
 };
 
 #endif

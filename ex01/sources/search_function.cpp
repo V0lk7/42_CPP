@@ -6,39 +6,49 @@
 /*   By: jduval <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 10:07:25 by jduval            #+#    #+#             */
-/*   Updated: 2023/07/21 18:55:44 by jduval           ###   ########.fr       */
+/*   Updated: 2023/07/24 11:01:07 by jduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "PhoneBook.hpp"
 #include "utils.hpp"
-
-/*
-Affiche les contacts enregistrés sous la forme d’une liste de 4 colonnes : index,
-first name, last name et nickname.
-◦ Chaque colonne doit faire 10 caractères de long. Elles doivent être séparées
-par un pipe (’|’). Leur texte est aligné à droite. Si le texte dépasse la largeur
-de la colonne, il faut le tronquer et remplacer le dernier caractère affiché par
-un point (’.’).
-◦ Ensuite, le programme demande à l’utilisateur d’entrer l’index du contact à afficher. Si l’index ou son format sont incorrects, gérez cela de manière pertinente.
-Sinon, affichez les informations du contact, une par ligne.
-*/
+#include <iomanip>
+#include <iostream>
+#include <sstream>
 
 static void	display_contact(PhoneBook &book)
 {
-	int	part_displayable;
-
-	part_displayable = number_of_contacts / 2;
-	if (part_displayable == 0)
-		part_displayable = 1;
-	for (int i = 0; i < part_displayable)
+	//std::cout << std::setfill('-') << std::setw(width_col * 4 + 3) << std::endl;
+	for (int i = 0; i < number_of_contacts; i++)
 	{
-		Contact	&contact = get_contact(i);
+		Contact	&contact = book.get_contact(i);
 		if (contact.get_id() == -1)
 			continue ;
-		else
-			contact.display_base_search();
+		contact.display_all_contacts(); 
+	//	std::cout << std::setfill('-') << std::setw(width_col * 4 + 3) << std::endl;
 	}
+}
+
+int	get_index_to_input(std::string string)
+{
+	std::istringstream	convert(string);
+	int					index;
+
+	convert >> index;
+	if ((index == 0 && string != "0")
+		|| !(index >= 0 && index < number_of_contacts))
+		return (-1);
+	return (index);
+}
+
+static bool	is_book_empty(PhoneBook &book)
+{
+	Contact	&contact = book.get_contact(0);
+
+	if (contact.get_id() == -1)
+		return (true);
+	else
+		return (false);
 }
 
 int	search_input(PhoneBook &book)
@@ -46,9 +56,9 @@ int	search_input(PhoneBook &book)
 	int	index;
 	std::string	input;
 
-	if (is_phonebook_empty(book) == true)
+	if (is_book_empty(book) == true)
 	{
-		std::cout << search_request[1] << std::endl;
+		std::cout << search_request[1] << std::endl; 
 		return (0);
 	}
 	display_contact(book);
@@ -59,13 +69,14 @@ int	search_input(PhoneBook &book)
 			std::cout << user_pathern[4] << std::endl;
 			return (0);
 		}
-		try
-			index = std::stoi(input);
-		catch (const std::out_of_range &overflow)
+		index = get_index_to_input(input);
+		if (index < 0)
 		{
-			std::cout << overflow.what() << bad_input[4] << number_of_contact << std::endl;
+			std::cout << bad_input[4] << number_of_contacts << std::endl;  
 			continue ;
 		}
+		Contact	&contact = book.get_contact(index);
+		contact.display_infos();
 	}
 	return (0);
 }

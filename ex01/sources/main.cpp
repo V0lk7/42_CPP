@@ -6,7 +6,7 @@
 /*   By: jduval <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/18 15:28:10 by jduval            #+#    #+#             */
-/*   Updated: 2023/07/21 18:12:07 by jduval           ###   ########.fr       */
+/*   Updated: 2023/07/24 10:07:04 by jduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,8 @@ int	main(void)
 		else if (input.compare("ADD") == 0)
 			(void)add_input(book);
 		else if (input.compare("SEARCH") == 0)
-			std::cout << input << " inserted" << std::endl;
+			(void)search_input(book);
 		else if (input.compare("EXIT") == 0)
-			//std::cout << input << " inserted" << std::endl;
 			break ;
 		else
 			std::cout << bad_input[2] << std::endl;
