@@ -6,7 +6,7 @@
 #    By: jduval <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/18 10:18:38 by jduval            #+#    #+#              #
-#    Updated: 2023/07/24 15:20:55 by jduval           ###   ########.fr        #
+#    Updated: 2023/07/24 17:08:54 by jduval           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ SHELL		=	/bin/sh
 #								EXECUTABLE									  #
 ###############################################################################
 
-NAME		=	megaphone
+NAME		=	test
 
 ###############################################################################
 #								DESTINATION									  #
@@ -28,9 +28,12 @@ OBJ_DIR		:=	.obj
 #								SOURCES										  #
 ###############################################################################
 
-INCLUDES	=	.
+SRC_DIR		=	.
 
-SRCS		=	megaphone.cpp	
+SRCS		:=	tests.cpp			\
+				Account.cpp
+
+SRCS		:=	$(SRCS:%=$(SRC_DIR)/%)
 
 OBJS		:=	$(SRCS:%.cpp=$(OBJ_DIR)/%.o)
 
@@ -42,9 +45,9 @@ DEPS		:=	$(OBJS:.o=.d)
 
 CC			=	c++
 
-CFLAGS		=	-Wall -Wextra -Werror -std=c++98 -pedantic
+CFLAGS		=	-Wall -Wextra -Werror -std=c++98 -gdwarf -pedantic
 
-CPPFLAGS	=	-MMD -MP $(addprefix -I,$(INCLUDES))
+CPPFLAGS	=	-MMD -MP
 
 ###############################################################################
 #								UTILS										  #

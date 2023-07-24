@@ -6,7 +6,7 @@
 /*   By: jduval <jduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 15:57:01 by jduval            #+#    #+#             */
-/*   Updated: 2023/07/24 10:53:48 by jduval           ###   ########.fr       */
+/*   Updated: 2023/07/24 11:23:28 by jduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ const std::string	user_pathern[5] =
 };
 
 const int			contact_parameters = 5;
-const int			number_of_contacts = 2;
+const int			number_of_contacts = 8;
 const int			width_col = 10;
 
 #endif

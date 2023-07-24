@@ -6,7 +6,7 @@
 /*   By: jduval <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 10:07:25 by jduval            #+#    #+#             */
-/*   Updated: 2023/07/24 11:01:07 by jduval           ###   ########.fr       */
+/*   Updated: 2023/07/24 11:18:59 by jduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,14 +18,12 @@
 
 static void	display_contact(PhoneBook &book)
 {
-	//std::cout << std::setfill('-') << std::setw(width_col * 4 + 3) << std::endl;
 	for (int i = 0; i < number_of_contacts; i++)
 	{
 		Contact	&contact = book.get_contact(i);
 		if (contact.get_id() == -1)
 			continue ;
 		contact.display_all_contacts(); 
-	//	std::cout << std::setfill('-') << std::setw(width_col * 4 + 3) << std::endl;
 	}
 }
 
@@ -72,7 +70,7 @@ int	search_input(PhoneBook &book)
 		index = get_index_to_input(input);
 		if (index < 0)
 		{
-			std::cout << bad_input[4] << number_of_contacts << std::endl;  
+			std::cout << bad_input[4] << number_of_contacts - 1 << std::endl;  
 			continue ;
 		}
 		Contact	&contact = book.get_contact(index);
