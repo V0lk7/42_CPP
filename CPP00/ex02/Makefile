@@ -6,7 +6,7 @@
 #    By: jduval <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/18 10:18:38 by jduval            #+#    #+#              #
-#    Updated: 2023/07/24 17:08:54 by jduval           ###   ########.fr        #
+#    Updated: 2023/07/25 09:39:28 by jduval           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -45,7 +45,7 @@ DEPS		:=	$(OBJS:.o=.d)
 
 CC			=	c++
 
-CFLAGS		=	-Wall -Wextra -Werror -std=c++98 -gdwarf -pedantic
+CFLAGS		=	-Wall -Wextra -Werror -std=c++98 -pedantic
 
 CPPFLAGS	=	-MMD -MP
 
@@ -60,7 +60,7 @@ DIR_CREATE	=	mkdir -p $(@D)
 ###############################################################################
 
 $(NAME): $(OBJS)
-	$(CC) $(OBJS) -o $(NAME)
+	@$(CC) $(OBJS) -o $(NAME)
 	$(info CREATED $(NAME))
 
 $(OBJ_DIR)/%.o : %.cpp

@@ -6,7 +6,7 @@
 #    By: jduval <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/18 10:18:38 by jduval            #+#    #+#              #
-#    Updated: 2023/07/25 09:38:56 by jduval           ###   ########.fr        #
+#    Updated: 2023/07/25 09:38:06 by jduval           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ SHELL		=	/bin/sh
 #								EXECUTABLE									  #
 ###############################################################################
 
-NAME		=	phonebook
+NAME		=	brain
 
 ###############################################################################
 #								DESTINATION									  #
@@ -28,17 +28,11 @@ OBJ_DIR		:=	.obj
 #								SOURCES										  #
 ###############################################################################
 
-SRC_DIR		=	sources
+INCLUDES	=	.
 
-INCLUDES	=	includes
-
-SRCS		:=	main.cpp			\
-				PhoneBook.cpp		\
-				Contact.cpp			\
-				add_function.cpp	\
-				search_function.cpp
-
-SRCS		:=	$(SRCS:%=$(SRC_DIR)/%)
+SRCS		=	main.cpp		\
+				Zombie.cpp		\
+				zombieHorde.cpp	\
 
 OBJS		:=	$(SRCS:%.cpp=$(OBJ_DIR)/%.o)
 

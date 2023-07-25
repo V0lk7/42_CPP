@@ -1,26 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
+/*   Zombie.cpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jduval <jduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/24 20:14:56 by jduval            #+#    #+#             */
-/*   Updated: 2023/07/25 09:46:21 by jduval           ###   ########.fr       */
+/*   Created: 2023/07/24 19:58:27 by jduval            #+#    #+#             */
+/*   Updated: 2023/07/25 09:02:23 by jduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "function.hpp"
-#include <new>
+#include <iostream>
+#include "Zombie.hpp"
 
-int	main(void)
+Zombie::Zombie(void){}
+
+Zombie::~Zombie(void)
 {
-	Zombie	*VAL = newZombie("VAL");
-	randomChump("RAPH");
-	randomChump("FRANCIS");
-	Zombie	*THIBS = newZombie("LeTHIBS");
-	randomChump("EL_KENNY");
-	delete VAL;
-	delete THIBS;
-	return (0);
+	std::cout << name << ": Destroyed" << std::endl;
+}
+
+void	Zombie::announce(void)
+{
+	std::cout << name << ": BraiiiiiiinnnzzzZ..." << std::endl;
+}
+
+void	Zombie::get_a_name(std::string new_name)
+{
+	name = new_name;
 }
