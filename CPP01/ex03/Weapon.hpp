@@ -1,24 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Zombie.hpp                                         :+:      :+:    :+:   */
+/*   Weapon.hpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jduval <jduval@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jduval <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/24 19:56:23 by jduval            #+#    #+#             */
-/*   Updated: 2023/07/25 10:01:23 by jduval           ###   ########.fr       */
+/*   Created: 2023/07/25 11:57:34 by jduval            #+#    #+#             */
+/*   Updated: 2023/07/25 13:22:37 by jduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <string>
 
-class Zombie
+class Weapon
 {
 	private	:
-		std::string	name;
+		std::string	type;
 	public	:
-		Zombie();
-		~Zombie();
-		void 	announce(void);
-		void	get_a_name(std::string);
+		Weapon(std::string);
+		~Weapon();
+		const std::string	&getType(void);
+		void				setType(std::string);
 };

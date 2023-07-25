@@ -3,29 +3,32 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jduval <jduval@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jduval <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/24 20:14:56 by jduval            #+#    #+#             */
-/*   Updated: 2023/07/25 13:09:47 by jduval           ###   ########.fr       */
+/*   Created: 2023/07/25 11:28:32 by jduval            #+#    #+#             */
+/*   Updated: 2023/07/25 14:12:09 by jduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "function.hpp"
-#include <iostream>
+#include "HumanA.hpp"
+#include "HumanB.hpp"
 
-int	main(void)
+int main()
 {
-	Zombie	*hordes;
-	int		N[] = {0, -10, 2147483647, 10};
-	int		len = 4;
-
-	for (int i = 0; i < len; i++)
 	{
-		hordes = zombieHorde(N[i], "ROGER");
-		if (hordes == NULL)
-			std::cout << "Hordes == NULL " << "Bad allocation for N = " << N[i] << std::endl;
-		else
-			delete[] hordes;
+	Weapon club = Weapon("crude spiked club");
+	HumanA bob("Bob", club);
+	bob.attack();
+	club.setType("some other type of club");
+	bob.attack();
+	}
+	{
+	Weapon club = Weapon("crude spiked club");
+	HumanB jim("Jim");
+	jim.setWeapon(club);
+	jim.attack();
+	club.setType("some other type of club");
+	jim.attack();
 	}
 	return (0);
 }

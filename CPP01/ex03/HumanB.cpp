@@ -1,29 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   megaphone.cpp                                      :+:      :+:    :+:   */
+/*   HumanB.cpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jduval <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/18 11:25:34 by jduval            #+#    #+#             */
-/*   Updated: 2023/07/25 10:19:07 by jduval           ###   ########.fr       */
+/*   Created: 2023/07/25 13:01:52 by jduval            #+#    #+#             */
+/*   Updated: 2023/07/25 14:11:59 by jduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <ctype.h>
+#include "HumanB.hpp"
+#include <new>
 #include <iostream>
 
-int	main(int ac, char **ag)
+HumanB::HumanB(std::string new_name)
 {
-	if (ac == 1){
-		std::cout << "* LOUD AND UNBEARABLE FEEDBACK NOISE *" << std::endl;
-		return (0);
-	}
-	std::string output;
-	for (int i = 1; ag[i] != NULL; i++){
-		for (int j = 0; ag[i][j] != '\0'; j++)
-			output.push_back(std::toupper(ag[i][j]));
-	}
-	std::cout << output << std::endl;
-	return (0);
+	weapon = NULL;
+	name = new_name;
+}
+HumanB::~HumanB(){}
+
+void	HumanB::attack(void)
+{
+	std::cout << "attacks with their " << weapon->getType() << std::endl;
+}
+
+void	HumanB::setWeapon(Weapon &var)
+{
+	weapon = &var;
 }

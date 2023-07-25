@@ -1,24 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Zombie.hpp                                         :+:      :+:    :+:   */
+/*   HumanA.hpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jduval <jduval@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jduval <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/24 19:56:23 by jduval            #+#    #+#             */
-/*   Updated: 2023/07/25 10:01:23 by jduval           ###   ########.fr       */
+/*   Created: 2023/07/25 11:59:53 by jduval            #+#    #+#             */
+/*   Updated: 2023/07/25 14:12:01 by jduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <string>
 
-class Zombie
+class Weapon;
+
+class HumanA
 {
 	private	:
 		std::string	name;
+		Weapon	&weapon;
 	public	:
-		Zombie();
-		~Zombie();
-		void 	announce(void);
-		void	get_a_name(std::string);
+		HumanA(std::string, Weapon &var);
+		~HumanA();
+		void	attack(void);
 };

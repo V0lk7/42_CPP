@@ -6,26 +6,25 @@
 /*   By: jduval <jduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/24 20:14:56 by jduval            #+#    #+#             */
-/*   Updated: 2023/07/25 13:09:47 by jduval           ###   ########.fr       */
+/*   Updated: 2023/07/25 10:25:41 by jduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "function.hpp"
 #include <iostream>
+#include <string>
 
 int	main(void)
 {
-	Zombie	*hordes;
-	int		N[] = {0, -10, 2147483647, 10};
-	int		len = 4;
+	std::string	variable = "HI THIS IS BRAIN";
+	std::string	*stringPTR = &variable;
+	std::string	&stringREF = variable;
 
-	for (int i = 0; i < len; i++)
-	{
-		hordes = zombieHorde(N[i], "ROGER");
-		if (hordes == NULL)
-			std::cout << "Hordes == NULL " << "Bad allocation for N = " << N[i] << std::endl;
-		else
-			delete[] hordes;
-	}
+	std::cout << "Addresse of variable = " << &variable << std::endl;
+	std::cout << "Addresse of stringPTR = " << stringPTR << std::endl;
+	std::cout << "Addresse of stringREF = " << &stringREF << std::endl;
+
+	std::cout << "Value of variable = " << variable << std::endl;
+	std::cout << "Value of stringPTR = " << *stringPTR << std::endl;
+	std::cout << "Value of stringREF = " << stringREF << std::endl;
 	return (0);
 }
