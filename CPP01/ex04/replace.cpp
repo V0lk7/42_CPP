@@ -1,34 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
+/*   replace.cpp                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jduval <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/25 11:28:32 by jduval            #+#    #+#             */
-/*   Updated: 2023/07/25 14:45:22 by jduval           ###   ########.fr       */
+/*   Created: 2023/07/25 17:44:43 by jduval            #+#    #+#             */
+/*   Updated: 2023/07/25 17:56:21 by jduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "HumanA.hpp"
-#include "HumanB.hpp"
-
-int main()
+bool	replace(std::ifstream &infile,
+				std::ofstream &outfile,
+				std::string (&inputs)[4])
 {
+	std::string	input;
+	std::string	output;
+
+	while (std::getline(infile, input))
 	{
-	Weapon club = Weapon("crude spiked club");
-	HumanA bob("Bob", club);
-	bob.attack();
-	club.setType("some other type of club");
-	bob.attack();
+		
 	}
-	{
-	Weapon club = Weapon("crude spiked club");
-	HumanB jim("Jim");
-	jim.setWeapon(club);
-	jim.attack();
-	club.setType("some other type of club");
-	jim.attack();
-	}
-	return (0);
 }
+

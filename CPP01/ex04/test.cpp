@@ -1,34 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
+/*   test.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jduval <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/25 11:28:32 by jduval            #+#    #+#             */
-/*   Updated: 2023/07/25 14:45:22 by jduval           ###   ########.fr       */
+/*   Created: 2023/07/25 17:06:45 by jduval            #+#    #+#             */
+/*   Updated: 2023/07/25 17:24:55 by jduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "HumanA.hpp"
-#include "HumanB.hpp"
+#include <fstream>
+#include <iostream>
 
-int main()
+int	main(void)
 {
-	{
-	Weapon club = Weapon("crude spiked club");
-	HumanA bob("Bob", club);
-	bob.attack();
-	club.setType("some other type of club");
-	bob.attack();
+	std::fstream	file;
+	try{
+		file.open("test");
+	}catch (std::ios_base::failure	&fail){
+		std::cerr	<< fail.what() << std::endl;
 	}
-	{
-	Weapon club = Weapon("crude spiked club");
-	HumanB jim("Jim");
-	jim.setWeapon(club);
-	jim.attack();
-	club.setType("some other type of club");
-	jim.attack();
-	}
+	if (file.is_open() == false)
+		std::cout << "mdr" << std::endl;
 	return (0);
 }

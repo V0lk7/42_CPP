@@ -5,30 +5,30 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: jduval <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/25 11:28:32 by jduval            #+#    #+#             */
-/*   Updated: 2023/07/25 14:45:22 by jduval           ###   ########.fr       */
+/*   Created: 2023/07/25 15:26:37 by jduval            #+#    #+#             */
+/*   Updated: 2023/07/25 17:56:19 by jduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "HumanA.hpp"
-#include "HumanB.hpp"
+#include <iostream>
+#include <fstream>
+#include "functions.hpp"
 
-int main()
+int	main(int ac, char **av)
 {
-	{
-	Weapon club = Weapon("crude spiked club");
-	HumanA bob("Bob", club);
-	bob.attack();
-	club.setType("some other type of club");
-	bob.attack();
-	}
-	{
-	Weapon club = Weapon("crude spiked club");
-	HumanB jim("Jim");
-	jim.setWeapon(club);
-	jim.attack();
-	club.setType("some other type of club");
-	jim.attack();
-	}
+	std::string		inputs[4];
+	std::ifstream	infile;
+	std::ofstream	outfile;
+
+	if (input_is_valid(ac, av, inputs) == false)
+		return (1);
+	create_name_outfile(inputs[0], inputs[3]);
+	if (files_are_valid(infile, outfile, inputs) == false)
+		return (1);
+	bool	flag = replace_to_newfile(infile, outfile, inputs);
+	input.close();
+	output.close();
+	if (flag == false)
+		return (1);
 	return (0);
 }
