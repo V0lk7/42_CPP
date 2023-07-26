@@ -6,7 +6,7 @@
 /*   By: jduval <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/25 15:55:40 by jduval            #+#    #+#             */
-/*   Updated: 2023/07/25 17:56:20 by jduval           ###   ########.fr       */
+/*   Updated: 2023/07/26 12:03:07 by jduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@ bool	files_are_valid(std::ifstream &infile,
 						std::ofstream &outfile,
 						std::string (&inputs)[4]);
 
-//file : replace.cpp
-bool	replace(std::ifstream &infile,
-				std::ofstream &outfile,
-				std::string (&inputs)[4]);
+//file : change_input.cpp
+int		change_input(std::ifstream &infile,
+					std::ofstream &outfile,
+					std::string (&inputs)[4]);
 #endif

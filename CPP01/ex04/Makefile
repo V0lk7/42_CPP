@@ -6,7 +6,7 @@
 #    By: jduval <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/18 10:18:38 by jduval            #+#    #+#              #
-#    Updated: 2023/07/25 17:44:40 by jduval           ###   ########.fr        #
+#    Updated: 2023/07/26 12:45:48 by jduval           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,7 +34,7 @@ SRCS		=	main.cpp			\
 				parse_inputs.cpp	\
 				utils.cpp			\
 				file_access.cpp		\
-				replace.cpp			\
+				change_input.cpp			\
 
 OBJS		:=	$(SRCS:%.cpp=$(OBJ_DIR)/%.o)
 
@@ -46,7 +46,8 @@ DEPS		:=	$(OBJS:.o=.d)
 
 CC			=	c++
 
-CFLAGS		=	-Wall -Wextra -Werror -std=c++98 -pedantic
+CFLAGS		=	-Wall -Wextra -Werror -std=c++98 -gdwarf
+#-pedantic
 
 CPPFLAGS	=	-MMD -MP $(addprefix -I,$(INCLUDES))
 
