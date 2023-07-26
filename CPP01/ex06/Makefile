@@ -6,7 +6,7 @@
 #    By: jduval <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/18 10:18:38 by jduval            #+#    #+#              #
-#    Updated: 2023/07/26 14:54:34 by jduval           ###   ########.fr        #
+#    Updated: 2023/07/26 16:53:26 by jduval           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ SHELL		=	/bin/sh
 #								EXECUTABLE									  #
 ###############################################################################
 
-NAME		=	replace
+NAME		=	HarlFilter
 
 ###############################################################################
 #								DESTINATION									  #
@@ -31,10 +31,7 @@ OBJ_DIR		:=	.obj
 INCLUDES	=	.
 
 SRCS		=	main.cpp			\
-				parse_inputs.cpp	\
-				utils.cpp			\
-				file_access.cpp		\
-				change_input.cpp			\
+				Harl.cpp			\
 
 OBJS		:=	$(SRCS:%.cpp=$(OBJ_DIR)/%.o)
 
