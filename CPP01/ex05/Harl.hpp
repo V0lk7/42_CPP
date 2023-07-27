@@ -6,11 +6,14 @@
 /*   By: jduval <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/26 13:41:28 by jduval            #+#    #+#             */
-/*   Updated: 2023/07/26 14:38:16 by jduval           ###   ########.fr       */
+/*   Updated: 2023/07/27 10:21:39 by jduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <string>
+#ifndef HARL_HPP
+# define HARL_HPP
+
+# include <string>
 
 class Harl
 {
@@ -24,3 +27,5 @@ class Harl
 		~Harl();
 		void	complain(std::string);
 };
+
+#endif

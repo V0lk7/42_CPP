@@ -6,7 +6,7 @@
 /*   By: jduval <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/26 14:25:25 by jduval            #+#    #+#             */
-/*   Updated: 2023/07/26 16:51:59 by jduval           ###   ########.fr       */
+/*   Updated: 2023/07/27 10:29:41 by jduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,15 +41,15 @@ int	main(int ac, char **av)
 
 static void	put_message(const std::string filter, Harl &harl)
 {
-	int	result_compare[4];
+	int	result_compare;
 	const std::string	comparators[4] = {	"DEBUG",
 											"INFO",
 											"WARNING",
 											"ERROR"};
 	for (int i = 0; i < 4; i++)
 	{
-		result_compare[i] = comparators[i].compare(filter);
-		switch (result_compare[i]){
+		result_compare = comparators[i].compare(filter);
+		switch (result_compare){
 			case 0 :
 				harl.complain(i);
 				return ;

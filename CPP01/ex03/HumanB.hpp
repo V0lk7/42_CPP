@@ -6,12 +6,15 @@
 /*   By: jduval <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/25 12:59:11 by jduval            #+#    #+#             */
-/*   Updated: 2023/07/25 14:12:04 by jduval           ###   ########.fr       */
+/*   Updated: 2023/07/27 10:16:57 by jduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <string>
-#include "Weapon.hpp"
+#ifndef HUMANB_HPP
+# define HUMANB_HPP
+
+# include <string>
+class Weapon;
 
 class HumanB
 {
@@ -24,3 +27,5 @@ class HumanB
 		void	attack(void);
 		void	setWeapon(Weapon &var);
 };
+
+#endif

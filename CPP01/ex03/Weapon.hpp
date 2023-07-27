@@ -6,11 +6,14 @@
 /*   By: jduval <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/25 11:57:34 by jduval            #+#    #+#             */
-/*   Updated: 2023/07/25 13:22:37 by jduval           ###   ########.fr       */
+/*   Updated: 2023/07/27 10:18:50 by jduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <string>
+#ifndef WEAPON_HPP
+# define WEAPON_HPP
+
+# include <string>
 
 class Weapon
 {
@@ -22,3 +25,5 @@ class Weapon
 		const std::string	&getType(void);
 		void				setType(std::string);
 };
+
+#endif

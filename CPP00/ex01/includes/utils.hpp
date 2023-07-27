@@ -6,7 +6,7 @@
 /*   By: jduval <jduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 15:57:01 by jduval            #+#    #+#             */
-/*   Updated: 2023/07/24 11:23:28 by jduval           ###   ########.fr       */
+/*   Updated: 2023/07/27 11:25:49 by jduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ const std::string	add_request[6] =
 	"The contact is not completely set. All modification will be lost.\nReturn to the main menu."
 };
 
-const std::string	search_request[3] = 
+const std::string	search_request[3] =
 {
 	"Enter the ID of the contact wanted :",
 	"No contact set. Try ADD to set at least one contact",
@@ -60,7 +60,7 @@ const std::string	user_pathern[5] =
 };
 
 const int			contact_parameters = 5;
-const int			number_of_contacts = 8;
+const int			number_of_contacts = 3;
 const int			width_col = 10;
 
 #endif

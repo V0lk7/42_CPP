@@ -6,7 +6,7 @@
 /*   By: jduval <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 10:07:25 by jduval            #+#    #+#             */
-/*   Updated: 2023/07/24 11:18:59 by jduval           ###   ########.fr       */
+/*   Updated: 2023/07/27 11:23:27 by jduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ int	get_index_to_input(std::string string)
 	std::istringstream	convert(string);
 	int					index;
 
+	if (string.find_first_not_of("0123456789") != std::string::npos)
+		return (-1);
 	convert >> index;
 	if ((index == 0 && string != "0")
 		|| !(index >= 0 && index < number_of_contacts))
@@ -66,6 +68,11 @@ int	search_input(PhoneBook &book)
 		{
 			std::cout << user_pathern[4] << std::endl;
 			return (0);
+		}
+		if (input.empty() == true)
+		{
+			std::cout << search_request[0] << std::endl;
+			continue ;
 		}
 		index = get_index_to_input(input);
 		if (index < 0)

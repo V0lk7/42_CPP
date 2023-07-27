@@ -6,7 +6,7 @@
 /*   By: jduval <jduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/24 20:14:56 by jduval            #+#    #+#             */
-/*   Updated: 2023/07/25 10:25:41 by jduval           ###   ########.fr       */
+/*   Updated: 2023/07/27 10:14:57 by jduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,11 @@ int	main(void)
 	std::string	&stringREF = variable;
 
 	std::cout << "Addresse of variable = " << &variable << std::endl;
-	std::cout << "Addresse of stringPTR = " << stringPTR << std::endl;
-	std::cout << "Addresse of stringREF = " << &stringREF << std::endl;
+	std::cout << "Addresse stocked in stringPTR = " << stringPTR << std::endl;
+	std::cout << "Addresse stocked in stringREF = " << &stringREF << std::endl;
 
 	std::cout << "Value of variable = " << variable << std::endl;
-	std::cout << "Value of stringPTR = " << *stringPTR << std::endl;
-	std::cout << "Value of stringREF = " << stringREF << std::endl;
+	std::cout << "Value pointed by stringPTR = " << *stringPTR << std::endl;
+	std::cout << "Value pointed by stringREF = " << stringREF << std::endl;
 	return (0);
 }
