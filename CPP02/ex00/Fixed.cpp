@@ -1,27 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   HumanA.cpp                                         :+:      :+:    :+:   */
+/*   Fixed.cpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jduval <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/25 12:54:42 by jduval            #+#    #+#             */
-/*   Updated: 2023/07/27 15:22:04 by jduval           ###   ########.fr       */
+/*   Created: 2023/07/27 12:03:53 by jduval            #+#    #+#             */
+/*   Updated: 2023/07/27 15:26:10 by jduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "HumanA.hpp"
-#include "Weapon.hpp"
+#include "Fixed.hpp"
 #include <iostream>
 
-HumanA::HumanA(std::string new_name, Weapon &var) : weapon (var)
+const int	Fixed::nbr_of_bits = 8;
+
+Fixed::Fixed() : number(0), nbr_of_bits(8)
 {
-	name = new_name;
+	this->number = 0;
+	std::cout << "Default constructor called" << std::endl;
 }
 
-HumanA::~HumanA(){}
-
-void	HumanA::attack(void)
+Fixed::Fixed(const Fixed &object)
 {
-	std::cout << "attacks with their " << weapon.getType() << std::endl;
+	std::cout << "Copy constructor called" << std::endl;
+	this->number = object.getRawBits();
+}
+
+Fixed::~Fixed()
+{
+	std::cout << "Destructor called" << std::endl;
+}
+
+int	Fixed::getRawBits(void) const
+{
+	return (this->number);
 }

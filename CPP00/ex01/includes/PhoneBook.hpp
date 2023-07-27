@@ -6,7 +6,7 @@
 /*   By: jduval <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/18 14:13:57 by jduval            #+#    #+#             */
-/*   Updated: 2023/07/24 11:22:26 by jduval           ###   ########.fr       */
+/*   Updated: 2023/07/27 15:52:14 by jduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ class PhoneBook
 	public	:
 		PhoneBook();
 		~PhoneBook();
-		int		get_index();
+		int		get_index() const;
 		void	increment_index(int i = 1);
 		Contact	&get_contact(int);
 };

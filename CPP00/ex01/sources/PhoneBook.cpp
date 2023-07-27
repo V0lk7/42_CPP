@@ -6,21 +6,18 @@
 /*   By: jduval <jduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 10:11:53 by jduval            #+#    #+#             */
-/*   Updated: 2023/07/20 17:50:26 by jduval           ###   ########.fr       */
+/*   Updated: 2023/07/27 15:51:49 by jduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "PhoneBook.hpp"
 #include "utils.hpp"
 
-PhoneBook::PhoneBook(void)
-{
-	index = 0;
-}
+PhoneBook::PhoneBook(void) : index (0){}
 
 PhoneBook::~PhoneBook(void){}
 
-int	PhoneBook::get_index(void)
+int	PhoneBook::get_index(void) const
 {
 	return (index);
 }
