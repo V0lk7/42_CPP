@@ -6,7 +6,7 @@
 /*   By: jduval <jduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/24 20:14:56 by jduval            #+#    #+#             */
-/*   Updated: 2023/07/25 09:46:21 by jduval           ###   ########.fr       */
+/*   Updated: 2023/07/31 09:33:38 by jduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
 
 int	main(void)
 {
-	Zombie	*VAL = newZombie("VAL");
-	randomChump("RAPH");
-	randomChump("FRANCIS");
+	Zombie	*VAL = newZombie("VV");
+	randomChump("ALED");
+	randomChump("HEY");
 	Zombie	*THIBS = newZombie("LeTHIBS");
 	randomChump("EL_KENNY");
 	delete VAL;

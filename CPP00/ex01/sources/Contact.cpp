@@ -6,7 +6,7 @@
 /*   By: jduval <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/18 14:53:01 by jduval            #+#    #+#             */
-/*   Updated: 2023/07/27 15:57:14 by jduval           ###   ########.fr       */
+/*   Updated: 2023/07/31 09:22:06 by jduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,7 @@
 #include <sstream>
 #include <iomanip>
 
-Contact::Contact() : id (-1)
-{
-	for (int i = 0; i < number_of_contacts; i++)
-		this->infos[i] = "";
-}
+Contact::Contact() : id (-1){}
 
 Contact::~Contact(){}
 

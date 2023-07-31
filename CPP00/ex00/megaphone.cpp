@@ -6,11 +6,10 @@
 /*   By: jduval <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/18 11:25:34 by jduval            #+#    #+#             */
-/*   Updated: 2023/07/25 10:19:07 by jduval           ###   ########.fr       */
+/*   Updated: 2023/07/31 09:14:24 by jduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <ctype.h>
 #include <iostream>
 
 int	main(int ac, char **ag)

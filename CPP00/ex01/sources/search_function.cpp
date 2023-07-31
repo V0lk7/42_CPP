@@ -6,7 +6,7 @@
 /*   By: jduval <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 10:07:25 by jduval            #+#    #+#             */
-/*   Updated: 2023/07/27 11:23:27 by jduval           ###   ########.fr       */
+/*   Updated: 2023/07/31 09:22:49 by jduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ int	search_input(PhoneBook &book)
 		return (0);
 	}
 	display_contact(book);
+	std::cout << search_request[3] << std::endl;
 	while (getline(std::cin, input))
 	{
 		if (input == user_pathern[3])
@@ -82,6 +83,7 @@ int	search_input(PhoneBook &book)
 		}
 		Contact	&contact = book.get_contact(index);
 		contact.display_infos();
+		std::cout << search_request[3] << std::endl;
 	}
 	return (0);
 }
