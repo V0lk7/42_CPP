@@ -6,7 +6,7 @@
 /*   By: jduval <jduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/24 20:10:23 by jduval            #+#    #+#             */
-/*   Updated: 2023/07/24 20:11:42 by jduval           ###   ########.fr       */
+/*   Updated: 2023/07/31 15:24:17 by jduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,7 @@
 
 void	randomChump(std::string name)
 {
-	Zombie	new_zombie;
-
-	new_zombie.get_a_name(name);
-	new_zombie.announce();
+	Zombie	new_zombie(name);
+	
+	return ;
 }

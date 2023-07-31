@@ -6,13 +6,12 @@
 /*   By: jduval <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/26 13:43:15 by jduval            #+#    #+#             */
-/*   Updated: 2023/07/31 10:04:11 by jduval           ###   ########.fr       */
+/*   Updated: 2023/07/31 17:00:58 by jduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Harl.hpp"
 #include <iostream>
-#include <cstdlib>
 
 Harl::Harl(){}
 
@@ -47,13 +46,27 @@ void	Harl::error(void)
 }
 
 
-void	Harl::complain(int start)
+void	Harl::complain(std::string level)
 {
 	void	(Harl::*funcptr[4])(void) = {&Harl::debug,
-							&Harl::info,
-							&Harl::warning,
-							&Harl::error};
-
-	for (int i = start; i < 4; i++)
-		(this->*funcptr[i])();
+										&Harl::info,
+										&Harl::warning,
+										&Harl::error};
+	std::string const	inputs[4] =	{	"DEBUG",
+										"INFO",
+										"WARNING",
+										"ERROR"};
+	for (int i = 0; i < 4; i++)
+	{
+		switch(level.compare(inputs[i])){
+			case 0 :
+			{
+				while (i < 4)
+					(this->*funcptr[i++])();
+				return ;
+			}
+			default :
+				continue ;
+		}
+	}
 }

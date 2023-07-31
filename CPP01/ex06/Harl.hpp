@@ -6,12 +6,14 @@
 /*   By: jduval <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/26 13:41:28 by jduval            #+#    #+#             */
-/*   Updated: 2023/07/31 10:03:54 by jduval           ###   ########.fr       */
+/*   Updated: 2023/07/31 17:00:59 by jduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef HARL_HPP
 # define HARL_HPP
+
+#include <string>
 
 class Harl
 {
@@ -23,7 +25,7 @@ class Harl
 	public	:
 		Harl();
 		~Harl();
-		void	complain(int start);
+		void	complain(std::string level);
 };
 
 #endif

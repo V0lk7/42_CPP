@@ -6,7 +6,7 @@
 /*   By: jduval <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/27 12:03:53 by jduval            #+#    #+#             */
-/*   Updated: 2023/07/31 14:04:59 by jduval           ###   ########.fr       */
+/*   Updated: 2023/07/31 15:09:11 by jduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,16 @@
 int const	Fixed::nbr_of_bits = 8;
 
 Fixed::Fixed() : number(0)
+{
+	std::cout << "Default constructor called" << std::endl;
+}
+
+Fixed::Fixed(int const value) : number(value)
+{
+	std::cout << "Default constructor called" << std::endl;
+}
+
+Fixed::Fixed(float const value) : number(value)
 {
 	std::cout << "Default constructor called" << std::endl;
 }

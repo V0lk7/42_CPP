@@ -6,7 +6,7 @@
 /*   By: jduval <jduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/24 20:14:56 by jduval            #+#    #+#             */
-/*   Updated: 2023/07/31 09:33:38 by jduval           ###   ########.fr       */
+/*   Updated: 2023/07/31 15:32:39 by jduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	main(void)
 	randomChump("ALED");
 	randomChump("HEY");
 	Zombie	*THIBS = newZombie("LeTHIBS");
-	randomChump("EL_KENNY");
+	randomChump("LE LEO");
 	delete VAL;
 	delete THIBS;
 	return (0);

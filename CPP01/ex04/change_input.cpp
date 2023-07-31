@@ -6,7 +6,7 @@
 /*   By: jduval <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/25 17:44:43 by jduval            #+#    #+#             */
-/*   Updated: 2023/07/26 13:06:55 by jduval           ###   ########.fr       */
+/*   Updated: 2023/07/31 16:08:47 by jduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,11 @@ static std::string	find_and_replace(std::string input,
 									const std::string &s1,
 									const std::string &s2)
 {
+	if (s1.empty() == true)
+		return (input);
 	std::size_t	pos = 0;
-	while (pos < input.size())
+	std::size_t	end = input.size();
+	while (pos < end)
 	{
 		pos = input.find(s1, pos);
 		if (pos == std::string::npos)

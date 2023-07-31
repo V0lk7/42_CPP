@@ -6,16 +6,14 @@
 /*   By: jduval <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/26 14:25:25 by jduval            #+#    #+#             */
-/*   Updated: 2023/07/31 10:04:23 by jduval           ###   ########.fr       */
+/*   Updated: 2023/07/31 17:01:01 by jduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Harl.hpp"
 #include <iostream>
-#include <string>
 
 static int	is_there_filter(const int ac);
-static void	put_message(const std::string filter, Harl &harl);
 
 int	main(int ac, char **av)
 {
@@ -30,34 +28,13 @@ int	main(int ac, char **av)
 						<< std::endl;
 			break ;
 		case 1 :
-			put_message(av[1], harl);
+			harl.complain(av[1]);
 			break ;
 		default :
 			std::cout << "No filter.... Need one, don't you think ?" << std::endl;
 			break ;
 	}
 	return (0);	
-}
-
-static void	put_message(const std::string filter, Harl &harl)
-{
-	int	result_compare;
-	const std::string	comparators[4] = {	"DEBUG",
-											"INFO",
-											"WARNING",
-											"ERROR"};
-	for (int i = 0; i < 4; i++)
-	{
-		result_compare = comparators[i].compare(filter);
-		switch (result_compare){
-			case 0 :
-				harl.complain(i);
-				return ;
-			default :
-				continue ;
-		}
-	}
-	std::cout << "We don't speak the same langage i guess" << std::endl;
 }
 
 static int	is_there_filter(const int ac)

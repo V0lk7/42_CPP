@@ -6,7 +6,7 @@
 /*   By: jduval <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/26 13:43:15 by jduval            #+#    #+#             */
-/*   Updated: 2023/07/31 10:03:07 by jduval           ###   ########.fr       */
+/*   Updated: 2023/07/31 16:20:17 by jduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,11 +49,21 @@ void	Harl::error(void)
 void	Harl::complain(std::string level)
 {
 	void	(Harl::*funcptr[4])(void) = {&Harl::debug,
-							&Harl::info,
-							&Harl::warning,
-							&Harl::error};
-	int		index;
-
-	index = atoi(level.c_str());
-	(this->*funcptr[index])();
+										&Harl::info,
+										&Harl::warning,
+										&Harl::error};
+	std::string const	inputs[4] =	{	"DEBUG",
+										"INFO",
+										"WARNING",
+										"ERROR"};
+	for (int i = 0; i < 4; i++)
+	{
+		switch(level.compare(inputs[i])){
+			case 0 :
+				(this->*funcptr[i])();
+				return ;
+			default :
+				continue ;
+		}
+	}
 }
