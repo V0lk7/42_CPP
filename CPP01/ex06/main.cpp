@@ -6,7 +6,7 @@
 /*   By: jduval <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/26 14:25:25 by jduval            #+#    #+#             */
-/*   Updated: 2023/07/31 17:01:01 by jduval           ###   ########.fr       */
+/*   Updated: 2023/08/02 07:50:52 by jduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,15 +23,13 @@ int	main(int ac, char **av)
 	filter = is_there_filter(ac);
 	switch(filter){
 		case 2 :
-			std::cout	<< "What are you talking about ??" 
-						<< " Need one filter, not a J.K Rowling novel"
-						<< std::endl;
+			std::cout	<< "Too much parameters" << std::endl;
 			break ;
 		case 1 :
 			harl.complain(av[1]);
 			break ;
 		default :
-			std::cout << "No filter.... Need one, don't you think ?" << std::endl;
+			std::cout << "Not enough parameters" << std::endl;
 			break ;
 	}
 	return (0);	

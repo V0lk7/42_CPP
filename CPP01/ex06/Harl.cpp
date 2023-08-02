@@ -6,7 +6,7 @@
 /*   By: jduval <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/26 13:43:15 by jduval            #+#    #+#             */
-/*   Updated: 2023/07/31 17:00:58 by jduval           ###   ########.fr       */
+/*   Updated: 2023/08/02 07:51:46 by jduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,4 +69,5 @@ void	Harl::complain(std::string level)
 				continue ;
 		}
 	}
+	std::cout << "Wrong parameter, Try : DEBUG, INFO, WARNING or ERROR" << std::endl;
 }

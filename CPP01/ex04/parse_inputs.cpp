@@ -6,7 +6,7 @@
 /*   By: jduval <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/25 15:50:13 by jduval            #+#    #+#             */
-/*   Updated: 2023/07/31 16:11:11 by jduval           ###   ########.fr       */
+/*   Updated: 2023/08/02 07:49:55 by jduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static bool	valid_nb_parameters(int ac)
 		}
 		else
 		{
-			std::cout	<< "Not enough parameters. Need 3 parameters only"
+			std::cout	<< "Not enough parameters. Need 3 parameters"
 						<< std::endl;
 		}
 		return (false);
