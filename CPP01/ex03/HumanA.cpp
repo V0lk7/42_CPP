@@ -6,7 +6,7 @@
 /*   By: jduval <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/25 12:54:42 by jduval            #+#    #+#             */
-/*   Updated: 2023/07/31 09:56:28 by jduval           ###   ########.fr       */
+/*   Updated: 2023/08/02 10:27:43 by jduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,5 +23,5 @@ HumanA::~HumanA(){}
 
 void	HumanA::attack(void)
 {
-	std::cout << "attacks with their " << weapon.getType() << std::endl;
+	std::cout << this->name << " attacks with their " << weapon.getType() << std::endl;
 }

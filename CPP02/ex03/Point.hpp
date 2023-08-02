@@ -1,32 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   PhoneBook.hpp                                      :+:      :+:    :+:   */
+/*   Point.hpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jduval <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/18 14:13:57 by jduval            #+#    #+#             */
-/*   Updated: 2023/08/02 11:35:05 by jduval           ###   ########.fr       */
+/*   Created: 2023/08/02 14:41:15 by jduval            #+#    #+#             */
+/*   Updated: 2023/08/02 17:16:56 by jduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PHONEBOOK_HPP
-# define PHONEBOOK_HPP
+#ifndef POINT_HPP
+# define POINT_HPP
 
-# include "Contact.hpp"
-# include "utils.hpp"
+#include "Fixed.hpp"
 
-class PhoneBook
+class Point
 {
-	private :
-		Contact list[number_of_contacts];
-		int		index;
+	private	:
+		Fixed const	_x;
+		Fixed const	_y;
+
 	public	:
-		PhoneBook();
-		~PhoneBook();
-		int		get_index() const;
-		void	increment_index(int i = 1);
-		Contact	&get_contact(int);
+		Point();					//Default constructor
+		Point(Point const &src);	//Copy constructor
+		~Point();					//Destructor
+		Point(float const x_val, float const y_val);
+
+		Point	&operator=(Point const &rhs);
+
+		Fixed	getX() const;
+		Fixed	getY() const;
+
+		static  Fixed	&getSegment(Point const &a, Point const &b);
+
 };
 
 #endif

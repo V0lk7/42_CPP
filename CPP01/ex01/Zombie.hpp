@@ -6,7 +6,7 @@
 /*   By: jduval <jduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/24 19:56:23 by jduval            #+#    #+#             */
-/*   Updated: 2023/07/27 10:13:16 by jduval           ###   ########.fr       */
+/*   Updated: 2023/08/02 14:19:07 by jduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ class Zombie
 		Zombie();
 		~Zombie();
 		void 	announce(void);
-		void	get_a_name(std::string);
+		void	getName(std::string);
 };
 
 #endif

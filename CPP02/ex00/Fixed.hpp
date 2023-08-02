@@ -6,7 +6,7 @@
 /*   By: jduval <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/27 11:54:51 by jduval            #+#    #+#             */
-/*   Updated: 2023/07/31 14:05:43 by jduval           ###   ########.fr       */
+/*   Updated: 2023/08/02 08:16:32 by jduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@
 class Fixed
 {
 	private	:
-		int					number;
-		static const int	nbr_of_bits;
+		int					_number;
+		static const int	_nbr_of_bits;
 
 	public	:
 		Fixed();	//Default constructor

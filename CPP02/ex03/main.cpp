@@ -1,33 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   HumanB.cpp                                         :+:      :+:    :+:   */
+/*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jduval <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/25 13:01:52 by jduval            #+#    #+#             */
-/*   Updated: 2023/08/02 10:27:34 by jduval           ###   ########.fr       */
+/*   Created: 2023/08/02 15:10:48 by jduval            #+#    #+#             */
+/*   Updated: 2023/08/02 17:59:13 by jduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "HumanB.hpp"
-#include "Weapon.hpp"
-#include <new>
+#include "Point.hpp"
 #include <iostream>
 
-HumanB::HumanB(std::string new_name) : name(new_name)
+int	main(void)
 {
-	weapon = NULL;
-}
-HumanB::~HumanB(){}
+	Point	a(1.5f, 1.0f);
 
-void	HumanB::attack(void)
-{
-	if (weapon != NULL)
-		std::cout << this->name << " attacks with their " << weapon->getType() << std::endl;
-}
-
-void	HumanB::setWeapon(Weapon &var)
-{
-	weapon = &var;
+	std::cout << "x = " << a.getX().toFloat() << std::endl;
+	std::cout << "y = " << a.getY().toFloat() << std::endl;
+	float	result = (a.getX() - a.getY()).toFloat();
+	std::cout << result << std::endl;
+	return (0);
 }

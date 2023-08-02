@@ -1,50 +1,63 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Fixed.cpp                                          :+:      :+:    :+:   */
+/*   Point.cpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jduval <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/27 12:03:53 by jduval            #+#    #+#             */
-/*   Updated: 2023/08/02 08:17:16 by jduval           ###   ########.fr       */
+/*   Created: 2023/08/02 14:44:25 by jduval            #+#    #+#             */
+/*   Updated: 2023/08/02 17:59:12 by jduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Fixed.hpp"
+#include "Point.hpp"
 #include <iostream>
+#include <cmath>
 
-int const	Fixed::_nbr_of_bits = 8;
-
-Fixed::Fixed() : _number(0)
+Point::Point() : _x(0), _y(0)
 {
 	std::cout << "Default constructor called" << std::endl;
 }
 
-Fixed::Fixed(Fixed const  &src)
+Point::Point(float const x_val, float const y_val) : _x(x_val), _y(y_val)
+{
+	std::cout << "Params constructor called" << std::endl;
+}
+
+Point::Point(Point const  &src)
 {
 	std::cout << "Copy constructor called" << std::endl;
 	*this = src;
 }
 
-Fixed::~Fixed()
+Point::~Point()
 {
 	std::cout << "Destructor called" << std::endl;
 }
 
-int	Fixed::getRawBits(void) const
+Fixed	Point::getX(void) const
 {
-	std::cout << "getRawBits member function called" << std::endl;
-	return (this->_number);
+	return (this->_x);
 }
 
-void	Fixed::setRawBits(int const raw)
+Fixed	Point::getY(void) const
 {
-	this->_number = raw << Fixed::_nbr_of_bits;;
+	return (this->_y);
 }
 
-Fixed	&Fixed::operator=(Fixed const &rhs)
+Fixed	&Point::getSegment(Point const &a, Point const &b)
 {
+	float	result;
+
+	result = b.getX() - a.getX()
+	result += powf((b.getY() - a.getY()).toFloat());
+	result = sqrtf(result);
+	return (Fixed(result));
+}
+
+Point	&Point::operator=(Point const &rhs)
+{
+	(void)rhs;
 	std::cout << "Copy assignment operator called" << std::endl;
-	this->_number = rhs._number;
 	return (*this);
 }
