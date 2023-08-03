@@ -6,7 +6,7 @@
 /*   By: jduval <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/02 14:41:15 by jduval            #+#    #+#             */
-/*   Updated: 2023/08/02 17:16:56 by jduval           ###   ########.fr       */
+/*   Updated: 2023/08/03 13:54:59 by jduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ class Point
 	private	:
 		Fixed const	_x;
 		Fixed const	_y;
+		Point	&operator=(Point const &rhs);
 
 	public	:
 		Point();					//Default constructor
@@ -27,13 +28,8 @@ class Point
 		~Point();					//Destructor
 		Point(float const x_val, float const y_val);
 
-		Point	&operator=(Point const &rhs);
-
 		Fixed	getX() const;
 		Fixed	getY() const;
-
-		static  Fixed	&getSegment(Point const &a, Point const &b);
-
 };
 
 #endif

@@ -1,21 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   randomChump.cpp                                    :+:      :+:    :+:   */
+/*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jduval <jduval@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jduval <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/24 20:10:23 by jduval            #+#    #+#             */
-/*   Updated: 2023/08/03 16:45:37 by jduval           ###   ########.fr       */
+/*   Created: 2023/08/03 15:46:08 by jduval            #+#    #+#             */
+/*   Updated: 2023/08/03 16:42:08 by jduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Zombie.hpp"
+#include "ClapTrap.hpp"
+#include <iostream>
 
-void	randomChump(std::string name)
+int	main(void)
 {
-	Zombie	new_zombie(name);
-
-	new_zombie.announce();
-	return ;
 }

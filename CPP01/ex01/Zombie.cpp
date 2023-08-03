@@ -6,7 +6,7 @@
 /*   By: jduval <jduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/24 19:58:27 by jduval            #+#    #+#             */
-/*   Updated: 2023/08/02 14:18:51 by jduval           ###   ########.fr       */
+/*   Updated: 2023/08/03 16:46:03 by jduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,5 @@ void	Zombie::announce(void)
 
 void	Zombie::getName(std::string new_name)
 {
-	name = new_name;
-	this->announce();
+	this->name = new_name;
 }

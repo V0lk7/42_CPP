@@ -6,14 +6,14 @@
 /*   By: jduval <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/27 11:54:51 by jduval            #+#    #+#             */
-/*   Updated: 2023/08/02 14:16:03 by jduval           ###   ########.fr       */
+/*   Updated: 2023/08/03 17:00:42 by jduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <ostream>
-
 #ifndef FIXED_HPP
 # define FIXED_HPP
+
+# include <ostream>
 
 class Fixed
 {

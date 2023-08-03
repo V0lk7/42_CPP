@@ -6,7 +6,7 @@
 /*   By: jduval <jduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/24 20:03:58 by jduval            #+#    #+#             */
-/*   Updated: 2023/07/31 15:24:42 by jduval           ###   ########.fr       */
+/*   Updated: 2023/08/03 16:45:07 by jduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,5 +18,6 @@ Zombie	*newZombie(std::string name)
 	Zombie	*new_zombie;
 
 	new_zombie = new Zombie(name);
+	new_zombie->announce();
 	return (new_zombie);
 }

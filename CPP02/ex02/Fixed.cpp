@@ -6,14 +6,13 @@
 /*   By: jduval <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/27 12:03:53 by jduval            #+#    #+#             */
-/*   Updated: 2023/08/02 14:15:35 by jduval           ###   ########.fr       */
+/*   Updated: 2023/08/03 16:59:23 by jduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Fixed.hpp"
-#include <iostream>
-#include <ostream>
 #include <cmath>
+//#include <iostream>
 
 int const	Fixed::_nbr_of_bits = 8;
 
@@ -47,7 +46,6 @@ Fixed::~Fixed()
 
 int	Fixed::getRawBits(void) const
 {
-	//std::cout << "getRawBits member function called" << std::endl;
 	return (this->_number);
 }
 

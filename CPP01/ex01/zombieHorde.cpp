@@ -6,7 +6,7 @@
 /*   By: jduval <jduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/24 20:03:58 by jduval            #+#    #+#             */
-/*   Updated: 2023/08/02 14:19:20 by jduval           ###   ########.fr       */
+/*   Updated: 2023/08/03 16:47:00 by jduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ Zombie	*zombieHorde(int N, std::string name)
 		result = name;
 		result += convert.str();
 		new_zombie[i].getName(result);
+		new_zombie[i].announce();
 	}
 	return (new_zombie);
 }

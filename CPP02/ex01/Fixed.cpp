@@ -6,48 +6,46 @@
 /*   By: jduval <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/27 12:03:53 by jduval            #+#    #+#             */
-/*   Updated: 2023/08/02 08:21:59 by jduval           ###   ########.fr       */
+/*   Updated: 2023/08/03 16:56:09 by jduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Fixed.hpp"
 #include <iostream>
-#include <ostream>
 #include <cmath>
 
 int const	Fixed::_nbr_of_bits = 8;
 
 Fixed::Fixed() : _number(0)
 {
-//	std::cout << "Default constructor called" << std::endl;
+	std::cout << "Default constructor called" << std::endl;
 }
 
 Fixed::Fixed(int const value)
 {
 	this->_number = value << Fixed::_nbr_of_bits;
-//	std::cout << "Constructor Int to Fixed called" << std::endl;
+	std::cout << "Int constructor called" << std::endl;
 }
 
 Fixed::Fixed(float const value)
 {
 	this->_number = roundf(value * (1 << Fixed::_nbr_of_bits));
-//	std::cout << "Constructor Float to Fixed called" << std::endl;
+	std::cout << "Float constructor called" << std::endl;
 }
 
 Fixed::Fixed(Fixed const  &src)
 {
-//	std::cout << "Copy constructor called" << std::endl;
+	std::cout << "Copy constructor called" << std::endl;
 	*this = src;
 }
 
 Fixed::~Fixed()
 {
-//	std::cout << "Destructor called" << std::endl;
+	std::cout << "Destructor called" << std::endl;
 }
 
 int	Fixed::getRawBits(void) const
 {
-	//std::cout << "getRawBits member function called" << std::endl;
 	return (this->_number);
 }
 
@@ -68,7 +66,7 @@ int	Fixed::toInt(void) const
 
 Fixed	&Fixed::operator=(Fixed const &rhs)
 {
-	//std::cout << "Copy assignment operator called" << std::endl;
+	std::cout << "Copy assignment operator called" << std::endl;
 	this->_number = rhs.getRawBits();
 	return (*this);
 }

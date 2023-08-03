@@ -1,41 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Fixed.hpp                                          :+:      :+:    :+:   */
+/*   ClapTrap.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jduval <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/27 11:54:51 by jduval            #+#    #+#             */
-/*   Updated: 2023/08/03 17:00:48 by jduval           ###   ########.fr       */
+/*   Updated: 2023/08/03 16:42:07 by jduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FIXED_HPP
-# define FIXED_HPP
+#include <string>
 
-# include <ostream>
+#ifndef CLAPTRAP_HPP
+# define CLAPTRAP_HPP
 
-class Fixed
+class ClapTrap
 {
 	private	:
-		int					_number;
-		static const int	_nbr_of_bits;
+
+		std::string	_name;
+		int			_hit_points;
+		int			_energy_points;
+		int			_attack_damage;
 
 	public	:
-		Fixed();	//Default constructor
-		Fixed(int const value);
-		Fixed(float const value);
-		Fixed(Fixed const &src);	//Copy constructor
-		~Fixed();	//Destructor
-		Fixed	&operator=(Fixed const &rhs); //overload operator -- rhs = Right Hand Side
 
-		int		getRawBits(void) const;
-		void	setRawBits(int const raw);
-		float	toFloat(void) const;
-		int		toInt(void) const;
-
+		ClapTrap();					//Default constructor
+		ClapTrap(ClapTrap const &src);	//Copy constructor
+		~ClapTrap();					//Destructor
+		ClapTrap(std::string);
+		void	Setname(std::string);
+		std::string	Getname(void) const;
+		ClapTrap	&operator=(ClapTrap const &rhs);
 };
-
-std::ostream	&operator<<(std::ostream &o, Fixed const &rhs);
 
 #endif
