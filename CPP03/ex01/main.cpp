@@ -6,26 +6,15 @@
 /*   By: jduval <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/03 15:46:08 by jduval            #+#    #+#             */
-/*   Updated: 2023/08/04 18:51:49 by jduval           ###   ########.fr       */
+/*   Updated: 2023/08/04 18:51:35 by jduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ClapTrap.hpp"
+#include "ScavTrap.hpp"
 
 int	main(void)
 {
-	ClapTrap	n1("Steve");
-	ClapTrap	n2("James");
-	ClapTrap	n3("Harry");
+	ScavTrap	n1("Steve");
 
-	ClapTrap	n4 = n1;
-	n1.attack(n2.getName());
-	n2.takeDamage(n1.getAttackDamage());
-	n2.attack(n3.getName());
-	n3.beRepaired(10);
-	n1.displayStats();
-	n2.displayStats();
-	n3.displayStats();
-	n4.displayStats();
 	return (0);
 }
