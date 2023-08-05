@@ -6,37 +6,34 @@
 /*   By: jduval <jduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/04 17:58:37 by jduval            #+#    #+#             */
-/*   Updated: 2023/08/04 19:01:11 by jduval           ###   ########.fr       */
+/*   Updated: 2023/08/05 17:30:06 by jduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ScavTrap.hpp"
+#include <string>
+#include <iostream>
 
-ScavTrap::ScavTrap() :	_hit_points(100),
-						_energy_points(50),
-						_attack_damage(20)
+ScavTrap::ScavTrap() : ClapTrap::ClapTrap()
 {
-	std::cout << "Default constructor called" << std::endl;
+	std::cout << "ScavTrap : " << "Default constructor called" << std::endl;
 }
 
-ScavTrap::ScavTrap(std::string name) :	_name(name),
-										_hit_points(100),
-										_energy_points(50),
-										_attack_damage(20)
+ScavTrap::ScavTrap(std::string name) : ClapTrap::ClapTrap(name)
 {
-	std::cout << this->_name << " : Constructor called" << std::endl;
+	std::cout << "ScavTrap : " << this->_name << " : Constructor called" << std::endl;
 }
 
 ScavTrap::~ScavTrap()
 {
-	std::cout << this->_name << " : Destructor called" << std::endl;
+	std::cout << "ScavTrap : " << this->_name << " : Destructor called" << std::endl;
 }
 
 
-ScavTrap::ScavTrap(ScavTrap const &src)
+ScavTrap::ScavTrap(ScavTrap const &src) : ClapTrap::ClapTrap(src)
 {
 	*this = src;
-	std::cout << this->_name << " : Copy constructor called" << std::endl;
+	std::cout << "ScavTrap : " << this->_name << " : Copy constructor called" << std::endl;
 }
 
 ScavTrap	&ScavTrap::operator=(ScavTrap const &rhs)

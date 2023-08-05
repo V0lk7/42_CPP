@@ -6,7 +6,7 @@
 /*   By: jduval <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/27 11:54:51 by jduval            #+#    #+#             */
-/*   Updated: 2023/08/04 19:03:25 by jduval           ###   ########.fr       */
+/*   Updated: 2023/08/05 17:28:48 by jduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 # include "ClapTrap.hpp"
 
-class ScavTrap: public Claptrap 
+class ScavTrap : public ClapTrap
 {
 	public	:
 
@@ -26,9 +26,9 @@ class ScavTrap: public Claptrap
 
 		void	guardGate();
 
-		void	attack(std::string const &target) override;
-		void	takeDamage(unsigned int amount) override;
-		void	beRepaired(unsigned int amount) override;
+		void	attack(std::string const &target);
+		void	takeDamage(unsigned int amount);
+		void	beRepaired(unsigned int amount);
 
 		ScavTrap	&operator=(ScavTrap const &rhs);
 };
