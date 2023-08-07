@@ -6,18 +6,18 @@
 /*   By: jduval <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/03 15:46:08 by jduval            #+#    #+#             */
-/*   Updated: 2023/08/07 08:32:19 by jduval           ###   ########.fr       */
+/*   Updated: 2023/08/07 15:23:31 by jduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ScavTrap.hpp"
+#include "FragTrap.hpp"
 
 int	main(void)
 {
-	ScavTrap	n1("Steve");
-	ScavTrap	n2("Marty");
+	FragTrap	n1("Steve");
+	FragTrap	n2("Marty");
 
-	n1.guardGate();
+	n1.highFivesGuys();
 	n2.attack(n1.getName());
 	n1.beRepaired(10);
 	n1.displayStats();

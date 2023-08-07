@@ -1,36 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ScavTrap.hpp                                       :+:      :+:    :+:   */
+/*   FragTrap.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jduval <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/27 11:54:51 by jduval            #+#    #+#             */
-/*   Updated: 2023/08/07 10:00:09 by jduval           ###   ########.fr       */
+/*   Updated: 2023/08/07 10:01:09 by jduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SCAVTRAP_HPP
-# define SCAVTRAP_HPP
+#ifndef FRAGTRAP_HPP
+# define FRAGTRAP_HPP
 
 # include "ClapTrap.hpp"
 
-class ScavTrap : public ClapTrap
+class FragTrap : public ClapTrap
 {
 	public	:
 
-		ScavTrap();						//Default constructor
-		ScavTrap(ScavTrap const &src);	//Copy constructor
-		~ScavTrap();					//Destructor
-		ScavTrap(std::string);
+		FragTrap();						//Default constructor
+		FragTrap(FragTrap const &src);	//Copy constructor
+		~FragTrap();					//Destructor
+		FragTrap(std::string);
 
-		void	guardGate(void);
+		void	highFivesGuys(void);
 
 		void	attack(std::string const &target);
 		void	takeDamage(unsigned int amount);
 		void	beRepaired(unsigned int amount);
 
-		ScavTrap	&operator=(ScavTrap const &rhs);
+		FragTrap	&operator=(FragTrap const &rhs);
 };
 
 #endif

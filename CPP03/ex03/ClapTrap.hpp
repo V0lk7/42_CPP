@@ -1,36 +1,48 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ScavTrap.hpp                                       :+:      :+:    :+:   */
+/*   ClapTrap.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jduval <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/27 11:54:51 by jduval            #+#    #+#             */
-/*   Updated: 2023/08/07 10:00:09 by jduval           ###   ########.fr       */
+/*   Updated: 2023/08/07 10:50:47 by jduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SCAVTRAP_HPP
-# define SCAVTRAP_HPP
+#ifndef CLAPTRAP_HPP
+# define CLAPTRAP_HPP
 
-# include "ClapTrap.hpp"
+# include <string>
 
-class ScavTrap : public ClapTrap
+class ClapTrap
 {
+	protected	:
+
+		std::string		_name;
+		int				_hit_points;
+		int				_energy_points;
+		int				_attack_damage;
+
 	public	:
 
-		ScavTrap();						//Default constructor
-		ScavTrap(ScavTrap const &src);	//Copy constructor
-		~ScavTrap();					//Destructor
-		ScavTrap(std::string);
-
-		void	guardGate(void);
+		ClapTrap();					//Default constructor
+		ClapTrap(ClapTrap const &src);	//Copy constructor
+		~ClapTrap();					//Destructor
+		ClapTrap(std::string);
 
 		void	attack(std::string const &target);
 		void	takeDamage(unsigned int amount);
 		void	beRepaired(unsigned int amount);
 
-		ScavTrap	&operator=(ScavTrap const &rhs);
+		int				getAttackDamage() const;
+		int				getEnergyPoints(void) const;
+		int				getHitPoints(void) const;
+		std::string		getName() const;
+
+		void			displayStats(void) const;
+		
+		ClapTrap	&operator=(ClapTrap const &rhs);
 };
 
 #endif
