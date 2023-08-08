@@ -6,7 +6,7 @@
 /*   By: jduval <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/27 11:54:51 by jduval            #+#    #+#             */
-/*   Updated: 2023/08/07 17:08:09 by jduval           ###   ########.fr       */
+/*   Updated: 2023/08/08 11:46:07 by jduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,13 @@ class DiamondTrap : public FragTrap, public ScavTrap
 		DiamondTrap	&operator=(DiamondTrap const &rhs);
 
 		DiamondTrap(std::string);
+
 		using ScavTrap::attack;
+		using ClapTrap::beRepaired;
+		using ClapTrap::takeDamage;
+		using FragTrap::highFivesGuys;
+		using ScavTrap::guardGate;
+
 		std::string	getDiamondName(void) const;
 		void	whoAmI(void) const;
 };

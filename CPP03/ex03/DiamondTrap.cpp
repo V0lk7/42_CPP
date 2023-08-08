@@ -6,7 +6,7 @@
 /*   By: jduval <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 14:24:56 by jduval            #+#    #+#             */
-/*   Updated: 2023/08/07 17:08:10 by jduval           ###   ########.fr       */
+/*   Updated: 2023/08/08 11:23:37 by jduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,8 +59,8 @@ std::string	DiamondTrap::getDiamondName(void) const
 
 void	DiamondTrap::whoAmI(void) const
 {
-	std::cout	<< "My _name is " << getName() << "\n"
-				<< "But my other name is " << getDiamondName()
+	std::cout	<< "First _name = " << getName() << "\n"
+				<< "Diamond name = " << getDiamondName()
 				<< std::endl;
 	return ;
 }
