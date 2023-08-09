@@ -1,28 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   megaphone.cpp                                      :+:      :+:    :+:   */
+/*   WrongCat.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jduval <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/18 11:25:34 by jduval            #+#    #+#             */
-/*   Updated: 2023/08/08 13:01:26 by jduval           ###   ########.fr       */
+/*   Created: 2023/07/27 11:54:51 by jduval            #+#    #+#             */
+/*   Updated: 2023/08/08 15:40:48 by jduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <iostream>
+#ifndef WRONGCAT_HPP
+# define WRONGCAT_HPP
 
-int	main(int ac, char **ag)
+# include "WrongAnimal.hpp"
+
+class WrongCat : public WrongAnimal
 {
-	if (ac == 1){
-		std::cout << "* LOUD AND UNBEARABLE FEEDBACK NOISE *" << std::endl;
-		return (0);
-	}
-	std::string output;
-	for (int i = 1; ag[i] != NULL; i++){
-		for (int j = 0; ag[i][j] != '\0'; j++)
-			output.push_back(std::toupper(ag[i][j]));
-	}
-	std::cout << output << std::endl;
-	return (0);
-}
+	public	:
+
+		WrongCat();					//Default constructor
+		WrongCat(WrongCat const &src);	//Copy constructor
+		~WrongCat();					//Destructor
+		WrongCat	&operator=(WrongCat const &rhs);
+
+		void	makeSound(void) const;
+};
+
+#endif

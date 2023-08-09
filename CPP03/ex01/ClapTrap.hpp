@@ -6,7 +6,7 @@
 /*   By: jduval <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/27 11:54:51 by jduval            #+#    #+#             */
-/*   Updated: 2023/08/08 11:18:44 by jduval           ###   ########.fr       */
+/*   Updated: 2023/08/08 12:55:31 by jduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,9 @@ class ClapTrap
 		~ClapTrap();					//Destructor
 		ClapTrap(std::string);
 
-		virtual void	attack(std::string const &target);
-		virtual void	takeDamage(unsigned int amount);
-		virtual void	beRepaired(unsigned int amount);
+		void	attack(std::string const &target);
+		void	takeDamage(unsigned int amount);
+		void	beRepaired(unsigned int amount);
 
 		int				getAttackDamage() const;
 		int				getEnergyPoints(void) const;

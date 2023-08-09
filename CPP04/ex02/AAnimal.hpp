@@ -1,36 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ScavTrap.hpp                                       :+:      :+:    :+:   */
+/*   AAnimal.hpp                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jduval <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/27 11:54:51 by jduval            #+#    #+#             */
-/*   Updated: 2023/08/08 12:56:39 by jduval           ###   ########.fr       */
+/*   Updated: 2023/08/09 14:30:34 by jduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SCAVTRAP_HPP
-# define SCAVTRAP_HPP
+#ifndef AANIMAL_HPP
+# define AANIMAL_HPP
 
-#include "ClapTrap.hpp"
+# include <string>
 
-class ScavTrap : virtual public ClapTrap
+class AAnimal
 {
+	protected	:
+
+		std::string		_type;
+
 	public	:
 
-		ScavTrap();						//Default constructor
-		ScavTrap(ScavTrap const &src);	//Copy constructor
-		~ScavTrap();					//Destructor
-		ScavTrap(std::string);
+		AAnimal();					//Default constructor
+		AAnimal(AAnimal const &src);	//Copy constructor
+		virtual ~AAnimal();					//Destructor
+		AAnimal	&operator=(AAnimal const &rhs);
 
-		void	guardGate(void);
+		AAnimal(std::string const);
 
-		void	attack(std::string const &target);
-		void	takeDamage(unsigned int amount);
-		void	beRepaired(unsigned int amount);
-
-		ScavTrap	&operator=(ScavTrap const &rhs);
+		std::string		getType(void) const;
+		virtual void	makeSound(void) const = 0;
 };
 
 #endif

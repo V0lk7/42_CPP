@@ -1,28 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   megaphone.cpp                                      :+:      :+:    :+:   */
+/*   Ice.hpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jduval <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/18 11:25:34 by jduval            #+#    #+#             */
-/*   Updated: 2023/08/08 13:01:26 by jduval           ###   ########.fr       */
+/*   Created: 2023/08/09 15:53:59 by jduval            #+#    #+#             */
+/*   Updated: 2023/08/09 17:04:24 by jduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <iostream>
+#ifndef ICE_HPP
+# define ICE_HPP
 
-int	main(int ac, char **ag)
+# include "AMateria.hpp" 
+
+//class ICharacter;
+
+class Ice : public AMateria 
 {
-	if (ac == 1){
-		std::cout << "* LOUD AND UNBEARABLE FEEDBACK NOISE *" << std::endl;
-		return (0);
-	}
-	std::string output;
-	for (int i = 1; ag[i] != NULL; i++){
-		for (int j = 0; ag[i][j] != '\0'; j++)
-			output.push_back(std::toupper(ag[i][j]));
-	}
-	std::cout << output << std::endl;
-	return (0);
-}
+	private	:
+		Ice	&operator=(Ice const &rhs);
+
+	public	:
+		Ice();
+		Ice(Ice const &src);
+		virtual	~Ice();
+
+		Ice(std::string const &type);
+
+		virtual	AMateria	*clone(void) const;
+//		virtual void		use(ICharacter &target) const;
+};
+
+#endif

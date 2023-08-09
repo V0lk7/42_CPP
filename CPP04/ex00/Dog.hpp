@@ -1,28 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   megaphone.cpp                                      :+:      :+:    :+:   */
+/*   Dog.hpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jduval <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/18 11:25:34 by jduval            #+#    #+#             */
-/*   Updated: 2023/08/08 13:01:26 by jduval           ###   ########.fr       */
+/*   Created: 2023/08/08 13:31:41 by jduval            #+#    #+#             */
+/*   Updated: 2023/08/08 13:42:23 by jduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <iostream>
+#ifndef DOG_HPP
+# define DOG_HPP
 
-int	main(int ac, char **ag)
+# include "Animal.hpp"
+
+class Dog : public Animal
 {
-	if (ac == 1){
-		std::cout << "* LOUD AND UNBEARABLE FEEDBACK NOISE *" << std::endl;
-		return (0);
-	}
-	std::string output;
-	for (int i = 1; ag[i] != NULL; i++){
-		for (int j = 0; ag[i][j] != '\0'; j++)
-			output.push_back(std::toupper(ag[i][j]));
-	}
-	std::cout << output << std::endl;
-	return (0);
-}
+	public	:
+
+		Dog();					//Default constructor
+		Dog(Dog const &src);	//Copy constructor
+		~Dog();					//Destructor
+		Dog	&operator=(Dog const &rhs);
+
+		virtual void	makeSound(void) const;
+};
+
+#endif

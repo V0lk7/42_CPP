@@ -6,7 +6,7 @@
 /*   By: jduval <jduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/04 17:58:37 by jduval            #+#    #+#             */
-/*   Updated: 2023/08/07 15:40:49 by jduval           ###   ########.fr       */
+/*   Updated: 2023/08/08 14:39:28 by jduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include <string>
 #include <iostream>
 
-FragTrap::FragTrap() : ClapTrap::ClapTrap()
+FragTrap::FragTrap()
 {
 	this->_hit_points = 100;
 	this->_energy_points = 100;
@@ -22,7 +22,7 @@ FragTrap::FragTrap() : ClapTrap::ClapTrap()
 	std::cout << "FragTrap : " << "Default constructor called" << std::endl;
 }
 
-FragTrap::FragTrap(std::string name) : ClapTrap::ClapTrap(name)
+FragTrap::FragTrap(std::string name) : ClapTrap(name)
 {
 	this->_hit_points = 100;
 	this->_energy_points = 100;
@@ -35,7 +35,7 @@ FragTrap::~FragTrap()
 	std::cout << "FragTrap : " << this->_name << " : Destructor called" << std::endl;
 }
 
-FragTrap::FragTrap(FragTrap const &src) : ClapTrap::ClapTrap(src)
+FragTrap::FragTrap(FragTrap const &src)
 {
 	*this = src;
 	std::cout << "FragTrap : " << this->_name << " : Copy constructor called" << std::endl;
@@ -54,7 +54,7 @@ void	FragTrap::attack(std::string const &target)
 {
 	if (this->_hit_points == 0 || this->_energy_points == 0)
 		return ;
-	std::cout	<< "FragTrap " << this->_name << " attacks " << target
+	std::cout	<< "FragTrap : " << this->_name << " attacks " << target
 				<< " causing " << this->_attack_damage << " points of damage !"
 				<< std::endl;
 	this->_energy_points -= 1;
@@ -63,7 +63,7 @@ void	FragTrap::attack(std::string const &target)
 
 void	FragTrap::takeDamage(unsigned int amount)
 {
-	std::cout	<< "FragTrap " << this->_name << " takes "
+	std::cout	<< "FragTrap : " << this->_name << " takes "
 				<< amount << " of damages" << std::endl;
 	this->_hit_points -= amount;
 	if (_hit_points < 0)
@@ -75,7 +75,7 @@ void	FragTrap::beRepaired(unsigned int amount)
 {
 	if (this->_hit_points == 0 || this->_energy_points == 0)
 		return ;
-	std::cout	<< "FragTrap " << this->_name << " repairing itself. Gain "
+	std::cout	<< "FragTrap : " << this->_name << " repairing itself. Gain "
 				<< amount << " hit points." << std::endl;
 	this->_hit_points += amount;
 	this->_energy_points -= 1;

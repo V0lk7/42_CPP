@@ -1,28 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   megaphone.cpp                                      :+:      :+:    :+:   */
+/*   Brain.hpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jduval <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/18 11:25:34 by jduval            #+#    #+#             */
-/*   Updated: 2023/08/08 13:01:26 by jduval           ###   ########.fr       */
+/*   Created: 2023/08/08 15:49:58 by jduval            #+#    #+#             */
+/*   Updated: 2023/08/09 12:16:07 by jduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <iostream>
+#ifndef BRAIN_HPP
+# define BRAIN_HPP
 
-int	main(int ac, char **ag)
+# include <string>
+
+class Brain
 {
-	if (ac == 1){
-		std::cout << "* LOUD AND UNBEARABLE FEEDBACK NOISE *" << std::endl;
-		return (0);
-	}
-	std::string output;
-	for (int i = 1; ag[i] != NULL; i++){
-		for (int j = 0; ag[i][j] != '\0'; j++)
-			output.push_back(std::toupper(ag[i][j]));
-	}
-	std::cout << output << std::endl;
-	return (0);
-}
+	protected	:
+		std::string	ideas[100];
+
+	public	:
+		Brain();					//Default constructor
+		Brain(Brain const &src);	//Copy constructor
+		~Brain();					//Destructor
+		Brain	&operator=(Brain const &rhs);
+
+		void				setBrainIdea(int const, std::string const);
+		std::string const	getBrainIdea(int const) const;
+};
+
+#endif

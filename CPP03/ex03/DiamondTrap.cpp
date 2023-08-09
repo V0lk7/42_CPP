@@ -6,7 +6,7 @@
 /*   By: jduval <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 14:24:56 by jduval            #+#    #+#             */
-/*   Updated: 2023/08/08 11:23:37 by jduval           ###   ########.fr       */
+/*   Updated: 2023/08/08 14:38:45 by jduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ DiamondTrap::DiamondTrap()
 	std::cout << "DiamondTrap : " << "Default constructor called" << std::endl;
 }
 
-DiamondTrap::DiamondTrap(std::string name) :	ClapTrap::ClapTrap(name + "_clap_name"),
+DiamondTrap::DiamondTrap(std::string name) :	ClapTrap(name + "_clap_name"),
 												_diamond_name(name)
 {
 	this->_hit_points = 100;

@@ -1,36 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ScavTrap.hpp                                       :+:      :+:    :+:   */
+/*   WrongAnimal.hpp                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jduval <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/27 11:54:51 by jduval            #+#    #+#             */
-/*   Updated: 2023/08/08 12:56:39 by jduval           ###   ########.fr       */
+/*   Updated: 2023/08/08 15:40:21 by jduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SCAVTRAP_HPP
-# define SCAVTRAP_HPP
+#ifndef WRONGANIMAL_HPP
+# define WRONGANIMAL_HPP
 
-#include "ClapTrap.hpp"
+# include <string>
 
-class ScavTrap : virtual public ClapTrap
+class WrongAnimal
 {
+	protected	:
+
+		std::string		_type;
+
 	public	:
 
-		ScavTrap();						//Default constructor
-		ScavTrap(ScavTrap const &src);	//Copy constructor
-		~ScavTrap();					//Destructor
-		ScavTrap(std::string);
+		WrongAnimal();					//Default constructor
+		WrongAnimal(WrongAnimal const &src);	//Copy constructor
+		~WrongAnimal();					//Destructor
+		WrongAnimal	&operator=(WrongAnimal const &rhs);
 
-		void	guardGate(void);
+		WrongAnimal(std::string const);
 
-		void	attack(std::string const &target);
-		void	takeDamage(unsigned int amount);
-		void	beRepaired(unsigned int amount);
-
-		ScavTrap	&operator=(ScavTrap const &rhs);
+		std::string		getType(void) const;
+		void			makeSound(void) const;
 };
 
 #endif
