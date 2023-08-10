@@ -6,7 +6,7 @@
 /*   By: jduval <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/09 16:36:57 by jduval            #+#    #+#             */
-/*   Updated: 2023/08/09 17:10:28 by jduval           ###   ########.fr       */
+/*   Updated: 2023/08/10 10:27:10 by jduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,9 @@
 int	main(void)
 {
 	AMateria	*test = new Cure("Hey");
+	AMateria	*lol = new Ice;
+
+	Cure = Ice;
 
 	std::cout << test->getType() << std::endl;
 
