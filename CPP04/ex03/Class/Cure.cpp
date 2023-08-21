@@ -6,12 +6,12 @@
 /*   By: jduval <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/09 16:56:25 by jduval            #+#    #+#             */
-/*   Updated: 2023/08/09 17:10:25 by jduval           ###   ########.fr       */
+/*   Updated: 2023/08/21 14:31:04 by jduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Cure.hpp"
-//#include "ICharacter.hpp"
+#include "ICharacter.hpp"
 #include <iostream>
 
 Cure::Cure() : AMateria("cure")
@@ -48,9 +48,9 @@ AMateria	*Cure::clone(void) const
 	return (materia);
 }
 
-/*void	Cure::use(ICharacter &target) const
+void	Cure::use(ICharacter &target) const
 {
 	std::cout	<< "Cure: \"* heals "
 				<< target.getName() << "'s wounds *\""
 				<< std::endl;
-}*/
+}

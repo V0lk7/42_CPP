@@ -6,7 +6,7 @@
 /*   By: jduval <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/09 15:41:46 by jduval            #+#    #+#             */
-/*   Updated: 2023/08/09 16:40:45 by jduval           ###   ########.fr       */
+/*   Updated: 2023/08/21 15:22:34 by jduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,4 +45,7 @@ std::string const	&AMateria::getType(void) const
 	return (this->_type);	
 }
 
-//void		AMateria::use(ICharacter &target){}
+void		AMateria::use(ICharacter &target) const 
+{
+	(void) target;
+}

@@ -6,7 +6,7 @@
 /*   By: jduval <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/09 15:34:55 by jduval            #+#    #+#             */
-/*   Updated: 2023/08/09 16:40:26 by jduval           ###   ########.fr       */
+/*   Updated: 2023/08/21 14:25:15 by jduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 # include <string>
 
-//class ICharacter;
+class ICharacter;
 
 class AMateria
 {
@@ -33,7 +33,7 @@ class AMateria
 		std::string const	&getType(void) const;
 
 		virtual	AMateria	*clone() const = 0;
-//		virtual void		use(ICharacter &target) const;
+		virtual void		use(ICharacter &target) const;
 };
 
 #endif

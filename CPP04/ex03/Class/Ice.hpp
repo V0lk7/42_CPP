@@ -6,7 +6,7 @@
 /*   By: jduval <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/09 15:53:59 by jduval            #+#    #+#             */
-/*   Updated: 2023/08/09 17:04:24 by jduval           ###   ########.fr       */
+/*   Updated: 2023/08/21 15:22:47 by jduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 # include "AMateria.hpp" 
 
-//class ICharacter;
+class ICharacter;
 
 class Ice : public AMateria 
 {
@@ -30,7 +30,7 @@ class Ice : public AMateria
 		Ice(std::string const &type);
 
 		virtual	AMateria	*clone(void) const;
-//		virtual void		use(ICharacter &target) const;
+		virtual void		use(ICharacter &target) const;
 };
 
 #endif
