@@ -6,7 +6,7 @@
 /*   By: jduval <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 14:24:56 by jduval            #+#    #+#             */
-/*   Updated: 2023/08/08 14:38:45 by jduval           ###   ########.fr       */
+/*   Updated: 2023/09/04 09:06:32 by jduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ DiamondTrap::DiamondTrap(DiamondTrap const &src)
 DiamondTrap	&DiamondTrap::operator=(DiamondTrap const &rhs)
 {
 	this->_diamond_name = rhs.getDiamondName();
-	this->_name = rhs.getName();
+	this->_name = rhs._name;
 	this->_hit_points = rhs.getHitPoints();
 	this->_energy_points = rhs.getEnergyPoints();
 	this->_attack_damage = rhs.getAttackDamage();
@@ -63,4 +63,10 @@ void	DiamondTrap::whoAmI(void) const
 				<< "Diamond name = " << getDiamondName()
 				<< std::endl;
 	return ;
+}
+
+void	DiamondTrap::SetName(std::string name)
+{
+	this->_name = name;
+	return  ;
 }

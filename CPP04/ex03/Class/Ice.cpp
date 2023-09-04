@@ -6,7 +6,7 @@
 /*   By: jduval <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/09 15:41:46 by jduval            #+#    #+#             */
-/*   Updated: 2023/08/21 15:43:48 by jduval           ###   ########.fr       */
+/*   Updated: 2023/09/04 14:54:49 by jduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,18 +16,18 @@
 
 Ice::Ice() : AMateria("ice")
 {
-	std::cout << "Ice : Default constructor called." << std::endl;
+	//std::cout << "Ice : Default constructor called." << std::endl;
 }
 
 Ice::Ice(Ice const &src) : AMateria("ice")
 {
-	std::cout << "Ice : Copy constructor called." << std::endl;
+//	std::cout << "Ice : Copy constructor called." << std::endl;
 	*this = src;
 }
 
 Ice::~Ice()
 {
-	std::cout << "Ice : Destructor called." << std::endl;
+//	std::cout << "Ice : Destructor called." << std::endl;
 }
 
 Ice	&Ice::operator=(Ice const &rhs)
@@ -39,7 +39,7 @@ Ice	&Ice::operator=(Ice const &rhs)
 Ice::Ice(std::string const &type) : AMateria("ice")
 {
 	(void) type;
-	std::cout << "Ice : Constructor with type called." << std::endl;
+//	std::cout << "Ice : Constructor with type called." << std::endl;
 }
 
 AMateria	*Ice::clone(void) const
@@ -50,7 +50,7 @@ AMateria	*Ice::clone(void) const
 
 void	Ice::use(ICharacter &target) const
 {
-	std::cout	<< "Ice: \"* shoots an ice bolt at "
-				<< target.getName() << " *\""
+	std::cout	<< "Ice: * shoots an ice bolt at "
+				<< target.getName() << " *"
 				<< std::endl;
 }

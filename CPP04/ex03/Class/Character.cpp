@@ -6,7 +6,7 @@
 /*   By: jduval <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 10:23:55 by jduval            #+#    #+#             */
-/*   Updated: 2023/08/21 15:43:51 by jduval           ###   ########.fr       */
+/*   Updated: 2023/09/04 16:04:30 by jduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,19 +17,19 @@ Character::Character()
 {
 	for (int i = 0; i < INVENTORY_COUNT; i++)
 		this->_inventory[i] = NULL;
-	std::cout << "Character : Default constructor called." << std::endl;
+//	std::cout << "Character : Default constructor called." << std::endl;
 }
 
 Character::Character(std::string const name) :	_name(name)
 {
 	for (int i = 0; i < INVENTORY_COUNT; i++)
 		this->_inventory[i] = NULL;
-	std::cout << "Character : Constructor with name called." << std::endl;
+//	std::cout << this->_name << " Character : Constructor with name called." << std::endl;
 }
 
 Character::Character(Character const &src)
 {
-	std::cout << "Character : Copy constructor called." << std::endl;
+//	std::cout << "Character : Copy constructor called." << std::endl;
 	*this = src;
 }
 
@@ -40,7 +40,7 @@ Character::~Character()
 		if (this->_inventory[i] != NULL)
 			delete this->_inventory[i];
 	}
-	std::cout << "Character : Destructor called." << std::endl;
+//	std::cout << this->_name << " Character : Destructor called." << std::endl;
 }
 
 Character	&Character::operator=(Character const &rhs)
@@ -82,7 +82,7 @@ void	Character::unequip(int idx)
 
 void	Character::use(int idx, ICharacter &target)
 {
-	if (!(idx >= 0 && idx <= 3) || this->_inventory[idx] == NULL)
+	if ((idx < 0 || idx > 3) || this->_inventory[idx] == NULL)
 		return ;
 	(this->_inventory[idx])->use(target);
 }
@@ -90,4 +90,11 @@ void	Character::use(int idx, ICharacter &target)
 std::string const	&Character::getName(void) const
 {
 	return (this->_name);
+}
+
+AMateria	*Character::getItem(int index) const
+{
+	if ((index < 0 || index > 3) || this->_inventory[index] == NULL)
+		return (NULL);
+	return (this->_inventory[index]);
 }

@@ -6,7 +6,7 @@
 /*   By: jduval <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/09 15:41:46 by jduval            #+#    #+#             */
-/*   Updated: 2023/08/21 15:22:34 by jduval           ###   ########.fr       */
+/*   Updated: 2023/09/04 14:54:51 by jduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,18 +15,18 @@
 
 AMateria::AMateria()
 {
-	std::cout << "AMateria : Default constructor called." << std::endl;
+//	std::cout << "AMateria : Default constructor called." << std::endl;
 }
 
 AMateria::AMateria(AMateria const &src)
 {
-	std::cout << "AMateria : Copy constructor called." << std::endl;
+//	std::cout << "AMateria : Copy constructor called." << std::endl;
 	*this = src;
 }
 
 AMateria::~AMateria()
 {
-	std::cout << "AMateria : Destructor called." << std::endl;
+//	std::cout << "AMateria : Destructor called." << std::endl;
 }
 
 AMateria	&AMateria::operator=(AMateria const &rhs)
@@ -37,7 +37,7 @@ AMateria	&AMateria::operator=(AMateria const &rhs)
 
 AMateria::AMateria(std::string const &type) : _type(type)
 {
-	std::cout << "AMateria : Constructor with type called." << std::endl;
+//	std::cout << "AMateria : Constructor with type called." << std::endl;
 }
 
 std::string const	&AMateria::getType(void) const

@@ -6,7 +6,7 @@
 /*   By: jduval <jduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 11:25:50 by jduval            #+#    #+#             */
-/*   Updated: 2023/08/21 08:40:40 by jduval           ###   ########.fr       */
+/*   Updated: 2023/09/04 14:54:54 by jduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,22 +14,27 @@
 # define MATERIASOURCE_HPP
 
 # include <string>
+# include "IMateriaSource.hpp"
+# include "AMateria.hpp"
 
-class AMateria;
 
 class MateriaSource : public IMateriaSource
 {
 	private	:
 		AMateria	*_stock[4];
-		size_t		_count;
+		int			_count;
+
 	public	:
 		MateriaSource();
-		MateriaSource(IMateriaSource const &);
+		MateriaSource(MateriaSource const &);
 		virtual	~MateriaSource();
-		MateriaSource	&operator=(IMateriaSource const &);
+		MateriaSource	&operator=(MateriaSource const &);
 
 		virtual void		learnMateria(AMateria *);
 		virtual AMateria	*createMateria(std::string const &type);
+
+		AMateria			*getMateria(int index) const;
+		int					getCount(void) const;
 };
 
 #endif

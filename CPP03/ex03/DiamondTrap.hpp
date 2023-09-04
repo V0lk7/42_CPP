@@ -6,7 +6,7 @@
 /*   By: jduval <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/27 11:54:51 by jduval            #+#    #+#             */
-/*   Updated: 2023/08/08 11:46:07 by jduval           ###   ########.fr       */
+/*   Updated: 2023/09/04 09:06:33 by jduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ class DiamondTrap : public FragTrap, public ScavTrap
 
 		std::string	getDiamondName(void) const;
 		void	whoAmI(void) const;
+		void	SetName(std::string name);
 };
 
 #endif
