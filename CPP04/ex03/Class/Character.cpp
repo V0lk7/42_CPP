@@ -6,7 +6,7 @@
 /*   By: jduval <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 10:23:55 by jduval            #+#    #+#             */
-/*   Updated: 2023/09/04 16:04:30 by jduval           ###   ########.fr       */
+/*   Updated: 2023/09/05 10:46:02 by jduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,12 +49,15 @@ Character	&Character::operator=(Character const &rhs)
 	{
 		if (this->_inventory[i] != NULL)
 			delete this->_inventory[i];
+		this->_inventory[i] = NULL;
 	}
 	this->_name = rhs.getName();
 	for (int i = 0; i < INVENTORY_COUNT; i++)
 	{
-		if (rhs._inventory[i] != NULL)
-			this->_inventory[i] = (rhs._inventory[i])->clone();
+		AMateria	*ptr;
+		ptr = rhs.getItem(i);
+		if (ptr != NULL)
+			this->_inventory[i] = ptr->clone();
 	}
 	return (*this);
 }
@@ -97,4 +100,19 @@ AMateria	*Character::getItem(int index) const
 	if ((index < 0 || index > 3) || this->_inventory[index] == NULL)
 		return (NULL);
 	return (this->_inventory[index]);
+}
+
+std::ostream	&operator<<(std::ostream &o, Character const &rhs)
+{
+	o << rhs.getName() << std::endl;
+	for (int i = 0; i < INVENTORY_COUNT; i++)
+	{
+		AMateria	*ptr;
+		ptr = rhs.getItem(i);
+		if (ptr == NULL)
+			break ;
+		else
+			o << ptr->getType() << " Address : " << ptr << std::endl;
+	}
+	return (o);
 }

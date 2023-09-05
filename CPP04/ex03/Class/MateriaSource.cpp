@@ -6,7 +6,7 @@
 /*   By: jduval <jduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 17:35:29 by jduval            #+#    #+#             */
-/*   Updated: 2023/09/04 14:54:55 by jduval           ###   ########.fr       */
+/*   Updated: 2023/09/05 10:46:03 by jduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,4 +87,17 @@ AMateria	*MateriaSource::getMateria(int index) const
 	if (index < 0 || index > 3)
 		return (NULL);
 	return (this->_stock[index]);
+}
+
+std::ostream	&operator<<(std::ostream &o, MateriaSource const &rhs)
+{
+	o << rhs.getCount() << std::endl;
+	for (int i = 0; i < 4; i++)
+	{
+		if (rhs.getMateria(i) == NULL)
+			break ;
+		else
+			o << rhs.getMateria(i)->getType() << " Address -> " << rhs.getMateria(i) << std::endl;
+	}
+	return (o);
 }
