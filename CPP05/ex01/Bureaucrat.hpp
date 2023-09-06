@@ -6,7 +6,7 @@
 /*   By: jduval <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/27 11:54:51 by jduval            #+#    #+#             */
-/*   Updated: 2023/09/06 11:51:04 by jduval           ###   ########.fr       */
+/*   Updated: 2023/09/06 14:13:22 by jduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 # define BUREAUCRAT_HPP
 
 # include <string>
+
+class Form;
 
 class Bureaucrat
 {
@@ -35,6 +37,7 @@ class Bureaucrat
 		int 		getGrade(void) const;
 		void		IncrementGrade(void);
 		void		DecrementGrade(void);
+		void		signForm(Form &document);
 
 		class GradeTooHighException : public std::exception
 		{

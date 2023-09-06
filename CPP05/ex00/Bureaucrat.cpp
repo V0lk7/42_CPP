@@ -6,7 +6,7 @@
 /*   By: jduval <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 13:17:59 by jduval            #+#    #+#             */
-/*   Updated: 2023/09/06 11:40:40 by jduval           ###   ########.fr       */
+/*   Updated: 2023/09/06 12:52:07 by jduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include <iostream>
 #include <cstddef>
 
-Bureaucrat::Bureaucrat() : _name (""), _grade(0)
+Bureaucrat::Bureaucrat()
 {
 	std::cout << "Bureaucrat : " << "Default construtor called" << std::endl;
 }
