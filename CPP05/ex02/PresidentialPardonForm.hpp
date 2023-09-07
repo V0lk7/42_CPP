@@ -6,7 +6,7 @@
 /*   By: jduval <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/07 10:40:43 by jduval            #+#    #+#             */
-/*   Updated: 2023/09/07 10:42:11 by jduval           ###   ########.fr       */
+/*   Updated: 2023/09/07 15:32:16 by jduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ class Bureaucrat;
 
 class PresidentialPardonForm : public AForm
 {
+	private :
 		PresidentialPardonForm();						//Default constructor
 		PresidentialPardonForm	&operator=(PresidentialPardonForm const &rhs);
 

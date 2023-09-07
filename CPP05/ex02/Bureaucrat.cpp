@@ -6,7 +6,7 @@
 /*   By: jduval <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 13:17:59 by jduval            #+#    #+#             */
-/*   Updated: 2023/09/07 10:49:21 by jduval           ###   ########.fr       */
+/*   Updated: 2023/09/07 15:30:45 by jduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,8 +97,6 @@ Bureaucrat	&Bureaucrat::operator=(Bureaucrat const &rhs)
 	Bureaucrat const	*TestNullRef = &rhs;
 	if (TestNullRef != NULL)
 		this->_grade = rhs.getGrade();
-	else
-		this->_grade = 150;
 	return (*this);
 }
 

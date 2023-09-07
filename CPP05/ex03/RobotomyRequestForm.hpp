@@ -6,7 +6,7 @@
 /*   By: jduval <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/06 15:16:30 by jduval            #+#    #+#             */
-/*   Updated: 2023/09/07 10:13:36 by jduval           ###   ########.fr       */
+/*   Updated: 2023/09/07 15:33:38 by jduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ class Bureaucrat;
 
 class RobotomyRequestForm : public AForm
 {
+	private :
 		RobotomyRequestForm();						//Default constructor
 		RobotomyRequestForm	&operator=(RobotomyRequestForm const &rhs);
 

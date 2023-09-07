@@ -6,7 +6,7 @@
 /*   By: jduval <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/06 15:16:30 by jduval            #+#    #+#             */
-/*   Updated: 2023/09/07 08:55:32 by jduval           ###   ########.fr       */
+/*   Updated: 2023/09/07 15:31:43 by jduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ class Bureaucrat;
 
 class ShrubberyCreationForm : public AForm
 {
+	private :
 		ShrubberyCreationForm();						//Default constructor
 		ShrubberyCreationForm	&operator=(ShrubberyCreationForm const &rhs);
 

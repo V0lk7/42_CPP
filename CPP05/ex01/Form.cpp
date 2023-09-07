@@ -6,7 +6,7 @@
 /*   By: jduval <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/06 12:46:11 by jduval            #+#    #+#             */
-/*   Updated: 2023/09/06 15:15:42 by jduval           ###   ########.fr       */
+/*   Updated: 2023/09/07 15:29:29 by jduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,8 +88,6 @@ Form	&Form::operator=(Form const &rhs)
 	Form const	*TestNullRef = &rhs;
 	if (TestNullRef != NULL)
 		this->_isSigned = rhs.getIsSigned();
-	else
-		this->_isSigned = false;
 	return (*this);
 }
 
