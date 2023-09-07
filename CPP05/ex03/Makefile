@@ -6,7 +6,7 @@
 #    By: jduval <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/18 10:18:38 by jduval            #+#    #+#              #
-#    Updated: 2023/09/07 11:01:44 by jduval           ###   ########.fr        #
+#    Updated: 2023/09/07 11:14:05 by jduval           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ SHELL		=	/bin/sh
 #								EXECUTABLE									  #
 ###############################################################################
 
-NAME		=	ex02
+NAME		=	ex03
 
 ###############################################################################
 #								DESTINATION									  #
@@ -38,6 +38,7 @@ SRCS		:=	main.cpp					\
 				ShrubberyCreationForm.cpp	\
 				RobotomyRequestForm.cpp		\
 				PresidentialPardonForm.cpp	\
+				Intern.cpp					\
 
 SRCS		:=	$(SRCS:%=$(SRC_DIR)/%)
 
