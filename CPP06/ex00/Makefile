@@ -6,7 +6,7 @@
 #    By: jduval <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/18 10:18:38 by jduval            #+#    #+#              #
-#    Updated: 2023/09/13 14:17:49 by jduval           ###   ########.fr        #
+#    Updated: 2023/09/13 18:01:14 by jduval           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,7 +34,7 @@ INCLUDES	=	.
 
 SRCS		:=	main.cpp			\
 				UserInputParse.cpp	\
-				#ScalarConverter.cpp	\
+				ScalarConverter.cpp	\
 
 SRCS		:=	$(SRCS:%=$(SRC_DIR)/%)
 
