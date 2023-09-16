@@ -6,11 +6,12 @@
 /*   By: jduval <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 13:17:59 by jduval            #+#    #+#             */
-/*   Updated: 2023/09/13 19:02:50 by jduval           ###   ########.fr       */
+/*   Updated: 2023/09/16 16:21:13 by jduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ScalarConverter.hpp"
+#include "Utils.hpp"
 
 ScalarConverter::ScalarConverter(){}
 
@@ -27,21 +28,21 @@ ScalarConverter	&ScalarConverter::operator=(ScalarConverter const &rhs)
 	return (*this);
 }
 
-void	ScalarConverter::Convert(std::string input)
+void	ScalarConverter::convert(std::string input)
 {
 	(void) input;
 	ScalarConverter		obj;
-//	int					OriginType;
-/*
-	OriginType = FindOriginType(input);
+	int const			OriginType = FindOriginType(input);
+
 	if (OriginType < 0)
 		return ;
+/*
 	void	*(ScalarConverter::ConvertMethods[NBR_OF_CONVERT])(void *data, int type) = {	ConvertToChar,
 																							ConvertToInt, 
 																							ConvertToFloat, 
 																							ConvertToDouble};
 	try{
-		void	*PrimalTypeConverted = FirstConvertion(OriginType);
+		void	*PrimalTypeConverted = FirstConversion(OriginType, input);
 	}
 	catch (std::execption &e){
 		std::cerr << e.what() << std::endl;

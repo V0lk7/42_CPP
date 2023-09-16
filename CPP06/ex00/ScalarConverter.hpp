@@ -6,7 +6,7 @@
 /*   By: jduval <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/27 11:54:51 by jduval            #+#    #+#             */
-/*   Updated: 2023/09/13 18:41:03 by jduval           ###   ########.fr       */
+/*   Updated: 2023/09/16 16:45:29 by jduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,6 @@
 # define SCALARCONVERTER_HPP
 
 # include <string>
-
-# define CHAR 0
-# define INT 1
-# define FLOAT 2
-# define DOUBLE 3
-# define NBR_OF_CONVERT 4
 
 class ScalarConverter
 {
