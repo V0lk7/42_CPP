@@ -6,7 +6,7 @@
 /*   By: jduval <jduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/13 14:19:48 by jduval            #+#    #+#             */
-/*   Updated: 2023/09/16 16:45:28 by jduval           ###   ########.fr       */
+/*   Updated: 2023/09/17 16:53:21 by jduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,16 @@ static char const	*RegNormalCase[4] =	{"^-?[[:digit:]]+$", "^[[:graph:]]$",
 										 "^-?[[:digit:]]+\\.[[:digit:]]+f$",
 										 "^-?[[:digit:]]+\\.[[:digit:]]+$"};
 
+static char const	*RegZero[2] = {"^-?0\\.0+f$", "^-?0\\.0+$"};
+
 bool	CheckNumberOfArguments(int NumberOfArgs);
 int		FindOriginType(std::string input);
-void	*FirstConversion(int const OriginType, std::string input);
-void	FreeMetamorphicData(void *Ptr, int const OriginType);
+int		CheckOverflow(void *MetamorphicData, int OriginType, std::string input);
+bool	IsZero(std::string input, int OriginalType);
+
+
+int		AsciiToInt(std::string input);
+float	AsciiToFloat(std::string input);
+double	AsciiToDouble(std::string input);
 
 #endif
