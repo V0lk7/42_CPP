@@ -6,7 +6,7 @@
 /*   By: jduval <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/27 11:54:51 by jduval            #+#    #+#             */
-/*   Updated: 2023/09/17 16:52:08 by jduval           ###   ########.fr       */
+/*   Updated: 2023/09/19 09:52:35 by jduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,5 +42,11 @@ class ScalarConverter
 };
 
 typedef void	MethodsPtr(void *data, int type);
+
+class RegexException : public std::exception
+{
+	public :
+		virtual char const *what(void) const throw ();
+};
 
 #endif

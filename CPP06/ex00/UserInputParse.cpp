@@ -6,13 +6,14 @@
 /*   By: jduval <jduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/13 14:11:27 by jduval            #+#    #+#             */
-/*   Updated: 2023/09/17 16:43:38 by jduval           ###   ########.fr       */
+/*   Updated: 2023/09/19 10:12:57 by jduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <iostream>
 #include <regex.h>
 #include "Utils.hpp"
+#include "ScalarConverter.hpp"
 
 bool	CheckNumberOfArguments(int NumberOfArgs)
 {
@@ -64,7 +65,7 @@ static int	IsParticularFloat(std::string input)
 	for (int i = 0; i < PARTICULAR_CASE_NBR; i++)
 	{
 		if (regcomp(&regex, RegParticularFloat[i], REG_EXTENDED) != 0)
-			return (-1);
+			throw (RegexException());
 		if (regexec(&regex, input.c_str(), 0, NULL, 0) == 0)
 		{
 			regfree(&regex);
@@ -82,7 +83,7 @@ static int	IsParticularDouble(std::string input)
 	for (int i = 0; i < PARTICULAR_CASE_NBR; i++)
 	{
 		if (regcomp(&regex, RegParticularDouble[i], REG_EXTENDED) != 0)
-			return (-1);
+			throw (RegexException());
 		if (regexec(&regex, input.c_str(), 0, NULL, 0) == 0)
 		{
 			regfree(&regex);
@@ -100,7 +101,7 @@ static int IsNormalType(std::string input)
 	for (int i = 0; i < NBR_OF_TYPE; i++)
 	{
 		if (regcomp(&regex, RegNormalCase[i], REG_EXTENDED) != 0)
-			return (-1);
+			throw (RegexException());
 		if (regexec(&regex, input.c_str(), 0, NULL, 0) == 0)
 		{
 			regfree(&regex);
@@ -118,14 +119,14 @@ bool	IsZero(std::string input, int OriginalType)
 
 	switch(OriginalType){
 		case FLOAT :
-			//need a security in case of regcomp fail
-			regcomp(&regex, RegZero[0], REG_EXTENDED);
+			if (regcomp(&regex, RegZero[0], REG_EXTENDED) != 0)
+				throw (RegexException());
 			if (regexec(&regex, input.c_str(), 0, NULL, 0) == 0)
 				match = true;
 			break ;
 		case DOUBLE :
-			//need a security in case of regcomp fail
-			regcomp(&regex, RegZero[1], REG_EXTENDED);
+			if (regcomp(&regex, RegZero[1], REG_EXTENDED) != 0)
+				throw (RegexException());
 			if (regexec(&regex, input.c_str(), 0, NULL, 0) == 0)
 				match = true;
 			break ;

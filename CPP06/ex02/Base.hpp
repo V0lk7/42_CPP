@@ -1,23 +1,43 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
+/*   Base.hpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jduval <jduval@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jduval <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/13 14:03:32 by jduval            #+#    #+#             */
-/*   Updated: 2023/09/18 09:01:26 by jduval           ###   ########.fr       */
+/*   Created: 2023/07/27 11:54:51 by jduval            #+#    #+#             */
+/*   Updated: 2023/09/19 12:57:14 by jduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ScalarConverter.hpp"
-#include "Utils.hpp"
-#include <iostream>
+#ifndef BASE_HPP
+# define BASE_HPP
 
-int	main(int argc, char **argv)
+class Base
 {
-	if (CheckNumberOfArguments(argc) != true)
-		return (1);
-	ScalarConverter::convert(argv[1]);
-	return (0);
-}
+	public :
+		virtual ~Base(){};
+};
+
+class A : public Base
+{
+	public :
+		A();
+		~A();
+};
+
+class B : public Base
+{
+	public :
+		B();
+		~B();
+};
+
+class C : public Base
+{
+	public :
+		C();
+		~C();
+};
+
+#endif

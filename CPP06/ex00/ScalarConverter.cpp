@@ -6,7 +6,7 @@
 /*   By: jduval <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 13:17:59 by jduval            #+#    #+#             */
-/*   Updated: 2023/09/17 16:53:19 by jduval           ###   ########.fr       */
+/*   Updated: 2023/09/19 10:12:56 by jduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,16 +36,32 @@ ScalarConverter	&ScalarConverter::operator=(ScalarConverter const &rhs)
 	return (*this);
 }
 
+char const	*RegexException::what(void) const throw()
+{
+	return ("Regex failed");
+}
+
 void	ScalarConverter::convert(std::string input)
 {
 	ScalarConverter		obj;
-	int					OriginType = FindOriginType(input);
+	int					OriginType;
 	int					OriginTypeTmp;
 	void				*MetamorphicData;
 
-	if (OriginType < 0)
+	try{
+		OriginType = FindOriginType(input);
+		if (OriginType < 0)
+			return ;
+		MetamorphicData = firstConversion(OriginType, input);
+	}
+	catch (RegexException &e){
+		std::cerr << "Error Occured : " << e.what() << std::endl; 
 		return ;
-	MetamorphicData = firstConversion(OriginType, input);
+	}
+	catch (std::exception &e){
+		std::cerr << "Error Occured : " << e.what() << std::endl; 
+		return ;
+	}
 	OriginTypeTmp = checkOverflow(OriginType);
 	MethodsPtr	*ConvertMethods[4] = {convertToChar, convertToInt, convertToFloat, convertToDouble};
 	for (int i = 0; i < NBR_OF_TYPE; i++)
