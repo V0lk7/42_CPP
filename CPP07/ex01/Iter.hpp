@@ -1,37 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Whatever.hpp                                       :+:      :+:    :+:   */
+/*   Iter.hpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jduval <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 15:02:25 by jduval            #+#    #+#             */
-/*   Updated: 2023/09/20 15:08:57 by jduval           ###   ########.fr       */
+/*   Updated: 2023/09/20 15:10:06 by jduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef WHATEVER_HPP
-# define WHATEVER_HPP
+#ifndef ITER_HPP
+# define ITER_HPP
 
-template<typename Type>
-void	swap(Type &a, Type &b)
+template <typename type, typename returnType>
+void	iter(type *array, int length, returnType (*funcPtr))
 {
-	Type	tmp = a;
-	a = b;
-	b = tmp;
-	return ;
-}
-
-template<typename Type>
-Type const	&min(Type const &a, Type const &b)
-{
-	return (a < b ? a : b);
-}
-
-template<typename Type>
-Type const	&max(Type const &a, Type const &b)
-{
-	return (a > b ? a : b);
+	for (int i = 0; i < length; i++)
+		(*funcPtr)(array[i]);
 }
 
 #endif
