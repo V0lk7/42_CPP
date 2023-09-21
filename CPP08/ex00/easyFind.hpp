@@ -1,37 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Animal.hpp                                         :+:      :+:    :+:   */
+/*   easyFind.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jduval <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/27 11:54:51 by jduval            #+#    #+#             */
-/*   Updated: 2023/09/21 12:46:33 by jduval           ###   ########.fr       */
+/*   Created: 2023/09/20 15:19:36 by jduval            #+#    #+#             */
+/*   Updated: 2023/09/21 12:57:59 by jduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ANIMAL_HPP
-# define ANIMAL_HPP
+#ifndef EASYFIND_HPP
+# define EASYFIND_HPP
 
-# include <string>
+# include <algorithm>
 
-class Animal
+template<typename T>
+bool	easyFind(T container, int valueToFind)
 {
-	protected	:
+	typename T::iterator	itBegin = container.begin();
+	typename T::iterator	itEnd = container.end();
 
-		std::string		_type;
-
-	public	:
-
-		Animal();					//Default constructor
-		Animal(Animal const &src);	//Copy constructor
-		virtual ~Animal();					//Destructor
-		Animal	&operator=(Animal const &rhs);
-
-		Animal(std::string const);
-
-		std::string		getType(void) const;
-		virtual void	makeSound(void) const;
-};
+	if (find(itBegin, itEnd, valueToFind) != itEnd)
+		return (true);
+	else
+		return (false);
+}
 
 #endif

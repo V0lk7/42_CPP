@@ -1,21 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   easyfind.hpp                                       :+:      :+:    :+:   */
+/*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jduval <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/20 15:19:36 by jduval            #+#    #+#             */
-/*   Updated: 2023/09/20 16:34:18 by jduval           ###   ########.fr       */
+/*   Created: 2023/09/21 08:36:27 by jduval            #+#    #+#             */
+/*   Updated: 2023/09/21 16:08:02 by jduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef EASYFIND_HPP
-# define EASYFIND_HPP
+#include <iostream>
+#include "Span.hpp"
 
-template<typename T>
-bool	easyfind(T container, int find)
+int	main(void)
 {
-
+	Span	test(5);
+	
+	test.fillSpan();
+	test.displaySpan();
+	return (0);
 }
-#endif

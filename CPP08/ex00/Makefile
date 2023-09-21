@@ -6,7 +6,7 @@
 #    By: jduval <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/18 10:18:38 by jduval            #+#    #+#              #
-#    Updated: 2023/09/21 14:51:11 by jduval           ###   ########.fr        #
+#    Updated: 2023/09/21 08:48:40 by jduval           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ SHELL		=	/bin/sh
 #								EXECUTABLE									  #
 ###############################################################################
 
-NAME		=	ex01
+NAME		=	ex00
 
 ###############################################################################
 #								DESTINATION									  #
@@ -33,10 +33,6 @@ SRC_DIR		=	.
 INCLUDES	=	.
 
 SRCS		:=	main.cpp		\
-				Animal.cpp		\
-				Cat.cpp			\
-				Dog.cpp			\
-				Brain.cpp		\
 
 SRCS		:=	$(SRCS:%=$(SRC_DIR)/%)
 
@@ -50,7 +46,7 @@ DEPS		:=	$(OBJS:.o=.d)
 
 CC			=	c++
 
-CFLAGS		=	-Wall -Wextra -Werror -std=c++98 -pedantic
+CFLAGS		=	-Wall -Wextra -Werror -std=c++98 -pedantic -g
 
 CPPFLAGS	=	-MMD -MP $(addprefix -I,$(INCLUDES))
 
