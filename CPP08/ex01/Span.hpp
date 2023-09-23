@@ -6,7 +6,7 @@
 /*   By: jduval <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 12:51:50 by jduval            #+#    #+#             */
-/*   Updated: 2023/09/21 16:08:03 by jduval           ###   ########.fr       */
+/*   Updated: 2023/09/23 12:24:11 by jduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,6 @@ class Span
 		unsigned int		_spanNumbers;
 
 		Span();
-		std::vector<int>::iterator	getBeginIterator(void) const;
-		std::vector<int>::iterator	getEndIterator(void) const;
 		unsigned int				getSpanNumbers(void) const;
 
 	public :
@@ -36,7 +34,7 @@ class Span
 		int		shortestSpan(void);
 		int		longestSpan(void);
 		void	fillSpan(void);
-		void	displaySpan(void) const;
+		void	displaySpan(void);
 };
 
 #endif
