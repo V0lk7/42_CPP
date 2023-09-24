@@ -6,13 +6,14 @@
 /*   By: jduval <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 12:57:11 by jduval            #+#    #+#             */
-/*   Updated: 2023/09/23 12:38:22 by jduval           ###   ########.fr       */
+/*   Updated: 2023/09/24 14:21:49 by jduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Span.hpp"
 #include <cstdlib>
 #include <iostream>
+#include <algorithm>
 
 Span::Span(){}
 
@@ -52,17 +53,19 @@ int	Span::shortestSpan(void)
 	if (this->_span.size() < 2)
 		throw (std::logic_error("Span : shortestSpan : Need at least two value stored."));
 	else {
-		int	result = abs(this->_span[0] - this->_span[1]);
-		int	tmp;
+		sort(this->_span.begin(), this->_span.end());
 
-		for (int i = 0; i < static_cast<int>(this->_spanNumbers) - 1; i++)
+		std::vector<int>::iterator	itFirst = this->_span.begin();
+		std::vector<int>::iterator	itSecond = itFirst + 1;
+		int	result = abs((*itFirst) - (*itSecond));
+		int	tmp;
+		while (itSecond != this->_span.end())
 		{
-			for (int j = i + 1; j < static_cast<int>(this->_spanNumbers); j++)
-			{
-				tmp = abs(this->_span[i] - this->_span[j]);
-				if (result > tmp)
-					result = tmp;
-			}
+			tmp = abs((*itFirst) - (*itSecond));
+			if (result > tmp)
+				result = tmp;
+			itFirst++;
+			itSecond++;
 		}
 		return (result);
 	}
@@ -73,19 +76,12 @@ int	Span::longestSpan(void)
 	if (this->_span.size() < 2)
 		throw (std::logic_error("Span : longestSpan : Need at least two value stored."));
 	else {
-		int	result = abs(this->_span[0] - this->_span[1]);
-		int	tmp;
+		sort(this->_span.begin(), this->_span.end());
+		
+		std::vector<int>::iterator	itBegin = this->_span.begin();
+		std::vector<int>::iterator	itEnd = this->_span.end() - 1;
 
-		for (int i = 0; i < static_cast<int>(this->_spanNumbers) - 1; i++)
-		{
-			for (int j = i + 1; j < static_cast<int>(this->_spanNumbers); j++)
-			{
-				tmp = abs(this->_span[i] - this->_span[j]);
-				if (result < tmp)
-					result = tmp;
-			}
-		}
-		return (result);
+		return ((*itEnd) - (*itBegin));
 	}
 }
 
@@ -99,14 +95,14 @@ void	Span::fillSpan(void)
 		this->_span[i] = rand() % (this->_spanNumbers * 2);
 }
 
+static void	prinToScreen(int value)
+{
+	std::cout << ' ' << value;
+}
+
 void	Span::displaySpan(void)
 {
-	std::vector<int>::iterator	itBegin = this->_span.begin();
-	std::vector<int>::iterator	itEnd = this->_span.end();
-	while (itBegin != itEnd)
-	{
-		std::cout << *itBegin << " ";
-		itBegin++;
-	}
+	std::cout << "My vector contain :";
+	for_each(this->_span.begin(), this->_span.end(), prinToScreen);
 	std::cout << std::endl;
 }
