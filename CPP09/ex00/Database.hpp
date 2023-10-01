@@ -6,7 +6,7 @@
 /*   By: jduval <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/26 13:52:33 by jduval            #+#    #+#             */
-/*   Updated: 2023/09/30 16:44:56 by jduval           ###   ########.fr       */
+/*   Updated: 2023/10/01 16:04:24 by jduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ class Database
 		Database	&operator=(Database const &rhs);
 
 		bool		verifyDataHeader(void);
+		bool		verifyInputHeader(void);
 		int			parsingDatabase(void);
 
 	public :
@@ -40,7 +41,9 @@ class Database
 		Database	&openInputFile(char *arg);
 		void		createDatabase(void);
 		bool		setData(std::string const Date, double const Value);
-		//void		findInputsInDatabase(void);
+		double		getValue(std::string Date);
+		void		findInputsInDatabase(void);
+		int			visualizeDataRelation(void);
 
 		std::map<std::string, double>::iterator	getIteratorBegin(void);
 		std::map<std::string, double>::iterator	getIteratorEnd(void);
@@ -60,7 +63,17 @@ class Database
 			public :
 				virtual char const	*what(void) const throw();
 		};
+		class WrongHeaderInput : public std::exception
+		{
+			public :
+				virtual char const	*what(void) const throw();
+		};
 		class ErrorReadingDataFile : public std::exception
+		{
+			public :
+				virtual char const	*what(void) const throw();
+		};
+		class ErrorReadingInputFile : public std::exception
 		{
 			public :
 				virtual char const	*what(void) const throw();

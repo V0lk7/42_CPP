@@ -6,7 +6,7 @@
 /*   By: jduval <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/26 14:13:09 by jduval            #+#    #+#             */
-/*   Updated: 2023/09/30 16:44:55 by jduval           ###   ########.fr       */
+/*   Updated: 2023/10/01 16:04:24 by jduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,13 @@
 #define OUT_OF_RANGE 5
 #define SAME_DATE 6
 
+#define ERROR_DATE 1
+#define NEGATIVE_VALUE 2
+
 static const char	*RegexUtils[2] = 
 {
 	"^[0-9]{4}-\\b(0[1-9]|1[0-2])\\b-\\b(0[1-9]|[12][0-9]|3[01])\\b,([0-9]+\\.[0-9]+$|[0-9]+$)",
-	"/^[0-9]{4}-\\b(0[1-9]|1[0-2])\\b-\\b(0[1-9]|[12][0-9]|3[01])\\b \\| ([0-9]+\\.[0-9]+$|[0-9]+$)"
+	"^[0-9]{4}-\\b(0[1-9]|1[0-2])\\b-\\b(0[1-9]|[12][0-9]|3[01])\\b \\| -?([0-9]+\\.[0-9]+$|[0-9]+$)"
 };
 
 /*============================================================================*/
@@ -129,16 +132,6 @@ int	Database::parsingDatabase(void)
 	return (flag);
 }
 
-bool	Database::setData(std::string const Date, double const Value)
-{
-	std::pair<std::map<std::string, double>::iterator,bool> Existing;
-	Existing = this->Data.insert(std::make_pair(Date, Value));
-	if (Existing.second == false)
-		return (false);
-	else
-		return (true);
-}
-
 bool	Database::verifyDataHeader(void)
 {
 	std::string	Header;
@@ -159,7 +152,7 @@ void	Database::findInputsInDatabase(void)
 {
 	int	ErrorFlag;
 
-	if (this->DataFile.fail() == true)
+	if (this->InputFile.fail() == true)
 		throw (Database::InputFileFailed());
 	if (this->verifyInputHeader() == false)
 		throw (Database::WrongHeaderInput());
@@ -169,11 +162,26 @@ void	Database::findInputsInDatabase(void)
 	return ;
 }
 
+bool	Database::verifyInputHeader(void)
+{
+	std::string	Header;
+
+	getline(this->InputFile, Header);
+	if (this->DataFile.fail() == true && this->DataFile.eof() == false)
+		return (false);
+	else if (Header.compare("date | value") != 0)
+		return (false);
+	else
+		return (true);
+}
+
+
+static void	ParseInput(Database &Data, std::string &InputExtracted, regex_t &InputRegex);
+
 int	Database::visualizeDataRelation(void)
 {
 	regex_t		InputRegex;
 	std::string	InputExtract;
-	int			flag = 0;
 
 	if (regcomp(&InputRegex, RegexUtils[1], REG_EXTENDED) != 0)
 		return (ERROR_REGCOMP);
@@ -187,13 +195,36 @@ int	Database::visualizeDataRelation(void)
 		else if (this->InputFile.eof() == true)
 			break ;
 		else
-		{
-			flag = ParseInput(*this, InputExtract, InputRegex);
-			if (flag != 0)
-				break ;
-		}
+			ParseInput(*this, InputExtract, InputRegex);
 	}
 	regfree(&InputRegex);
+	return (0);
+}
+
+static void	DisplayErrorOutput(std::string Date, int flag);
+static int	ValidDataInput(std::string Date, double Value);
+
+static void ParseInput(Database &Data, std::string &InputExtracted, regex_t &InputRegex)
+{
+	if (regexec(&InputRegex, InputExtracted.c_str(), 0, NULL, 0) == REG_NOMATCH)
+	{
+		std::cout << "btc: Error Format => " << InputExtracted << std::endl;
+		return ;
+	}
+
+	std::string	Date(InputExtracted, 0, 10);
+	double		Value = strtod(&(InputExtracted.c_str())[13], NULL);
+	int			Flag = 0;
+
+	Flag = ValidDataInput(Date, Value);
+	if (Flag != 0)
+		DisplayErrorOutput(Date, Flag);
+	else
+	{
+		double Result = Value * Data.getValue(Date);
+		std::cout << Date << " | " << Value << " | " << Result << std::endl;
+	}
+	return ;
 }
 
 /*===========================================================================*/
@@ -203,9 +234,34 @@ std::map<std::string, double>::iterator	Database::getIteratorBegin(void)
 {
 	return (this->Data.begin());
 }
+
 std::map<std::string, double>::iterator	Database::getIteratorEnd(void)
 {
 	return (this->Data.end());
+}
+
+bool	Database::setData(std::string const Date, double const Value)
+{
+	std::pair<std::map<std::string, double>::iterator,bool> Existing;
+	Existing = this->Data.insert(std::make_pair(Date, Value));
+	if (Existing.second == false)
+		return (false);
+	else
+		return (true);
+}
+
+double	Database::getValue(std::string Date)
+{
+	std::map<std::string, double>::iterator	ItObject;
+
+	ItObject = this->Data.find(Date);
+	if (ItObject != this->Data.end())
+		return (ItObject->second);
+	else
+		ItObject = this->Data.lower_bound(Date);
+	if (ItObject == this->Data.end())
+		ItObject--;
+	return (ItObject->second);
 }
 
 /*===========================================================================*/
@@ -227,9 +283,19 @@ char const	*Database::WrongHeaderDatabase::what(void) const throw()
 	return (ErrorParsingFile[0]);
 }
 
+char const	*Database::WrongHeaderInput::what(void) const throw()
+{
+	return (ErrorParsingFile[7]);
+}
+
 char const	*Database::ErrorReadingDataFile::what(void) const throw()
 {
 	return (ErrorParsingFile[1]);
+}
+
+char const	*Database::ErrorReadingInputFile::what(void) const throw()
+{
+	return (ErrorParsingFile[8]);
 }
 
 char const	*Database::EmptyDataFile::what(void) const throw()
@@ -258,7 +324,6 @@ char const	*Database::SameDate::what(void) const throw()
 }
 
 /*===========================================================================*/
-
 /*===========================Utility functions===============================*/
 
 static bool	ExtractData(Database &Data, std::string &DataExtracted, regex_t &DataRegex)
@@ -293,10 +358,57 @@ static void	ErrorExtractData(int flag)
 		return ;
 }
 
+static bool	ValidateDate(std::string Date);
+
+static int	ValidDataInput(std::string Date, double Value)
+{
+	if (ValidateDate(Date) == false)
+		return (ERROR_DATE);
+	if (errno == ERANGE || Value > 1000.0)
+		return (OUT_OF_RANGE);
+	if (Value < 0.0)
+		return (NEGATIVE_VALUE);
+	return (0);
+}
+
+static bool	ValidateDate(std::string Date)
+{
+	int		Year = static_cast<int>(strtod(Date.substr(0, 4).c_str(), NULL));
+	int		Month = static_cast<int>(strtod(Date.substr(5, 2).c_str(), NULL));
+	int		Day = static_cast<int>(strtod(Date.substr(8, 2).c_str(), NULL));
+	bool	LeapYear = false;
+
+	if ((Year % 4 == 0 && Year % 100 != 0) || (Year % 400 == 0))
+		LeapYear = true;
+	if (Month > 0 && Month < 13)
+	{
+		if ((Month % 2 == 0 && Month != 8) && (Day > 0 && Day < 31))
+			return (true);
+		else if (Month == 2 && LeapYear == true && (Day > 0 && Day < 30))
+			return (true);
+		else if (Month == 2 && LeapYear == false && (Day > 0 && Day < 29))
+			return (true);
+		else if ((Month % 2 != 0 || Month == 8) && (Day > 0 && Day < 32))
+			return (true);
+		else
+			return (false);
+	}
+	else
+		return (false);
+}
+
+static void	DisplayErrorOutput(std::string Date, int flag)
+{
+	if (flag == ERROR_DATE)
+		std::cout << "btc: Date error => " << Date << '.' << std::endl;
+	else if (flag == OUT_OF_RANGE)
+		std::cout << "btc: Value out of range. [0-1000] range needed."<< std::endl;
+	else
+		std::cout << "btc: Negative value. [0-1000] range needed." << std::endl;
+}
+
 /*===========================================================================*/
-
 /*===========================Overload Operator===============================*/
-
 
 std::ostream	&operator<<(std::ostream &o, Database &rhs)
 {
