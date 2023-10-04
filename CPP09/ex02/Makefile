@@ -6,7 +6,7 @@
 #    By: jduval <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/18 10:18:38 by jduval            #+#    #+#              #
-#    Updated: 2023/10/04 08:51:09 by jduval           ###   ########.fr        #
+#    Updated: 2023/10/04 15:53:49 by jduval           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,6 +33,9 @@ INCLUDES	=	.
 SRCS		:=	main.cpp				\
 				CreateList.cpp			\
 				AlgorithmForVector.cpp	\
+				BinarySearchVector.cpp	\
+				UtilsVector.cpp			\
+				Utils.cpp				\
 
 SRCS		:=	$(SRCS:%=$(SRC_DIR)/%)
 
@@ -46,7 +49,7 @@ DEPS		:=	$(OBJS:.o=.d)
 
 CC			=	c++
 
-CFLAGS		=	-Wall -Wextra -Werror -std=c++98 -pedantic -gdwarf
+CFLAGS		=	-Wall -Wextra -std=c++98 -gdwarf
 
 CPPFLAGS	=	-MMD -MP $(addprefix -I,$(INCLUDES))
 
