@@ -6,7 +6,7 @@
 /*   By: jduval <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/02 13:26:42 by jduval            #+#    #+#             */
-/*   Updated: 2023/10/03 13:01:16 by jduval           ###   ########.fr       */
+/*   Updated: 2023/10/04 09:45:40 by jduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,9 @@
 
 struct	Content
 {
-	int	max;
-	int	min;
+	int		max;
+	int		min;
+	bool	Odd;
 };
 
 void	CreateVList(std::vector<int> &VList, char **av);

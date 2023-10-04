@@ -6,7 +6,7 @@
 /*   By: jduval <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/02 13:45:07 by jduval            #+#    #+#             */
-/*   Updated: 2023/10/03 17:49:16 by jduval           ###   ########.fr       */
+/*   Updated: 2023/10/04 09:45:39 by jduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,29 @@ static void	DisplayVector(std::vector<int> &MaxVector);
 static void	DisplayPairedVector(std::vector<Content> &PairedVector);
 static void	MergeVector(std::vector<int> &MaxVector, std::vector<int> &SortedVector);
 
+static bool	is_sorted(std::vector<int> &SortedVector);
+
 void	MergeInsertSortVector(std::vector<int> &UnsortedVector)
 {
 	std::vector<int>	SortedVector;
 
 	MergeVector(UnsortedVector, SortedVector);
+	if (is_sorted(SortedVector) == true)
+		std::cout << "It's Fucking Sorted OMG !!!" << std::endl;
+	else
+		std::cout << "Aled ça marche pas...." << std::endl;
+	DisplayVector(SortedVector);
 	return ;
+}
+
+static bool	is_sorted(std::vector<int> &SortedVector)
+{
+	for (size_t i = 0; i < SortedVector.size(); i++)
+	{
+		if (i + 1 < SortedVector.size() && SortedVector[i] > SortedVector[i + 1])
+			return (false);
+	}
+	return (true);
 }
 
 static void	CreateVectorPairs(std::vector<int> &MaxVector, std::vector<Content> &PairedVector);
@@ -75,10 +92,12 @@ static void	InsertPendMin(size_t size,	std::vector<Content> &PairedVector,
 	Content	Pair;
 	std::vector<int>::iterator	NewInsertion;
 
-	size_t	len = size - 1;
+	size_t	len = size;
 	for (size_t i = 0; i < len; i++)
 	{
 		Pair = PairedVector[i];
+		if (Pair.Odd == true)
+			break ;
 		NewInsertion = BinarySearchPosition(Pair, SortedVector);
 		SortedVector.insert(NewInsertion, Pair.min);
 	}
@@ -111,17 +130,15 @@ static std::vector<int>::iterator	BinarySearchPosition(	Content Pair,
 			Mid = MinLimit + (std::distance(MinLimit, MaxLimit) / 2);
 		}
 	}
-	std::cout << "Pair " << Pair.min << " Mid : " << *Mid << std::endl;
-	std::cout << "MinLimit = " << *MinLimit << " MaxLimit = " << *MaxLimit << std::endl;
-	if (Mid == MinLimit)
-		return (MaxLimit);
-	else
+	if (Pair.min <= *MinLimit)
 		return (MinLimit);
+	else 
+		return (MaxLimit);
 }
 
 /*========================CreateVectors/Pairs===============================*/
 
-static void	AssignValuesToPairs(Content &Pairs, int a, int b);
+static void	AssignValuesToPairs(Content &Pairs, int a, int b, bool Odd);
 
 static void	CreateVectorPairs(std::vector<int> &MaxVector, std::vector<Content> &PairedVector)
 {
@@ -129,24 +146,26 @@ static void	CreateVectorPairs(std::vector<int> &MaxVector, std::vector<Content> 
 	for (size_t i = 0; i < MaxVector.size(); i += 2)
 	{
 		if (i + 1 < MaxVector.size())
-			AssignValuesToPairs(Pairs, MaxVector[i], MaxVector[i + 1]);
+			AssignValuesToPairs(Pairs, MaxVector[i], MaxVector[i + 1], false);
 		else
-			AssignValuesToPairs(Pairs, MaxVector[i], 0);
+			AssignValuesToPairs(Pairs, MaxVector[i], 0, true);
 		PairedVector.push_back(Pairs);
 	}
 }
 
-static void	AssignValuesToPairs(Content &Pairs, int a, int b)
+static void	AssignValuesToPairs(Content &Pairs, int a, int b, bool Odd)
 {
 	if (a <= b)
 	{
 		Pairs.max = b;
 		Pairs.min = a;
+		Pairs.Odd = Odd;
 	}
 	else
 	{
 		Pairs.max = a;
 		Pairs.min = b;
+		Pairs.Odd = Odd;
 	}
 }
 
