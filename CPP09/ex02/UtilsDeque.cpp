@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   UtilsVector.cpp                                    :+:      :+:    :+:   */
+/*   UtilsList.cpp                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jduval <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/04 15:22:13 by jduval            #+#    #+#             */
-/*   Updated: 2023/10/05 11:20:34 by jduval           ###   ########.fr       */
+/*   Created: 2023/10/05 11:19:40 by jduval            #+#    #+#             */
+/*   Updated: 2023/10/05 11:31:23 by jduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,28 +14,28 @@
 
 static void	AssignValuesToPairs(Content &Pairs, int a, int b);
 
-void	CreateVectorPairs(std::vector<int> &MaxVector, std::vector<Content> &PairedVector)
+void	CreatedequePairs(std::deque<int> &Maxdeque, std::deque<Content> &PairDeque)
 {
 	Content	Pairs;
-	std::size_t	size = MaxVector.size();
+	std::size_t	size = Maxdeque.size();
 
 	if (size % 2 != 0)
 		size--;
 	for (std::size_t i = 0; i < size; i += 2)
 	{
-		AssignValuesToPairs(Pairs, MaxVector[i], MaxVector[i + 1]);
-		PairedVector.push_back(Pairs);
+		AssignValuesToPairs(Pairs, Maxdeque[i], Maxdeque[i + 1]);
+		PairDeque.push_back(Pairs);
 	}
 }
 
-void	CreateSubMaxVector(std::vector<Content> &PairedVector, std::vector<int> &SubMaxVector)
+void	CreateSubMaxdeque(std::deque<Content> &PairDeque, std::deque<int> &SubMaxdeque)
 {
 	int	Value;
 
-	for (std::size_t i = 0; i < PairedVector.size(); i++)
+	for (std::size_t i = 0; i < PairDeque.size(); i++)
 	{
-		Value = PairedVector[i].max;
-		SubMaxVector.push_back(Value);
+		Value = PairDeque[i].max;
+		SubMaxdeque.push_back(Value);
 	}
 }
 

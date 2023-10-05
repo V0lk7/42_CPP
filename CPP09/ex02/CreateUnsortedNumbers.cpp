@@ -1,16 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   CreateList.cpp                                     :+:      :+:    :+:   */
+/*   CreateUnsortedNumbers.cpp                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jduval <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/02 12:45:50 by jduval            #+#    #+#             */
-/*   Updated: 2023/10/02 13:40:59 by jduval           ###   ########.fr       */
+/*   Updated: 2023/10/05 12:05:01 by jduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <vector>
+#include <deque>
 #include <cstdlib>
 #include <cctype>
 #include <cerrno>
@@ -19,7 +20,13 @@
 static void	IsValidCharacters(char *str);
 static int	ConvertToValidInteger(char *str);
 
-void	CreateVList(std::vector<int> &VList, char **av)
+void	CreateDeque(std::vector<int> &UnsortedVector, std::deque<int> &Unsorteddeque)
+{
+	for (int i = 0; i < UnsortedVector.size(); i++)
+		Unsorteddeque.push_back(UnsortedVector[i]);
+}
+
+void	CreateNumberVector(std::vector<int> &UnsortedNumbers, char **av)
 {
 	int	Value;
 
@@ -27,7 +34,7 @@ void	CreateVList(std::vector<int> &VList, char **av)
 	{
 		IsValidCharacters(av[i]);
 		Value = ConvertToValidInteger(av[i]);
-		VList.push_back(Value);
+		UnsortedNumbers.push_back(Value);
 	}
 	return ;
 }

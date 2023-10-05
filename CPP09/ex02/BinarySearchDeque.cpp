@@ -1,27 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   BinarySearchVector.cpp                             :+:      :+:    :+:   */
+/*   BinarySearchDeque.cpp                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jduval <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/04 15:26:24 by jduval            #+#    #+#             */
-/*   Updated: 2023/10/05 10:56:37 by jduval           ###   ########.fr       */
+/*   Created: 2023/10/05 10:50:05 by jduval            #+#    #+#             */
+/*   Updated: 2023/10/05 11:46:59 by jduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <algorithm>
 #include "Utilities.hpp"
 
-std::vector<int>::iterator	BinarySearchPosition(Content Pair, std::vector<int> &SortedVector)
+std::deque<int>::iterator	BinarySearchPosition(Content Pair, std::deque<int> &SortedDeque)
 {
-	std::vector<int>::iterator MaxLimit;
-	std::vector<int>::iterator MinLimit;
-	std::vector<int>::iterator Mid;
+	std::deque<int>::iterator MaxLimit;
+	std::deque<int>::iterator MinLimit;
+	std::deque<int>::iterator Mid;
 
 
-	MaxLimit = std::find(SortedVector.begin(), SortedVector.end(), Pair.max);
-	MinLimit = SortedVector.begin();
+	MaxLimit = std::find(SortedDeque.begin(), SortedDeque.end(), Pair.max);
+	MinLimit = SortedDeque.begin();
 	Mid = MinLimit + (std::distance(MinLimit, MaxLimit) / 2);
 	while (Mid != MinLimit && Mid != MaxLimit)
 	{
@@ -44,15 +44,15 @@ std::vector<int>::iterator	BinarySearchPosition(Content Pair, std::vector<int> &
 		return (MaxLimit);
 }
 
-std::vector<int>::iterator	BinarySearch(int Element, std::vector<int> &SortedVector)
+std::deque<int>::iterator	BinarySearch(int Element, std::deque<int> &SortedDeque)
 {
-	std::vector<int>::iterator MaxLimit;
-	std::vector<int>::iterator MinLimit;
-	std::vector<int>::iterator Mid;
+	std::deque<int>::iterator MaxLimit;
+	std::deque<int>::iterator MinLimit;
+	std::deque<int>::iterator Mid;
 
 
-	MaxLimit = SortedVector.end() - 1;
-	MinLimit = SortedVector.begin();
+	MaxLimit = SortedDeque.end() - 1;
+	MinLimit = SortedDeque.begin();
 	Mid = MinLimit + (std::distance(MinLimit, MaxLimit) / 2);
 	while (Mid != MinLimit && Mid != MaxLimit)
 	{

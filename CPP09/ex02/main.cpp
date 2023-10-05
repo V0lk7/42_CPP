@@ -6,25 +6,33 @@
 /*   By: jduval <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/02 12:35:22 by jduval            #+#    #+#             */
-/*   Updated: 2023/10/02 15:57:13 by jduval           ###   ########.fr       */
+/*   Updated: 2023/10/05 12:09:23 by jduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <iostream>
+#include <iomanip>
 #include "Utilities.hpp"
 
 static bool	CheckArgsNumber(int ac);
-//static void	DisplayVList(std::vector<int> &VList);
 
 int	main(int ac, char **av)
 {
 	if (CheckArgsNumber(ac) == false)
 		return (1);
 
-	std::vector<int>	VList;
+	std::vector<int>	UnsortedVectorNumbers;
+	std::deque<int>		UnsortedDequeNumbers;
+	double				VectorTime;
+	double				DequeTime;
+
 	try{
-		CreateVList(VList, av);
-		MergeInsertSortVector(VList);
+		CreateNumberVector(UnsortedVectorNumbers, av);
+		CreateDeque(UnsortedVectorNumbers, UnsortedDequeNumbers);
+		VectorTime = MergeInsertSortVector(UnsortedVectorNumbers);
+		DequeTime = MergeInsertSortdeque(UnsortedDequeNumbers);
+		std::cout << "VectorTime = " << std::setprecision(10) << VectorTime << std::endl;
+		std::cout << "DequeTime = " << std::setprecision(10) << DequeTime << std::endl;
 	}
 	catch (std::exception &e){
 		std::cout << "PmergMe: " << e.what() << std::endl;
@@ -42,15 +50,3 @@ static bool	CheckArgsNumber(int ac)
 	}
 	return (true);
 }
-/*
-static void	DisplayVList(std::vector<int> &VList)
-{
-	std::vector<int>::iterator	ItBegin = VList.begin();
-
-	while (ItBegin != VList.end())
-	{
-		std::cout << (*ItBegin) << " ";
-		ItBegin++;
-	}
-	std::cout << std::endl;
-}*/

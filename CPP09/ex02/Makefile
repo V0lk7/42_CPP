@@ -6,7 +6,7 @@
 #    By: jduval <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/18 10:18:38 by jduval            #+#    #+#              #
-#    Updated: 2023/10/04 15:53:49 by jduval           ###   ########.fr        #
+#    Updated: 2023/10/05 11:48:30 by jduval           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,12 +30,15 @@ SRC_DIR		=	.
 
 INCLUDES	=	.
 
-SRCS		:=	main.cpp				\
-				CreateList.cpp			\
-				AlgorithmForVector.cpp	\
-				BinarySearchVector.cpp	\
-				UtilsVector.cpp			\
-				Utils.cpp				\
+SRCS		:=	main.cpp					\
+				CreateUnsortedNumbers.cpp	\
+				AlgorithmForVector.cpp		\
+				AlgorithmForDeque.cpp		\
+				BinarySearchVector.cpp		\
+				BinarySearchDeque.cpp		\
+				UtilsVector.cpp				\
+				UtilsDeque.cpp				\
+				Utils.cpp					\
 
 SRCS		:=	$(SRCS:%=$(SRC_DIR)/%)
 
