@@ -6,7 +6,7 @@
 /*   By: jduval <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/02 12:45:50 by jduval            #+#    #+#             */
-/*   Updated: 2023/10/05 12:05:01 by jduval           ###   ########.fr       */
+/*   Updated: 2023/10/05 15:07:29 by jduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,20 @@
 static void	IsValidCharacters(char *str);
 static int	ConvertToValidInteger(char *str);
 
-void	CreateDeque(std::vector<int> &UnsortedVector, std::deque<int> &Unsorteddeque)
+void	CreateNumberVector(std::vector<int> &UnsortedNumbers, char **av)
 {
-	for (int i = 0; i < UnsortedVector.size(); i++)
-		Unsorteddeque.push_back(UnsortedVector[i]);
+	int	Value;
+
+	for (int i = 1; av[i] != NULL; i++)
+	{
+		IsValidCharacters(av[i]);
+		Value = ConvertToValidInteger(av[i]);
+		UnsortedNumbers.push_back(Value);
+	}
+	return ;
 }
 
-void	CreateNumberVector(std::vector<int> &UnsortedNumbers, char **av)
+void	CreateNumberDeque(std::deque<int> &UnsortedNumbers, char **av)
 {
 	int	Value;
 

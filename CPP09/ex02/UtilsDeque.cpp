@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   UtilsList.cpp                                      :+:      :+:    :+:   */
+/*   UtilsDeque.cpp                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jduval <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/05 11:19:40 by jduval            #+#    #+#             */
-/*   Updated: 2023/10/05 11:31:23 by jduval           ###   ########.fr       */
+/*   Updated: 2023/10/05 14:23:27 by jduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static void	AssignValuesToPairs(Content &Pairs, int a, int b);
 
-void	CreatedequePairs(std::deque<int> &Maxdeque, std::deque<Content> &PairDeque)
+void	CreateDequePairs(std::deque<int> &Maxdeque, std::deque<Content> &PairDeque)
 {
 	Content	Pairs;
 	std::size_t	size = Maxdeque.size();
@@ -28,7 +28,7 @@ void	CreatedequePairs(std::deque<int> &Maxdeque, std::deque<Content> &PairDeque)
 	}
 }
 
-void	CreateSubMaxdeque(std::deque<Content> &PairDeque, std::deque<int> &SubMaxdeque)
+void	CreateSubMaxDeque(std::deque<Content> &PairDeque, std::deque<int> &SubMaxdeque)
 {
 	int	Value;
 
