@@ -6,7 +6,7 @@
 /*   By: jduval <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/26 14:13:09 by jduval            #+#    #+#             */
-/*   Updated: 2023/10/01 16:55:19 by jduval           ###   ########.fr       */
+/*   Updated: 2023/10/06 10:21:22 by jduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -259,7 +259,7 @@ double	Database::getValue(std::string Date)
 		return (ItObject->second);
 	else
 		ItObject = this->Data.lower_bound(Date);
-	if (ItObject == this->Data.end())
+	if (ItObject != this->Data.begin())
 		ItObject--;
 	return (ItObject->second);
 }

@@ -6,7 +6,7 @@
 /*   By: jduval <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/05 15:40:09 by jduval            #+#    #+#             */
-/*   Updated: 2023/10/05 15:46:48 by jduval           ###   ########.fr       */
+/*   Updated: 2023/10/05 16:51:06 by jduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,17 @@ void	DisplaySortedNumbers(T const &Container)
 		std::cout << Container[i] << ' ';
 	}
 	std::cout << std::endl;
+}
+
+template<typename T>
+bool	VerifySorted(T const &Container)
+{
+	for (size_t i = 0; i < Container.size(); i++)
+	{
+		if (i + 1 < Container.size() && Container[i] > Container[i + 1])
+			return (false);
+	}
+	return (true);
 }
 
 struct	Content

@@ -6,7 +6,7 @@
 /*   By: jduval <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/26 13:52:33 by jduval            #+#    #+#             */
-/*   Updated: 2023/10/01 16:04:24 by jduval           ###   ########.fr       */
+/*   Updated: 2023/10/06 10:19:52 by jduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,6 @@ class Database
 				virtual char const	*what(void) const throw();
 		};
 };
-
 
 std::ostream	&operator<<(std::ostream &o, Database &rhs);
 
