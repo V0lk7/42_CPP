@@ -6,7 +6,7 @@
 #    By: jduval <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/18 10:18:38 by jduval            #+#    #+#              #
-#    Updated: 2023/09/26 15:12:32 by jduval           ###   ########.fr        #
+#    Updated: 2023/10/07 14:48:59 by jduval           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -45,7 +45,8 @@ DEPS		:=	$(OBJS:.o=.d)
 
 CC			=	c++
 
-CFLAGS		=	-Wall -Wextra -Werror -std=c++98 -pedantic -g
+CFLAGS		=	-Wall -Wextra -Werror -std=c++98 -pedantic
+#-gdwarf
 
 CPPFLAGS	=	-MMD -MP $(addprefix -I,$(INCLUDES))
 

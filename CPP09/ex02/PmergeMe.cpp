@@ -6,7 +6,7 @@
 /*   By: jduval <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/05 15:24:06 by jduval            #+#    #+#             */
-/*   Updated: 2023/10/05 16:37:37 by jduval           ###   ########.fr       */
+/*   Updated: 2023/10/07 15:10:30 by jduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,6 +139,9 @@ static void	InsertFirstPair(Content &Pair, std::vector<int> &SortedVector)
 }
 
 static int	JacobsthalGenerator(int n);
+static void	InsertFirstMin(	std::vector<Content> &PairVector,
+							std::vector<int> &SortedVector);
+
 
 static void	InsertPendMin(	std::vector<Content> &PairVector,
 							std::vector<int> &SortedVector)
@@ -152,6 +155,9 @@ static void	InsertPendMin(	std::vector<Content> &PairVector,
 	int		JacobsthalNumber;
 	int		i = 1;
 
+	InsertFirstMin(PairVector, SortedVector);
+	if (PairVector.size() == 0)
+		return ;
 	while (PairVector.size() > 1)
 	{
 		JacobsthalNumber = JacobsthalGenerator(i);
@@ -174,6 +180,20 @@ static void	InsertPendMin(	std::vector<Content> &PairVector,
 	}
 	return ;
 }
+
+static void	InsertFirstMin(	std::vector<Content> &PairVector,
+							std::vector<int> &SortedVector)
+{
+	std::vector<int>::iterator		NewInsertion;
+	std::vector<Content>::iterator	Pair = PairVector.begin();
+
+	if (Pair == PairVector.end())
+		return ;
+	NewInsertion = BinarySearchPosition(*Pair, SortedVector);
+	SortedVector.insert(NewInsertion, Pair->min);
+	PairVector.erase(Pair, Pair + 1);
+}
+
 
 /*====================MergeInsertSortDeque===========================*/
 
@@ -245,6 +265,9 @@ static void	InsertFirstPair(Content &Pair, std::deque<int> &SortedDeque)
 	return ;
 }
 
+static void	InsertFirstMin(	std::deque<Content> &PairDeque,
+							std::deque<int> &SortedDeque);
+
 static void	InsertPendMin(	std::deque<Content> &PairDeque,
 							std::deque<int> &SortedDeque)
 {
@@ -256,6 +279,7 @@ static void	InsertPendMin(	std::deque<Content> &PairDeque,
 	int		JacobsthalNumber;
 	int		i = 1;
 
+	InsertFirstMin(PairDeque, SortedDeque);
 	while (PairDeque.size() > 1)
 	{
 		JacobsthalNumber = JacobsthalGenerator(i);
@@ -277,6 +301,19 @@ static void	InsertPendMin(	std::deque<Content> &PairDeque,
 		i++;
 	}
 	return ;
+}
+
+static void	InsertFirstMin(	std::deque<Content> &PairDeque,
+							std::deque<int> &SortedDeque)
+{
+	std::deque<int>::iterator		NewInsertion;
+	std::deque<Content>::iterator	Pair = PairDeque.begin();
+
+	if (Pair == PairDeque.end())
+		return ;
+	NewInsertion = BinarySearchPosition(*Pair, SortedDeque);
+	SortedDeque.insert(NewInsertion, Pair->min);
+	PairDeque.erase(Pair, Pair + 1);
 }
 
 /*=======================BinarySearchsVector=====================*/

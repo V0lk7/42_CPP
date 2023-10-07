@@ -6,7 +6,7 @@
 /*   By: jduval <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/26 13:52:33 by jduval            #+#    #+#             */
-/*   Updated: 2023/10/06 10:19:52 by jduval           ###   ########.fr       */
+/*   Updated: 2023/10/07 14:28:49 by jduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,11 +84,6 @@ class Database
 				virtual char const	*what(void) const throw();
 		};
 		class RegCompFailed : public std::exception
-		{
-			public :
-				virtual char const	*what(void) const throw();
-		};
-		class RegExecFailed : public std::exception
 		{
 			public :
 				virtual char const	*what(void) const throw();

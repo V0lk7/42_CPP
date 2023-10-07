@@ -6,7 +6,7 @@
 /*   By: jduval <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/26 14:13:09 by jduval            #+#    #+#             */
-/*   Updated: 2023/10/07 10:53:45 by jduval           ###   ########.fr       */
+/*   Updated: 2023/10/07 14:48:44 by jduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,12 @@
 #include "UserMessages.hpp"
 #include <cstdlib>
 #include <iostream>
+#include <stdexcept>
 #include "regex.h"
 
 #define ERROR_READING 1
 #define ERROR_REGCOMP 3 
-#define ERROR_REGEXEC 4
-#define OUT_OF_RANGE 5
+#define OUT_OF_RANGE 4
 #define SAME_DATE 6
 
 #define ERROR_DATE 1
@@ -30,6 +30,8 @@ static const char	*RegexUtils[2] =
 	"^[0-9]{4}-\\b(0[1-9]|1[0-2])\\b-\\b(0[1-9]|[12][0-9]|3[01])\\b,([0-9]+\\.[0-9]+$|[0-9]+$)",
 	"^[0-9]{4}-\\b(0[1-9]|1[0-2])\\b-\\b(0[1-9]|[12][0-9]|3[01])\\b \\| -?([0-9]+\\.[0-9]+$|[0-9]+$)"
 };
+
+static const int	Dates[12] = {31, 0, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
 
 /*============================================================================*/
 /*===========================Constructors/Destructors=========================*/
@@ -85,7 +87,7 @@ Database	&Database::openInputFile(char *file)
 /*===========================================================================*/
 /*===========================Creating Database===============================*/
 
-static bool	ExtractData(Database &Data, std::string &DataExtracted, regex_t &DataRegex);
+static int	ExtractData(Database &Data, std::string &DataExtracted, regex_t &DataRegex);
 static void	ErrorExtractData(int flag);
 
 void	Database::createDatabase(void)
@@ -114,17 +116,15 @@ int	Database::parsingDatabase(void)
 		return (ERROR_REGCOMP);
 	while (getline(this->DataFile, DataExtract))
 	{
-		if (this->DataFile.fail() == true && this->DataFile.eof() == false)
+		if (this->DataFile.fail() == true)
 		{
 			regfree(&DataRegex);
 			throw (Database::ErrorReadingDataFile());
 		}
-		else if (this->DataFile.eof() == true)
-			break ;
 		else
 		{
 			flag = ExtractData(*this, DataExtract, DataRegex);
-			if (flag != 0)
+			if (flag != 0 || this->DataFile.eof() == true)
 				break ;
 		}
 	}
@@ -192,7 +192,7 @@ int	Database::visualizeDataRelation(void)
 			regfree(&InputRegex);
 			throw (Database::ErrorReadingInputFile());
 		}
-		else if (this->InputFile.eof() == true)
+		else if (this->InputFile.eof() == true && InputExtract.empty() == true)
 			break ;
 		else
 			ParseInput(*this, InputExtract, InputRegex);
@@ -208,7 +208,7 @@ static void ParseInput(Database &Data, std::string &InputExtracted, regex_t &Inp
 {
 	if (regexec(&InputRegex, InputExtracted.c_str(), 0, NULL, 0) == REG_NOMATCH)
 	{
-		std::cout << "btc: Error Format => " << InputExtracted << std::endl;
+		std::cout << "btc: Error Format => \'" << InputExtracted << '\'' << std::endl;
 		return ;
 	}
 
@@ -222,7 +222,10 @@ static void ParseInput(Database &Data, std::string &InputExtracted, regex_t &Inp
 	else
 	{
 		double Result = Value * Data.getValue(Date);
-		std::cout << Date << " | " << Value << " | " << Result << std::endl;
+		if (Result == -1.0)
+			std::cout << Date << " | " << "Not in database" << std::endl;
+		else
+			std::cout << Date << " | " << Value << " | " << Result << std::endl;
 	}
 	return ;
 }
@@ -261,6 +264,8 @@ double	Database::getValue(std::string Date)
 		ItObject = this->Data.lower_bound(Date);
 	if (ItObject != this->Data.begin())
 		ItObject--;
+	else 
+		return (-1.0);
 	return (ItObject->second);
 }
 
@@ -285,7 +290,7 @@ char const	*Database::WrongHeaderDatabase::what(void) const throw()
 
 char const	*Database::WrongHeaderInput::what(void) const throw()
 {
-	return (ErrorParsingFile[7]);
+	return (ErrorParsingFile[6]);
 }
 
 char const	*Database::ErrorReadingDataFile::what(void) const throw()
@@ -295,7 +300,7 @@ char const	*Database::ErrorReadingDataFile::what(void) const throw()
 
 char const	*Database::ErrorReadingInputFile::what(void) const throw()
 {
-	return (ErrorParsingFile[8]);
+	return (ErrorParsingFile[7]);
 }
 
 char const	*Database::EmptyDataFile::what(void) const throw()
@@ -308,28 +313,26 @@ char const	*Database::RegCompFailed::what(void) const throw()
 	return (ErrorParsingFile[3]);
 }
 
-char const	*Database::RegExecFailed::what(void) const throw()
+char const	*Database::ValueOutOfRange::what(void) const throw()
 {
 	return (ErrorParsingFile[4]);
 }
 
-char const	*Database::ValueOutOfRange::what(void) const throw()
-{
-	return (ErrorParsingFile[5]);
-}
-
 char const	*Database::SameDate::what(void) const throw()
 {
-	return (ErrorParsingFile[6]);
+	return (ErrorParsingFile[5]);
 }
 
 /*===========================================================================*/
 /*===========================Utility functions===============================*/
 
-static bool	ExtractData(Database &Data, std::string &DataExtracted, regex_t &DataRegex)
+static int	ExtractData(Database &Data, std::string &DataExtracted, regex_t &DataRegex)
 {
 	if (regexec(&DataRegex, DataExtracted.c_str(), 0, NULL, 0) == REG_NOMATCH)
-		return (ERROR_REGEXEC);
+	{
+		std::cout << "btc: Error Format => \'" << DataExtracted << '\'' << std::endl;
+		return (-1);
+	}
 	else
 	{
 		std::string	const Date(DataExtracted, 0, 10);
@@ -344,12 +347,12 @@ static bool	ExtractData(Database &Data, std::string &DataExtracted, regex_t &Dat
 
 static void	ErrorExtractData(int flag)
 {
+	if (flag == -1)
+		throw (std::runtime_error(""));
 	if (flag == ERROR_REGCOMP)
 		throw (Database::RegCompFailed());
 	else if (flag == ERROR_READING)
 		throw (Database::ErrorReadingDataFile());
-	else if (flag == ERROR_REGEXEC)
-		throw (Database::RegExecFailed());
 	else if (flag == OUT_OF_RANGE)
 		throw (Database::ValueOutOfRange());
 	else if (flag == SAME_DATE)
@@ -380,15 +383,20 @@ static bool	ValidateDate(std::string Date)
 
 	if ((Year % 4 == 0 && Year % 100 != 0) || (Year % 400 == 0))
 		LeapYear = true;
-	if (Month > 0 && Month < 13)
+	if (Month != 2 && Month > 0)
 	{
-		if ((Month % 2 == 0 && Month != 8) && (Day > 0 && Day < 31))
+		if (Day > 0 && Day <= Dates[Month - 1])
 			return (true);
-		else if (Month == 2 && LeapYear == true && (Day > 0 && Day < 30))
+		else
+			return (false);
+	}
+	else if (Month == 2)
+	{
+		if (Day <= 0)
+			return (false);
+		else if (LeapYear == true && Day <= 29)
 			return (true);
-		else if (Month == 2 && LeapYear == false && (Day > 0 && Day < 29))
-			return (true);
-		else if ((Month % 2 != 0 || Month == 8) && (Day > 0 && Day < 32))
+		else if (LeapYear == false && Day <= 28)
 			return (true);
 		else
 			return (false);
