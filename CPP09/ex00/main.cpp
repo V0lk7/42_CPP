@@ -6,11 +6,10 @@
 /*   By: jduval <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/26 12:59:29 by jduval            #+#    #+#             */
-/*   Updated: 2023/10/01 16:04:25 by jduval           ###   ########.fr       */
+/*   Updated: 2023/10/09 11:35:27 by jduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "UserMessages.hpp"
 #include "Database.hpp"
 #include <iostream>
 
@@ -32,6 +31,13 @@ int	main(int ac, char **av)
 	}
 	return (0);
 }
+
+static const char	*ErrorNumbersOfArgs[3] = 
+{
+	"btc: Pathern: [./btc] [\"Input file\"].",
+	"btc: Error: Need input file\n",
+	"btc: Error: Too many arguments\n"
+};
 
 static bool	CheckArgumentsNumbers(int ac)
 {

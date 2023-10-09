@@ -6,24 +6,24 @@
 /*   By: jduval <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/26 14:13:09 by jduval            #+#    #+#             */
-/*   Updated: 2023/10/07 14:48:44 by jduval           ###   ########.fr       */
+/*   Updated: 2023/10/09 11:38:41 by jduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Database.hpp"
-#include "UserMessages.hpp"
 #include <cstdlib>
 #include <iostream>
-#include <stdexcept>
 #include "regex.h"
-
-#define ERROR_READING 1
-#define ERROR_REGCOMP 3 
-#define OUT_OF_RANGE 4
-#define SAME_DATE 6
 
 #define ERROR_DATE 1
 #define NEGATIVE_VALUE 2
+#define OUT_OF_RANGE 3
+
+static const char	*ErrorOpeningFiles[2] =
+{
+	"btc: Open: Error occured during INPUT file opening, please make sure your file exist and it's readable.\n",
+	"btc: Open: Error occured during DATA file opening, please verify that data.csv exist and it's readable.\n"
+};
 
 static const char	*RegexUtils[2] = 
 {
@@ -67,7 +67,7 @@ Database	&Database::openDataBaseFile(void)
 	{
 		if (this->InputFile.is_open() == true)
 			this->InputFile.close();
-		throw (Database::DataFileFailed());
+		throw (std::runtime_error(ErrorOpeningFiles[1]));
 	}
 	return (*this);
 }
@@ -79,7 +79,7 @@ Database	&Database::openInputFile(char *file)
 	{
 		if (this->DataFile.is_open() == true)
 			this->DataFile.close();
-		throw (Database::InputFileFailed());
+		throw (std::runtime_error(ErrorOpeningFiles[0]));
 	}
 	return (*this);
 }
@@ -87,62 +87,85 @@ Database	&Database::openInputFile(char *file)
 /*===========================================================================*/
 /*===========================Creating Database===============================*/
 
-static int	ExtractData(Database &Data, std::string &DataExtracted, regex_t &DataRegex);
-static void	ErrorExtractData(int flag);
+static void	ExtractData(Database &Data, std::string &DataExtracted, regex_t &DataRegex);
 
 void	Database::createDatabase(void)
 {
-	int	ErrorFlag;
-
-	if (this->DataFile.fail() == true)
-		throw (Database::DataFileFailed());
-	if (this->verifyDataHeader() == false)
-		throw (Database::WrongHeaderDatabase());
-	ErrorFlag = this->parsingDatabase();
-	if (ErrorFlag != 0)
-		ErrorExtractData(ErrorFlag);
+	this->verifyDataHeader();
+	this->parsingDatabase();
 	if (this->Data.empty() == true)
-		throw (Database::EmptyDataFile());
+		throw (std::runtime_error("btc: Database: File is empty.\n"));
 	return ;
 }
 
-int	Database::parsingDatabase(void)
+void	Database::parsingDatabase(void)
 {
 	regex_t		DataRegex;
 	std::string	DataExtract;
-	int			flag = 0;
 
 	if (regcomp(&DataRegex, RegexUtils[0], REG_EXTENDED) != 0)
-		return (ERROR_REGCOMP);
+		throw (std::runtime_error("btc: Database: Error in creation of the data Regex.\n"));
 	while (getline(this->DataFile, DataExtract))
 	{
 		if (this->DataFile.fail() == true)
 		{
 			regfree(&DataRegex);
-			throw (Database::ErrorReadingDataFile());
+			throw (std::runtime_error("btc: Database: An error occurred during the reading.\n"));
 		}
 		else
 		{
-			flag = ExtractData(*this, DataExtract, DataRegex);
-			if (flag != 0 || this->DataFile.eof() == true)
+			ExtractData(*this, DataExtract, DataRegex);
+			if (this->DataFile.eof() == true)
 				break ;
 		}
 	}
 	regfree(&DataRegex);
-	return (flag);
+	return ;
 }
 
-bool	Database::verifyDataHeader(void)
+static bool	ValidateDate(std::string Date);
+
+static void	ExtractData(Database &Data, std::string &DataExtracted, regex_t &DataRegex)
+{
+	if (regexec(&DataRegex, DataExtracted.c_str(), 0, NULL, 0) == REG_NOMATCH)
+	{
+		std::cerr << "btc: Database: Error Format => \'" << DataExtracted << '\'' << std::endl;
+		regfree(&DataRegex);
+		throw (std::runtime_error(""));
+	}
+	else
+	{
+		std::string	const Date(DataExtracted, 0, 10);
+		double	const Value = strtod(&(DataExtracted.c_str())[11], NULL);
+
+		if (errno == ERANGE)
+		{
+			regfree(&DataRegex);
+			throw (std::runtime_error("btc: Database: Value overflow.\n"));
+		}
+		if (ValidateDate(Date) == false)
+		{
+			regfree(&DataRegex);
+			throw (std::runtime_error("btc: Database: Date isn't valid.\n"));
+		}
+		if (Data.setData(Date, Value) == false)
+		{
+			regfree(&DataRegex);
+			throw (std::runtime_error("btc: Database: Can't have the same date twice.\n"));
+		}
+	}
+}
+
+void	Database::verifyDataHeader(void)
 {
 	std::string	Header;
 
 	getline(this->DataFile, Header);
 	if (this->DataFile.fail() == true && this->DataFile.eof() == false)
-		return (false);
-	else if (Header.compare("date,exchange_rate") != 0)
-		return (false);
-	else
-		return (true);
+		throw (std::runtime_error("btc: Database: An error occured during the reading of the Datafile.\n"));
+	if (Header.compare("date,exchange_rate") != 0)
+		throw (std::runtime_error("btc: Database: Wrong Header format in database file.\n"));
+	return ;
 }
 
 /*============================================================================*/
@@ -150,55 +173,47 @@ bool	Database::verifyDataHeader(void)
 
 void	Database::findInputsInDatabase(void)
 {
-	int	ErrorFlag;
-
-	if (this->InputFile.fail() == true)
-		throw (Database::InputFileFailed());
-	if (this->verifyInputHeader() == false)
-		throw (Database::WrongHeaderInput());
-	ErrorFlag = this->visualizeDataRelation();
-	if (ErrorFlag != 0)
-		ErrorExtractData(ErrorFlag);
+	this->verifyInputHeader();
+	this->visualizeDataRelation();
 	return ;
 }
 
-bool	Database::verifyInputHeader(void)
+void	Database::verifyInputHeader(void)
 {
 	std::string	Header;
 
 	getline(this->InputFile, Header);
 	if (this->DataFile.fail() == true && this->DataFile.eof() == false)
-		return (false);
-	else if (Header.compare("date | value") != 0)
-		return (false);
-	else
-		return (true);
+		throw (std::runtime_error("btc: Inputfile: An error occured during the reading of the InputFile.\n"));
+	if (Header.compare("date | value") != 0)
+		throw (std::runtime_error("btc: Inputfile: Wrong Header format in database file.\n"));
 }
-
 
 static void	ParseInput(Database &Data, std::string &InputExtracted, regex_t &InputRegex);
 
-int	Database::visualizeDataRelation(void)
+void	Database::visualizeDataRelation(void)
 {
 	regex_t		InputRegex;
 	std::string	InputExtract;
 
 	if (regcomp(&InputRegex, RegexUtils[1], REG_EXTENDED) != 0)
-		return (ERROR_REGCOMP);
+		throw (std::runtime_error("btc: Inputfile: Error in creation of the data Regex.\n"));
 	while (getline(this->InputFile, InputExtract))
 	{
-		if (this->InputFile.fail() == true && this->InputFile.eof() == false)
+		if (this->InputFile.fail() == true)
 		{
 			regfree(&InputRegex);
-			throw (Database::ErrorReadingInputFile());
+			throw (std::runtime_error("btc: Inputfile: An error occurred during the reading.\n"));
 		}
-		else if (this->InputFile.eof() == true && InputExtract.empty() == true)
-			break ;
 		else
+		{
 			ParseInput(*this, InputExtract, InputRegex);
+			if (this->InputFile.eof() == true)
+				break ;
+		}
 	}
 	regfree(&InputRegex);
-	return (0);
+	return ;
 }
 
 static void	DisplayErrorOutput(std::string Date, int flag);
@@ -208,12 +223,13 @@ static void ParseInput(Database &Data, std::string &InputExtracted, regex_t &Inp
 {
 	if (regexec(&InputRegex, InputExtracted.c_str(), 0, NULL, 0) == REG_NOMATCH)
 	{
-		std::cout << "btc: Error Format => \'" << InputExtracted << '\'' << std::endl;
+		std::cout << "btc: InputFile: Error Format => \'" << InputExtracted << '\'' << std::endl;
 		return ;
 	}
 
 	std::string	Date(InputExtracted, 0, 10);
 	double		Value = strtod(&(InputExtracted.c_str())[13], NULL);
+	double		ValueInData;
 	int			Flag = 0;
 
 	Flag = ValidDataInput(Date, Value);
@@ -221,11 +237,17 @@ static void ParseInput(Database &Data, std::string &InputExtracted, regex_t &Inp
 		DisplayErrorOutput(Date, Flag);
 	else
 	{
-		double Result = Value * Data.getValue(Date);
-		if (Result == -1.0)
-			std::cout << Date << " | " << "Not in database" << std::endl;
+		ValueInData = Data.getValue(Date);
+		if (ValueInData == -1.0)
+			std::cout << InputExtracted << " => Data can't be find in the database." << std::endl;
 		else
-			std::cout << Date << " | " << Value << " | " << Result << std::endl;
+		{
+			double Result = Value * ValueInData;
+			if (Result == -1.0)
+				std::cout << Date << " | " << "OverFlow value" << std::endl;
+			else
+				std::cout << Date << " | " << Value << " | " << Result << std::endl;
+		}
 	}
 	return ;
 }
@@ -270,98 +292,7 @@ double	Database::getValue(std::string Date)
 }
 
 /*===========================================================================*/
-
-/*===========================Class Exceptions================================*/
-
-char const	*Database::InputFileFailed::what(void) const throw()
-{
-	return (ErrorOpeningFiles[0]);
-}
-
-char const	*Database::DataFileFailed::what(void) const throw()
-{
-	return (ErrorOpeningFiles[1]);
-}
-
-char const	*Database::WrongHeaderDatabase::what(void) const throw()
-{
-	return (ErrorParsingFile[0]);
-}
-
-char const	*Database::WrongHeaderInput::what(void) const throw()
-{
-	return (ErrorParsingFile[6]);
-}
-
-char const	*Database::ErrorReadingDataFile::what(void) const throw()
-{
-	return (ErrorParsingFile[1]);
-}
-
-char const	*Database::ErrorReadingInputFile::what(void) const throw()
-{
-	return (ErrorParsingFile[7]);
-}
-
-char const	*Database::EmptyDataFile::what(void) const throw()
-{
-	return (ErrorParsingFile[2]);
-}
-
-char const	*Database::RegCompFailed::what(void) const throw()
-{
-	return (ErrorParsingFile[3]);
-}
-
-char const	*Database::ValueOutOfRange::what(void) const throw()
-{
-	return (ErrorParsingFile[4]);
-}
-
-char const	*Database::SameDate::what(void) const throw()
-{
-	return (ErrorParsingFile[5]);
-}
-
-/*===========================================================================*/
 /*===========================Utility functions===============================*/
-
-static int	ExtractData(Database &Data, std::string &DataExtracted, regex_t &DataRegex)
-{
-	if (regexec(&DataRegex, DataExtracted.c_str(), 0, NULL, 0) == REG_NOMATCH)
-	{
-		std::cout << "btc: Error Format => \'" << DataExtracted << '\'' << std::endl;
-		return (-1);
-	}
-	else
-	{
-		std::string	const Date(DataExtracted, 0, 10);
-		double	const Value = strtod(&(DataExtracted.c_str())[11], NULL);
-		if (errno == ERANGE)
-			return (OUT_OF_RANGE);
-		if (Data.setData(Date, Value) == false)
-			return (SAME_DATE);
-		return (0);
-	}
-}
-
-static void	ErrorExtractData(int flag)
-{
-	if (flag == -1)
-		throw (std::runtime_error(""));
-	if (flag == ERROR_REGCOMP)
-		throw (Database::RegCompFailed());
-	else if (flag == ERROR_READING)
-		throw (Database::ErrorReadingDataFile());
-	else if (flag == OUT_OF_RANGE)
-		throw (Database::ValueOutOfRange());
-	else if (flag == SAME_DATE)
-		throw (Database::SameDate());
-	else
-		return ;
-}
-
-static bool	ValidateDate(std::string Date);
 
 static int	ValidDataInput(std::string Date, double Value)
 {
