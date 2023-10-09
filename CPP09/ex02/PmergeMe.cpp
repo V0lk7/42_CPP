@@ -6,7 +6,7 @@
 /*   By: jduval <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/05 15:24:06 by jduval            #+#    #+#             */
-/*   Updated: 2023/10/07 15:10:30 by jduval           ###   ########.fr       */
+/*   Updated: 2023/10/09 16:20:57 by jduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -157,7 +157,7 @@ static void	InsertPendMin(	std::vector<Content> &PairVector,
 
 	InsertFirstMin(PairVector, SortedVector);
 	if (PairVector.size() == 0)
-		return ;
+		return ;							//FAUT REFAIRE ALED !
 	while (PairVector.size() > 1)
 	{
 		JacobsthalNumber = JacobsthalGenerator(i);
