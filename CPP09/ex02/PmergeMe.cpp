@@ -6,7 +6,7 @@
 /*   By: jduval <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/05 15:24:06 by jduval            #+#    #+#             */
-/*   Updated: 2023/10/09 16:20:57 by jduval           ###   ########.fr       */
+/*   Updated: 2023/10/10 18:21:34 by jduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	CreateNumberVector(std::vector<int> &UnsortedNumbers, char **av)
 	return ;
 }
 
-void	CreateNumberDeque(std::deque<int> &UnsortedNumbers, char **av)
+/*void	CreateNumberDeque(std::deque<int> &UnsortedNumbers, char **av)
 {
 	int	Value;
 
@@ -46,7 +46,7 @@ void	CreateNumberDeque(std::deque<int> &UnsortedNumbers, char **av)
 		UnsortedNumbers.push_back(Value);
 	}
 	return ;
-}
+}*/
 
 static void	IsValidCharacters(char *str)
 {
@@ -69,134 +69,228 @@ static int	ConvertToValidInteger(char *str)
 
 /*====================MergeInsertSortVector========================*/
 
-static void	MergeVector(std::vector<int> &MaxVector, std::vector<int> &SortedVector);
-static void	InsertOddElement(int Element, std::vector<int> &SortedVector);
+static std::vector<int>::iterator	BinarySearch(int Value, std::vector<int> &SortedVector);
+
+static void		InsertOddElement(int Value, std::vector<int> &SortedVector);
+static int		JacobsthalGenerator(int n);
+static void		EraseSubMaxElements(std::vector<int> &SubMaxVector, size_t index);
+static size_t	FindMinOfMax(std::vector<int> &SubMaxVector, int Max, size_t size);
+static size_t	InsertWithJacobSequence(std::vector<int> &SubMaxVector,
+										std::vector<int> &SortedVector,
+										size_t IndexStart,
+										size_t JacobsthalNumber);
+
+static void	InsertRemainMin(std::vector<int> &SubMaxVector, std::vector<int> &SortedVector);
+static void	InsertFirstMax(std::vector<int> &SubMaxVector, std::vector<int> &SortedVector);
+static void	InsertSortVector(std::vector<int> &SubMaxVector, std::vector<int> &SortedVector);
+static void	CreateSubMaxVector(std::vector<int> MaxVector, std::vector<int> &SubMaxVector);
+static void	MergeVector(std::vector<int> &MaxVector, std::vector<int> &SortedVector, int Step);
 
 void	MergeInsertSortVector(std::vector<int> &UnsortedVector, std::vector<int> &SortedVector)
 {
-	MergeVector(UnsortedVector, SortedVector);
-	if (UnsortedVector.size() % 2 != 0)
-		InsertOddElement(UnsortedVector.back(), SortedVector);
+	MergeVector(UnsortedVector, SortedVector, 0);
+	std::cout << "SortedVector" << std::endl;
+	Display(SortedVector);
 	return ;
 }
 
-static void	InsertSortVector(	std::vector<int> &SubMaxVector,
-								std::vector<Content> &PairVector,
-								std::vector<int> &SortedVector);
-static void	CreateVectorPairs(std::vector<int> &MaxVector, std::vector<Content> &PairedVector);
-static void	CreateSubMaxVector(std::vector<Content> &PairedVector, std::vector<int> &SubMaxVector);
-
-static void	MergeVector(std::vector<int> &MaxVector, std::vector<int> &SortedVector)
+static void	MergeVector(std::vector<int> &MaxVector, std::vector<int> &SortedVector, int Step)
 {
-	std::vector<Content>		PairVector;
 	std::vector<int>			SubMaxVector;
+	int							OddNumber;
+	bool						flag = false;
 
-	CreateVectorPairs(MaxVector, PairVector);
-	CreateSubMaxVector(PairVector, SubMaxVector);
+	if (MaxVector.size() % 2 != 0)
+	{
+		OddNumber = MaxVector.back();
+		MaxVector.pop_back();
+		flag = true;
+	}
+	CreateSubMaxVector(MaxVector, SubMaxVector);
 	if (MaxVector.size() > 2)
-		MergeVector(SubMaxVector, SortedVector);
-	InsertSortVector(SubMaxVector, PairVector, SortedVector);
+		MergeVector(SubMaxVector, SortedVector, Step + 1);
+	InsertSortVector(SubMaxVector, SortedVector);
+	if (flag == true)
+		InsertOddElement(OddNumber, SortedVector);
 }
 
-static void	InsertFirstPair(Content &Pair, std::vector<int> &SortedVector);
-static void	InsertPendMin(	std::vector<Content> &PairVector,
-							std::vector<int> &SortedVector);
-
-static void	InsertSortVector(	std::vector<int> &SubMaxVector,
-								std::vector<Content> &PairVector,
-								std::vector<int> &SortedVector)
+static void	CreateSubMaxVector(std::vector<int> MaxVector, std::vector<int> &SubMaxVector)
 {
-	int	OddElement;
+	size_t	size = MaxVector.size();
+	int	j = 0;
 
-	if (PairVector.size() == 1)
-		InsertFirstPair(PairVector[0], SortedVector);
-	else
-		InsertPendMin(PairVector, SortedVector);
-	if (SubMaxVector.size() % 2 != 0 && SubMaxVector.size() != 1)
+	SubMaxVector.assign((size / 2), 0);
+	for (size_t i = 0; i < size; i += 2)
 	{
-		OddElement = SubMaxVector.back();
-		InsertOddElement(OddElement, SortedVector);
+		if (i + 1 == size)
+			SubMaxVector[j] = MaxVector[i];
+		else if (MaxVector[i] >= MaxVector[i + 1])
+			SubMaxVector[j] = MaxVector[i];
+		else
+			SubMaxVector[j] = MaxVector[i + 1];
+		j++;
 	}
 }
 
-static std::vector<int>::iterator	BinarySearchPosition(	Content Pair,
-															std::vector<int> &SortedVector);
-static std::vector<int>::iterator	BinarySearch(int Element, std::vector<int> &SortedVector);
-
-static void	InsertOddElement(int Element, std::vector<int> &SortedVector)
+static void	InsertSortVector(std::vector<int> &SubMaxVector, std::vector<int> &SortedVector)
 {
-	std::vector<int>::iterator	NewInsertion;
+	size_t	size = SubMaxVector.size();
 
-	NewInsertion = BinarySearch(Element, SortedVector);
-	SortedVector.insert(NewInsertion, Element);
+	if (size == 1)
+		InsertFirstMax(SubMaxVector, SortedVector);
+	else
+		InsertRemainMin(SubMaxVector, SortedVector);
 }
 
-static void	InsertFirstPair(Content &Pair, std::vector<int> &SortedVector)
+static void	InsertFirstMax(std::vector<int> &SubMaxVector, std::vector<int> &SortedVector)
 {
-	SortedVector.push_back(Pair.min);
-	SortedVector.push_back(Pair.max);
+	int	Value = SubMaxVector[0];
+	SortedVector.push_back(Value);
 	return ;
 }
 
-static int	JacobsthalGenerator(int n);
-static void	InsertFirstMin(	std::vector<Content> &PairVector,
-							std::vector<int> &SortedVector);
-
-
-static void	InsertPendMin(	std::vector<Content> &PairVector,
-							std::vector<int> &SortedVector)
+static void	InsertRemainMin(std::vector<int> &SubMaxVector, std::vector<int> &SortedVector)
 {
-	std::vector<int>::iterator		NewInsertion;
+	size_t	size = SubMaxVector.size();
+	size_t	Index = FindMinOfMax(SubMaxVector, SortedVector[0], size);
+	size_t	JacobsthalNumber;
+	size_t	i = 1;
 
-	std::vector<Content>::iterator	ItLeft;
-	std::vector<Content>::iterator	ItRight;
-	std::vector<Content>::iterator	ItTmp;
+	SortedVector.insert(SortedVector.begin(), SubMaxVector[Index]);
+	EraseSubMaxElements(SubMaxVector, Index);
+	size -= 2;
+	Index = 1;
 
-	int		JacobsthalNumber;
-	int		i = 1;
-
-	InsertFirstMin(PairVector, SortedVector);
-	if (PairVector.size() == 0)
-		return ;							//FAUT REFAIRE ALED !
-	while (PairVector.size() > 1)
+	while (size > 0)
 	{
 		JacobsthalNumber = JacobsthalGenerator(i);
-		ItLeft = PairVector.begin();
-		if (JacobsthalNumber * 2 >= (int)PairVector.size())
-			ItRight = ItLeft + PairVector.size() - 1;
-		else
-			ItRight = ItLeft + JacobsthalNumber - 1;
-		ItTmp = ItRight + 1;
-		while (ItRight != ItLeft)
-		{
-			NewInsertion = BinarySearchPosition((*ItRight), SortedVector);
-			SortedVector.insert(NewInsertion, ItRight->min);
-			ItRight--;
-		}
-		NewInsertion = BinarySearchPosition((*ItLeft), SortedVector);
-		SortedVector.insert(NewInsertion, ItLeft->min);
-		PairVector.erase(PairVector.begin(), ItTmp);
+		Index = InsertWithJacobSequence(SubMaxVector,
+										SortedVector,
+										Index,
+										JacobsthalNumber * 2);
+		size -= 2 * JacobsthalNumber;
 		i++;
 	}
 	return ;
 }
 
-static void	InsertFirstMin(	std::vector<Content> &PairVector,
-							std::vector<int> &SortedVector)
+static size_t	InsertWithJacobSequence(std::vector<int> &SubMaxVector,
+										std::vector<int> &SortedVector,
+										size_t IndexStart,
+										size_t JacobsthalNumber)
 {
-	std::vector<int>::iterator		NewInsertion;
-	std::vector<Content>::iterator	Pair = PairVector.begin();
+	std::vector<int>::iterator	ItBegin = SortedVector.begin() + IndexStart;	
+	std::vector<int>::iterator	ItEnd;
+	std::vector<int>::iterator	MinPos;
+	size_t						IndexEnd;
+	size_t						IndexMin;
+	size_t						Size = SortedVector.size();
 
-	if (Pair == PairVector.end())
-		return ;
-	NewInsertion = BinarySearchPosition(*Pair, SortedVector);
-	SortedVector.insert(NewInsertion, Pair->min);
-	PairVector.erase(Pair, Pair + 1);
+	if (IndexStart + JacobsthalNumber >= Size)
+	{
+		ItEnd = SortedVector.end() - 1;
+		IndexEnd = IndexStart + ((Size - IndexStart) * 2);
+	}
+	else
+	{
+		ItEnd = ItBegin + JacobsthalNumber - 1;
+		IndexEnd = IndexStart + (JacobsthalNumber * 2);
+	}
+	std::vector<int>			JacobPacket(ItBegin, ItEnd);
+	Size = std::distance(ItBegin, ItEnd);
+
+	while (Size > 0)
+	{
+		IndexMin = FindMinOfMax(SubMaxVector, (*ItEnd), SubMaxVector.size());
+		MinPos = BinarySearch(SubMaxVector[IndexMin], SortedVector);
+		SortedVector.insert(MinPos, SubMaxVector[IndexMin]);
+		EraseSubMaxElements(SubMaxVector, IndexMin);
+		ItEnd--;
+		Size--;
+	}
+	return (IndexEnd);
 }
 
+static size_t	FindMinOfMax(std::vector<int> &SubMaxVector, int Max, size_t size)
+{
 
-/*====================MergeInsertSortDeque===========================*/
+	for (size_t i = 0; i < size; i++)
+	{
+		if (SubMaxVector[i] == Max)
+		{
+			if (i % 2 == 0)
+				return (i + 1);
+			else
+				return (i);
+		}
+	}
+	return (0);
+}
 
+static void	EraseSubMaxElements(std::vector<int> &SubMaxVector, size_t index)
+{
+	std::vector<int>::iterator	first;
+	std::vector<int>::iterator	second;
+
+	if (index % 2 == 0)
+		first = SubMaxVector.begin() + index;
+	else
+		first = SubMaxVector.begin() + (index - 1);
+	second = first + 2;
+	SubMaxVector.erase(first, second);
+}
+
+static int	JacobsthalGenerator(int n)
+{
+    if (n == 0)
+        return 0;
+    if (n == 1)
+        return 1;
+    return (JacobsthalGenerator(n - 1) + 2 * JacobsthalGenerator(n - 2));
+}
+
+static std::vector<int>::iterator	BinarySearch(int Value, std::vector<int> &SortedVector)
+{
+	std::vector<int>::iterator MaxLimit;
+	std::vector<int>::iterator MinLimit;
+	std::vector<int>::iterator Mid;
+
+
+	MaxLimit = std::find(SortedVector.begin(), SortedVector.end(), Value);
+	if (MaxLimit == SortedVector.end())
+		MaxLimit = SortedVector.end() -  1;
+	MinLimit = SortedVector.begin();
+	Mid = MinLimit + (std::distance(MinLimit, MaxLimit) / 2);
+	while (Mid != MinLimit && Mid != MaxLimit)
+	{
+		if (Value == *Mid)
+			return (Mid);
+		else if (Value < *Mid)
+		{
+			MaxLimit = Mid;
+			Mid = MinLimit + (std::distance(MinLimit, MaxLimit) / 2);
+		}
+		else
+		{
+			MinLimit = Mid;
+			Mid = MinLimit + (std::distance(MinLimit, MaxLimit) / 2);
+		}
+	}
+	if (Value <= *MinLimit)
+		return (MinLimit);
+	else 
+		return (MaxLimit);
+}
+
+static void	InsertOddElement(int Value, std::vector<int> &SortedVector)
+{
+	std::vector<int>::iterator	OddPos;
+
+	OddPos = BinarySearch(Value, SortedVector);
+	SortedVector.insert(OddPos, Value);
+}
+
+/*
 static void	MergeDeque(std::deque<int> &MaxDeque, std::deque<int> &SortedDeque);
 static void	InsertOddElement(int Element, std::deque<int> &SortedDeque);
 
@@ -316,7 +410,6 @@ static void	InsertFirstMin(	std::deque<Content> &PairDeque,
 	PairDeque.erase(Pair, Pair + 1);
 }
 
-/*=======================BinarySearchsVector=====================*/
 
 static std::vector<int>::iterator	BinarySearchPosition(	Content Pair,
 															std::vector<int> &SortedVector)
@@ -383,7 +476,6 @@ static std::vector<int>::iterator	BinarySearch(int Element, std::vector<int> &So
 		return (MaxLimit);
 }
 
-/*=======================BinarySearchsDeque=====================*/
 
 static std::deque<int>::iterator	BinarySearchPosition(Content Pair, std::deque<int> &SortedDeque)
 {
@@ -449,36 +541,6 @@ static std::deque<int>::iterator	BinarySearch(int Element, std::deque<int> &Sort
 		return (MaxLimit);
 }
 
-/*========================UtilsVector====================*/
-
-static void	AssignValuesToPairs(Content &Pairs, int a, int b);
-
-static void	CreateVectorPairs(std::vector<int> &MaxVector, std::vector<Content> &PairedVector)
-{
-	Content	Pairs;
-	std::size_t	size = MaxVector.size();
-
-	if (size % 2 != 0)
-		size--;
-	for (std::size_t i = 0; i < size; i += 2)
-	{
-		AssignValuesToPairs(Pairs, MaxVector[i], MaxVector[i + 1]);
-		PairedVector.push_back(Pairs);
-	}
-}
-
-static void	CreateSubMaxVector(std::vector<Content> &PairedVector, std::vector<int> &SubMaxVector)
-{
-	int	Value;
-
-	for (std::size_t i = 0; i < PairedVector.size(); i++)
-	{
-		Value = PairedVector[i].max;
-		SubMaxVector.push_back(Value);
-	}
-}
-
-/*========================UtilsDeque====================*/
 
 static void	CreateDequePairs(std::deque<int> &Maxdeque, std::deque<Content> &PairDeque)
 {
@@ -505,8 +567,6 @@ static void	CreateSubMaxDeque(std::deque<Content> &PairDeque, std::deque<int> &S
 	}
 }
 
-/*=====================UTILS=====================*/
-
 static int	JacobsthalGenerator(int n)
 {
     if (n == 0)
@@ -528,4 +588,4 @@ static void	AssignValuesToPairs(Content &Pairs, int a, int b)
 		Pairs.max = a;
 		Pairs.min = b;
 	}
-}
+}*/
