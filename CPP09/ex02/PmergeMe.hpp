@@ -6,7 +6,7 @@
 /*   By: jduval <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/05 15:40:09 by jduval            #+#    #+#             */
-/*   Updated: 2023/10/11 16:27:05 by jduval           ###   ########.fr       */
+/*   Updated: 2023/10/12 14:04:29 by jduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,10 +44,10 @@ bool	VerifySorted(T const &Container)
 	return (true);
 }
 
-void	CreateNumberVector(std::vector<int> &UnsortedNumbers, char **av);
-//void	CreateNumberDeque(std::deque<int> &UnsortedNumbers, char **av);
+void	CreateNumbers(std::vector<int> &UnsortedNumbers, char **av);
+void	CreateNumbers(std::deque<int> &UnsortedNumbers, char **av);
 
-void	MergeInsertSortVector(std::vector<int> UnsortedVector, std::vector<int> &SortedVector);
-//void	MergeInsertSortDeque(std::deque<int> &UnsortedDeque, std::deque<int> &SortedDeque);
+void	MergeInsertSort(std::vector<int> UnsortedVector, std::vector<int> &SortedVector);
+//void	MergeInsertSort(std::deque<int> &UnsortedDeque, std::deque<int> &SortedDeque);
 
 #endif

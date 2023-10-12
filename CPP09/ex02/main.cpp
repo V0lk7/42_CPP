@@ -6,7 +6,7 @@
 /*   By: jduval <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/02 12:35:22 by jduval            #+#    #+#             */
-/*   Updated: 2023/10/11 16:27:47 by jduval           ###   ########.fr       */
+/*   Updated: 2023/10/12 14:04:30 by jduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,16 +31,19 @@ int	main(int ac, char **av)
 	try{
 //		std::cout << "====================================================" << std::endl;
 //		std::cout << "Using Vector" << std::endl;
+
+		std::vector<int>	UnsortedVector;
+		std::vector<int>	SortedVector;
+
 		ClockTime = clock();
-
-		std::vector<int>	UnsortedVectorNumbers;
-		std::vector<int>	SortedVectorNumbers;
-		CreateNumberVector(UnsortedVectorNumbers, av);
-
-//		std::vector<int>	tmp(UnsortedVectorNumbers);
-		MergeInsertSortVector(UnsortedVectorNumbers, SortedVectorNumbers);
+		CreateNumbers(UnsortedVector, av);
+		MergeInsertSort(UnsortedVector, SortedVector);
 		VectorTime = (clock() - ClockTime);
-		DisplaySortedNumbers(SortedVectorNumbers);
+
+		std::cout << "Before :" << std::endl;
+		DisplaySortedNumbers(UnsortedVector);
+		std::cout << "After :" << std::endl;
+		DisplaySortedNumbers(SortedVector);
 //		std::cout << "====================================================" << std::endl;
 /*
 		std::cout << "Using Deque" << std::endl;
@@ -51,8 +54,8 @@ int	main(int ac, char **av)
 		DisplaySortedNumbers(SortedDequeNumbers);
 		std::cout << "====================================================" << std::endl;
 */
-		if (VerifySorted(SortedVectorNumbers) == true &&
-			AllElementsAreHere(UnsortedVectorNumbers, SortedVectorNumbers) == true)
+		if (VerifySorted(SortedVector) == true &&
+			AllElementsAreHere(UnsortedVector, SortedVector) == true)
 			std::cout << "Vector is Sorted" << std::endl;
 		else
 			std::cout << "Vector isn't Sorted" << std::endl;
