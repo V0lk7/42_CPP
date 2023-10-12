@@ -6,7 +6,7 @@
 /*   By: jduval <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/02 12:35:22 by jduval            #+#    #+#             */
-/*   Updated: 2023/10/12 14:04:30 by jduval           ###   ########.fr       */
+/*   Updated: 2023/10/12 15:01:50 by jduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,58 +16,53 @@
 
 static bool	CheckArgsNumber(int ac);
 static bool	AllElementsAreHere(std::vector<int> &Unsorted, std::vector<int> &Sorted);
+static bool	AllElementsAreHere(std::deque<int> &Unsorted, std::deque<int> &Sorted);
 
 int	main(int ac, char **av)
 {
 	if (CheckArgsNumber(ac) == false)
 		return (1);
 
-//	std::deque<int>		UnsortedDequeNumbers;
-//	std::deque<int>		SortedDequeNumbers;
+	std::deque<int>		UnsortedDeque, SortedDeque;
+	std::vector<int>	UnsortedVector, SortedVector;
 	clock_t				ClockTime;
-	float				VectorTime;
-//	float				DequeTime;
+	float				VectorTime, DequeTime;
 
 	try{
-//		std::cout << "====================================================" << std::endl;
-//		std::cout << "Using Vector" << std::endl;
-
-		std::vector<int>	UnsortedVector;
-		std::vector<int>	SortedVector;
-
 		ClockTime = clock();
 		CreateNumbers(UnsortedVector, av);
 		MergeInsertSort(UnsortedVector, SortedVector);
 		VectorTime = (clock() - ClockTime);
 
 		std::cout << "Before :" << std::endl;
-		DisplaySortedNumbers(UnsortedVector);
+		Display(UnsortedVector);
 		std::cout << "After :" << std::endl;
-		DisplaySortedNumbers(SortedVector);
-//		std::cout << "====================================================" << std::endl;
-/*
-		std::cout << "Using Deque" << std::endl;
+		Display(SortedVector);
+
 		ClockTime = clock();
-		CreateNumberDeque(UnsortedDequeNumbers, av);
-		MergeInsertSortDeque(UnsortedDequeNumbers, SortedDequeNumbers);
+		CreateNumbers(UnsortedDeque, av);
+		MergeInsertSort(UnsortedDeque, SortedDeque);
 		DequeTime = (clock() - ClockTime);
-		DisplaySortedNumbers(SortedDequeNumbers);
-		std::cout << "====================================================" << std::endl;
-*/
+
 		if (VerifySorted(SortedVector) == true &&
 			AllElementsAreHere(UnsortedVector, SortedVector) == true)
 			std::cout << "Vector is Sorted" << std::endl;
 		else
 			std::cout << "Vector isn't Sorted" << std::endl;
-//		if (VerifySorted(SortedDequeNumbers) == true)
-//			std::cout << "Deque is Sorted" << std::endl;
-//		else
-//			std::cout << "Deque isn't Sorted" << std::endl;
+
+		if (VerifySorted(SortedDeque) == true &&
+			AllElementsAreHere(UnsortedDeque, SortedDeque) == true)
+			std::cout << "Deque is Sorted" << std::endl;
+		else
+			std::cout << "Deque isn't Sorted" << std::endl;
 
 		VectorTime = (VectorTime / CLOCKS_PER_SEC) * 1000000;
-//		DequeTime = (DequeTime / CLOCKS_PER_SEC) * 1000000;
-		std::cout << "Time of sorting using a vector : " << VectorTime << " μs" << std::endl;
-//		std::cout << "Time of sorting using a deque : " << DequeTime << " μs" << std::endl;
+		DequeTime = (DequeTime / CLOCKS_PER_SEC) * 1000000;
+
+		std::cout	<< "Time to process a range of " << UnsortedVector.size()
+					<< " elements with std::vector : " << VectorTime << " μs" << std::endl;
+		std::cout	<< "Time to process a range of " << UnsortedDeque.size()
+					<< " elements with std::deque : " << DequeTime << " μs" << std::endl;
 	}
 	catch (std::exception &e){
 		std::cout << "PmergMe: " << e.what() << std::endl;
@@ -86,27 +81,53 @@ static bool	CheckArgsNumber(int ac)
 	return (true);
 }
 
-static void	loopAled(int Value, std::vector<int> &lol);
+static void	FindValue(int Value, std::vector<int> &Sorted);
+static void	FindValue(int Value, std::deque<int> &Sorted);
 
 static bool	AllElementsAreHere(std::vector<int> &Unsorted, std::vector<int> &Sorted)
 {
 	std::vector<int>	SortedB(Sorted);
 
 	for (size_t i = 0; i < Unsorted.size(); i++)
-		loopAled(Unsorted[i], SortedB);
+		FindValue(Unsorted[i], SortedB);
 	if (SortedB.size() == 0)
 		return (true);
 	else
 		return (false);
 }
 
-static void	loopAled(int Value, std::vector<int> &lol)
+static bool	AllElementsAreHere(std::deque<int> &Unsorted, std::deque<int> &Sorted)
 {
-	for (size_t j = 0; j < lol.size(); j++)
+	std::deque<int>	SortedB(Sorted);
+
+	for (size_t i = 0; i < Unsorted.size(); i++)
+		FindValue(Unsorted[i], SortedB);
+	if (SortedB.size() == 0)
+		return (true);
+	else
+		return (false);
+}
+
+static void	FindValue(int Value, std::vector<int> &Sorted)
+{
+	for (size_t j = 0; j < Sorted.size(); j++)
 	{
-		if (Value == lol[j])
+		if (Value == Sorted[j])
 		{
-			lol.erase(lol.begin() + j, lol.begin() + j + 1);
+			Sorted.erase(Sorted.begin() + j, Sorted.begin() + j + 1);
+			break ;
+		}
+	}
+	return ;
+}
+
+static void	FindValue(int Value, std::deque<int> &Sorted)
+{
+	for (size_t j = 0; j < Sorted.size(); j++)
+	{
+		if (Value == Sorted[j])
+		{
+			Sorted.erase(Sorted.begin() + j, Sorted.begin() + j + 1);
 			break ;
 		}
 	}
